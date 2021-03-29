@@ -1,1 +1,0 @@
-/usr/bin/c++.exe -g  -Wl,--enable-auto-import -mwindows CMakeFiles/test.dir/test/test.cpp.o  -o ../../test.exe -Wl,--out-implib,../../lib/libtest.dll.a -Wl,--major-image-version,0,--minor-image-version,0   -L/cygdrive/c/code/BrazzGUI/lib  ../../lib/libBrazzGUI.a -lwinmm -lgdiplus 
