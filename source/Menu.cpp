@@ -1,8 +1,18 @@
 #include "Menu.hpp"
 
-Menu::Menu(std::string t)
+Menu::Menu()
 {
-	setHandle(CreateMenu());
-	setText(t);
-	AppendMenu((HMENU) getHandle(), MF_STRING, NULL, t.c_str());
+	handle = CreateMenu();
+	updated = false;
+}
+
+Menu::~Menu()
+{
+	DestroyMenu(handle);
+}
+
+void Menu::addMenuItem(MenuItem mi)
+{
+	AppendMenu(handle, mi.getStyle(), (UINT_PTR) mi.handle, mi.getText().c_str());
+	updated = true;
 }

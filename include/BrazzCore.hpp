@@ -2,27 +2,21 @@
 #define BRAZZCORE
 
 //Lib Includes
-#include "BrazzCore.hpp"
-#include "Component.hpp"
+#include "OSInterface.hpp"
 #include "Window.hpp"
+#include "Brush.hpp"
+#include "Control.hpp"
+#include "Button.hpp"
+#include "Pane.hpp"
+#include "TextBox.hpp"
 #include "Menu.hpp"
-#include "Event.hpp"
-
-//Other includes
-#include <windows.h>
-#include <objidl.h>
-#include <gdiplus.h>
-#pragma comment (lib,"Gdiplus.lib")
-
-extern int BrazzApp();
-
-//Class for app initialization
-class BrazzCore{
-	private:
-		static LRESULT CALLBACK MessageRouter(HWND, UINT, WPARAM, LPARAM);
-		
-	public:
-		static bool registerWindows();
-};
+#include "ListViewer.hpp"
+#include "Label.hpp"
+#include "CheckBox.hpp"
+#include "Slider.hpp"
+#include "ComboBox.hpp"
+#include "RadioButton.hpp"
+#include "RadioGroup.hpp"
+#include "ControlGroup.hpp"
 
 #endif

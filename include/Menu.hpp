@@ -1,14 +1,26 @@
 #ifndef MENU
 #define MENU
 
-#include "Component.hpp"
-
-#include <windows.h>
 #include <string>
+#include <windows.h>
 
-class Menu : public Component{
+#include "MenuItem.hpp"
+
+class Menu
+{
+	private:
+		friend class Window;
+		
+		bool updated;
+		
+	protected:
+		HMENU handle;
+	
 	public:
-		Menu(std::string);
+		Menu();
+		~Menu();
+		
+		void addMenuItem(MenuItem);
 };
 
 #endif

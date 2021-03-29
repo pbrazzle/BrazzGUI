@@ -1,0 +1,14 @@
+TODOs
+
+Create Graph control
+
+Allow user to remove slider from TextBox/make TextField?
+
+Optimization considerations:
+	Change layout updates to interrupt system (user-defined message)
+	
+Change OSInterface handleMessage to only handle WinAPI messages
+Create other methods for rest of functionality
+
+Make parent hold references to children
+	Parent is in charge of child lifecycle

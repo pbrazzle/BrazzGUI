@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../include/ComboBox.hpp
+Control.hpp
+../../include/Control.hpp
+
+../../include/Control.hpp
+GUIEntity.hpp
+../../include/GUIEntity.hpp
+
+../../include/GUIEntity.hpp
+OSInterface.hpp
+../../include/OSInterface.hpp
+windows.h
+-
+string
+-
+
+../../include/OSInterface.hpp
+windows.h
+-
+
+/cygdrive/c/code/BrazzGUI/source/ComboBox.cpp
+ComboBox.hpp
+/cygdrive/c/code/BrazzGUI/source/ComboBox.hpp
+windows.h
+-
+CommCtrl.h
+-
+
+/cygdrive/c/code/BrazzGUI/source/OSInterface.cpp
+OSInterface.hpp
+/cygdrive/c/code/BrazzGUI/source/OSInterface.hpp
+GUIEntity.hpp
+/cygdrive/c/code/BrazzGUI/source/GUIEntity.hpp
+
