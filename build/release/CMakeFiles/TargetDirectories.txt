@@ -1,4 +1,0 @@
-/cygdrive/c/code/BrazzGUI/build/release/CMakeFiles/rebuild_cache.dir
-/cygdrive/c/code/BrazzGUI/build/release/CMakeFiles/edit_cache.dir
-/cygdrive/c/code/BrazzGUI/build/release/CMakeFiles/test.dir
-/cygdrive/c/code/BrazzGUI/build/release/CMakeFiles/BrazzGUI.dir
