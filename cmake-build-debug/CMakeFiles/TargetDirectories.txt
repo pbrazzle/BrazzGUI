@@ -1,0 +1,3 @@
+C:/Users/pbraz/CLionProjects/BrazzGUI/cmake-build-debug/CMakeFiles/BrazzGUI.dir
+C:/Users/pbraz/CLionProjects/BrazzGUI/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/pbraz/CLionProjects/BrazzGUI/cmake-build-debug/CMakeFiles/rebuild_cache.dir
