@@ -1,0 +1,2 @@
+GUIObjects handle Win32 initialization
+WindowProc sends Events to EventHandlers
