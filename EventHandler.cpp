@@ -1,5 +1,11 @@
 #include "EventHandler.h"
 
+LRESULT CALLBACK dispatchEvent(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	EventHandler* handler = (EventHandler*) GetWindowLongPtr(hwnd, GWLP_USERDATA);
+	return handler->handleEvent(hwnd, uMsg, wParam, lParam);
+}
+
 EventHandler::EventHandler() { }
 
 LRESULT EventHandler::handleEvent(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

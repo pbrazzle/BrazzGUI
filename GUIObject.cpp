@@ -1,9 +1,27 @@
 #include "GUIObject.h"
 
+void registerWindowClass()
+{
+	// Register the window class.
+    const LPCSTR CLASS_NAME  = (LPCSTR) L"Sample Window Class";
+    HINSTANCE hInstance = GetModuleHandle(NULL);
+	
+    WNDCLASS wc = { };
+
+    wc.lpfnWndProc   = dispatchEvent;
+    wc.hInstance     = hInstance;
+    wc.lpszClassName = (LPCSTR) CLASS_NAME;
+
+	if (GetClassInfoEx(hInstance, CLASS_NAME, (LPWNDCLASSEXA) &wc)) return;
+    RegisterClass(&wc);
+}
+
 GUIObject::GUIObject() { }
 
 GUIObject::GUIObject(std::string classname, std::string style, EventHandler* handler)
 {
+	registerWindowClass();
+	
 	hwnd = CreateWindowEx(
         0,                              			// Optional window styles.
         (LPCSTR) L"Sample Window Class",           // Window class
