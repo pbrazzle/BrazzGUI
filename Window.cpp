@@ -3,7 +3,8 @@
 Window::Window()
 {
 	handler = EventHandler();
-	obj = GUIObject("Window", "...", &handler);
+	obj = GUIObject("Window", "...");
+	handler.attachGUIObject(obj);
 }
 
 void Window::show()

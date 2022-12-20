@@ -4,8 +4,6 @@
 #include <windows.h>
 #include <string>
 
-#include "EventHandler.h"
-
 class GUIObject
 {
 	private:
@@ -13,9 +11,11 @@ class GUIObject
 		
 	public:
 		GUIObject();
-		GUIObject(std::string, std::string, EventHandler*);
+		GUIObject(std::string, std::string);
 		
 		void show();
+		
+		HWND getHandle();
 };
 
 #endif

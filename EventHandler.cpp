@@ -1,12 +1,22 @@
 #include "EventHandler.h"
 
+#include <windows.h>
+
 LRESULT CALLBACK dispatchEvent(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	EventHandler* handler = (EventHandler*) GetWindowLongPtr(hwnd, GWLP_USERDATA);
+	if (handler == NULL) return DefWindowProc(hwnd, uMsg, wParam, lParam);
 	return handler->handleEvent(hwnd, uMsg, wParam, lParam);
 }
 
 EventHandler::EventHandler() { }
+
+void EventHandler::attachGUIObject(GUIObject obj)
+{
+	HWND handle = obj.getHandle();
+	
+	SetWindowLongPtr(handle, GWLP_USERDATA, (LONG_PTR) this);
+}
 
 LRESULT EventHandler::handleEvent(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {

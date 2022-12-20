@@ -3,6 +3,7 @@
 #include <windows.h>
 
 #include "Window.h"
+#include "Button.h"
 #include "BrazzGUIApp.h"
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
@@ -10,6 +11,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	BrazzGUIApp myApp;
 	Window myWindow;
 	myWindow.show();
+	
+	Button myButton;
 	myApp.run();
 	
 	return 0;
