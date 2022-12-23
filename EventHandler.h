@@ -1,20 +1,21 @@
 #ifndef EVENTHANDLER
 #define EVENTHANDLER
 
-#include "GUIObject.h"
+#include <functional>
 
-#include <windows.h>
-
-LRESULT CALLBACK dispatchEvent(HWND, UINT, WPARAM, LPARAM);
+enum class EventType
+{
+	Click
+};
 
 class EventHandler
 {
 	public:
-		EventHandler();
+		//Set callbacks
+		virtual void setCallback(EventType, std::function<void()>) = 0;
 		
-		void attachGUIObject(GUIObject);
-		
-		LRESULT handleEvent(HWND, UINT, WPARAM, LPARAM);
+		//Several GUI events
+		virtual void click() = 0;
 };
 
 #endif
