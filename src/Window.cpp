@@ -1,65 +1,40 @@
-#include "Window.h"
+#include "Window.hpp"
 
-#include "Win32GUIHandle.h"
-#include "BasicEventHandler.h"
+#include <windows.h>
+
+extern LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+using namespace BrazzGUI;
 
 Window::Window()
 {
-	handle = std::shared_ptr<GUIHandle>(new Win32GUIHandle());
-	eventHandler = std::shared_ptr<EventHandler>(new BasicEventHandler());
-}
-		
-void Window::show()
-{
-	setVisible(true);
-}
+    // Register the window class.
+    const wchar_t CLASS_NAME[]  = L"Sample Window Class";
+    
+    WNDCLASS wc = { };
 
-void Window::setVisible(bool visible)
-{
-	handle->setVisible(visible);
-}
+    wc.lpfnWndProc   = BrazzGUIWndProc;
+    wc.hInstance     = GetModuleHandle(NULL);
+    wc.lpszClassName = (LPCSTR) CLASS_NAME;
 
-void Window::setWidth(int)
-{
-	
-}
+    RegisterClass(&wc);
 
-void Window::setHeight(int)
-{
-	
-}
+    // Create the window.
 
-void Window::setX(int)
-{
-	
-}
+    HWND hwnd = CreateWindowEx(
+        0,                              // Optional window styles.
+        (LPCSTR) CLASS_NAME,                     // Window class
+        (LPCSTR) L"Learn to Program Windows",    // Window text
+        WS_OVERLAPPEDWINDOW,            // Window style
 
-void Window::setY(int)
-{
-	
-}
+        // Size and position
+        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
 
-void Window::setParent(const BasicControl&)
-{
-	
-}
+        NULL,       // Parent window    
+        NULL,       // Menu
+        GetModuleHandle(NULL),  // Instance handle
+        NULL        // Additional application data
+        );
 
-BasicControl* Window::getParent()
-{
-	return nullptr;
-}
-
-void Window::addChild(const BasicControl&)
-{
-	
-}
-
-std::vector<BasicControl*> Window::getChildren()
-{
-	return std::vector<BasicControl*>();
-}
-
-void Window::setClickCallback(std::function<void()> callback)
-{
-	eventHandler->setCallback(EventType::Click, callback);
+    ShowWindow(hwnd, SW_NORMAL);
 }
