@@ -4,9 +4,4 @@
 
 using namespace BrazzGUI;
 
-Window::Window() : id(ControlCreation::createControl(ControlCreation::ControlType::Window)) { }
-
-void Window::show()
-{
-	ControlStyling::show(id);
-}
+Window::Window() : Control(ControlCreation::ControlType::Window) { }

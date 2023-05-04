@@ -1,19 +1,14 @@
 #ifndef WINDOW
 #define WINDOW
 
-#include "ControlID.hpp"
+#include "Control.hpp"
 
 namespace BrazzGUI
 {
-	class Window
+	class Window : public Control
 	{
-		private:
-			ControlID id;
-			
 		public:
 			Window();
-			
-			void show();
 	};
 }
 

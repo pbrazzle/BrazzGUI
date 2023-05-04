@@ -4,6 +4,7 @@ add_subdirectory(ControlHandling)
 set(LIB_SOURCES
 	BrazzApp.cpp
 	Window.cpp
+	Control.cpp
 	ControlID.cpp)
 	
 add_library(BrazzGUI ${LIB_SOURCES})
