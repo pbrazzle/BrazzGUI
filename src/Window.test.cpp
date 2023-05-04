@@ -1,11 +1,16 @@
 #include <catch2/catch_test_macros.hpp>
+#include "Window.hpp"
 
-TEST_CASE("Window creates successfully", "[Window]")
+using BrazzGUI::Window;
+
+TEST_CASE("Window creates", "[Window]")
 {
-	REQUIRE(false);
+	std::unique_ptr<Window> testWindow;
+	CHECK_NOTHROW(testWindow.reset(new Window()));
 }
 
-TEST_CASE("Window shows successfully", "[Window]")
+TEST_CASE("Window shows", "[Window]")
 {
-	REQUIRE(false);
+	Window testWindow;
+	CHECK_NOTHROW(testWindow.show());
 }

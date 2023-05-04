@@ -10,6 +10,7 @@ int main()
 	BrazzApp myApp;
 	
 	Window myWindow;
+	myWindow.show();
 
 	return myApp.run();
 }

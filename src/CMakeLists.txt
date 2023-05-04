@@ -1,11 +1,13 @@
 add_subdirectory(EventHandling)
+add_subdirectory(ControlHandling)
 
 set(LIB_SOURCES
 	BrazzApp.cpp
-	Window.cpp)
+	Window.cpp
+	ControlID.cpp)
 	
 add_library(BrazzGUI ${LIB_SOURCES})
-target_link_libraries(BrazzGUI PRIVATE EventHandling)
+target_link_libraries(BrazzGUI PRIVATE EventHandling ControlHandling)
 target_include_directories(BrazzGUI PRIVATE ${CMAKE_SOURCE_DIR}/src PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
 add_executable(main main.cpp)
