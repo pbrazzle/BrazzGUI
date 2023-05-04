@@ -33,21 +33,26 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-void handleMessage()
+bool handleMessage()
 {
 	MSG msg = { };
 	BOOL result = GetMessage(&msg, NULL, 0, 0);
+	if (result == 0) return false;
 	
 	//TODO Check for error
 	//if (result == -1) throw -1;
 	
 	TranslateMessage(&msg);
 	DispatchMessage(&msg);
+	return true;
 }
 
 Event BrazzGUI::EventHandling::getNextEvent() 
 { 
-	while (eventQueue.empty()) handleMessage();
+	while (eventQueue.empty())
+	{		
+		if (!handleMessage()) return Event(EventType::QUIT);
+	}
 	auto next = eventQueue.front();
 	eventQueue.pop();
 	return next;

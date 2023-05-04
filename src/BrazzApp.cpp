@@ -7,8 +7,7 @@ int BrazzApp::run()
 {
 	auto event = EventHandling::getNextEvent();
 	
-	//TODO check for quit event
-	while (true)
+	while (event.getType() != EventHandling::EventType::QUIT)
 	{
 		//TODO pass event somewhere...
 		event = EventHandling::getNextEvent();
