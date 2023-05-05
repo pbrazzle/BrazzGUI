@@ -1,7 +1,7 @@
 #ifndef EVENT_MAKER
 #define EVENT_MAKER
 
-#include "EventHandling/Event.hpp"
+#include "Event.hpp"
 
 namespace BrazzGUI
 {
@@ -17,6 +17,11 @@ namespace BrazzGUI
 		*	Enqueues a stop Event to the OS message queue
 		*/
 		void postStopEvent();
+		
+		/**
+		*	Enqueues an Event to the BrazzGUI Event queue
+		*/
+		void postEvent(const Event&);
 	}
 }
 

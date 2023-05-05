@@ -5,6 +5,7 @@
 
 #include <map>
 #include <memory>
+#include <vector>
 
 namespace BrazzGUI
 {
@@ -17,6 +18,8 @@ namespace BrazzGUI
 		};
 
 		const ControlOSData& getDataFromID(const ControlID&);
+		
+		const std::vector<std::unique_ptr<ControlOSData>>& getTopWindows();
 	}
 }
 

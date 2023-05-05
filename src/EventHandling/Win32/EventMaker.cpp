@@ -1,17 +1,24 @@
 #include "EventHandling/EventMaker.hpp"
-#include "EventHandling/Event.hpp"
+#include "Event.hpp"
+#include "ControlHandling/Win32/ControlHandling.hpp"
 
 #include <windows.h>
 #include <queue>
 
 using namespace BrazzGUI::EventHandling;
+using namespace BrazzGUI;
 
 std::queue<Event> eventQueue;
 
 LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	auto idVal = static_cast<int>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+	
     switch (uMsg)
     {
+	case WM_LBUTTONDOWN:
+		eventQueue.push(Event(idVal, EventType::LEFT_CLICK_DOWN));
+		return 0;
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
@@ -59,6 +66,17 @@ Event BrazzGUI::EventHandling::getNextEvent()
 }
 
 void BrazzGUI::EventHandling::postStopEvent() 
-{ 
-	PostMessage(HWND_BROADCAST, WM_CLOSE, 0, 0);
+{
+	auto& topWindowData = BrazzGUI::ControlHandling::getTopWindows();
+	for (int i = 0; i < topWindowData.size(); i++)
+	{
+		auto win32Data = static_cast<const ControlHandling::Win32Data*>(topWindowData[i].get());
+		auto handle = win32Data->getHandle();
+		PostMessage(handle, WM_CLOSE, 0, 0);
+	}
+}
+
+void BrazzGUI::EventHandling::postEvent(const Event& e)
+{
+	eventQueue.push(e);
 }

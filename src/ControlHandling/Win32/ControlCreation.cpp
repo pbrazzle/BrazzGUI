@@ -12,6 +12,7 @@ static int nextID = 0;
 extern LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 std::map<ControlID, std::unique_ptr<ControlHandling::ControlOSData>> idMap;
+std::vector<std::unique_ptr<ControlHandling::ControlOSData>> topWindowData;
 
 const ControlHandling::ControlOSData& ControlHandling::getDataFromID(const ControlID& id)
 {
@@ -31,7 +32,6 @@ ControlID ControlCreation::createControl(const ControlCreation::ControlType& typ
     RegisterClass(&wc);
 
     // Create the window.
-
     HWND hwnd = CreateWindowEx(
         0,                              // Optional window styles.
         (LPCSTR) CLASS_NAME,                     // Window class
@@ -44,11 +44,18 @@ ControlID ControlCreation::createControl(const ControlCreation::ControlType& typ
         NULL,       // Parent window    
         NULL,       // Menu
         GetModuleHandle(NULL),  // Instance handle
-        NULL        // Additional application data
+        (void*) nextID        // Additional application data
         );
+		
+	topWindowData.emplace_back(std::make_unique<ControlHandling::Win32Data>(hwnd));
 		
 	ControlID id = { nextID };
 	idMap[id] = std::make_unique<ControlHandling::Win32Data>(hwnd);
 	nextID++;
 	return id;
+}
+
+const std::vector<std::unique_ptr<ControlHandling::ControlOSData>>& ControlHandling::getTopWindows()
+{
+	return topWindowData;
 }

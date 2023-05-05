@@ -32,6 +32,8 @@ namespace BrazzGUI
 			int getHeight() const;
 			
 			std::string getText() const;
+			
+			ControlID getID() const;
 	};
 }
 

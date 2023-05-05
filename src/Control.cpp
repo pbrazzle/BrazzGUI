@@ -23,3 +23,5 @@ int Control::getWidth() const { return ControlStyling::getWidth(id); }
 int Control::getHeight() const { return ControlStyling::getHeight(id); }
 
 std::string Control::getText() const { return ControlStyling::getText(id); }
+
+ControlID Control::getID() const { return id; }

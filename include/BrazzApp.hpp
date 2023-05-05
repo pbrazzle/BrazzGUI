@@ -1,6 +1,10 @@
 #ifndef BRAZZAPP
 #define BRAZZAPP
 
+#include "Event.hpp"
+
+#include <functional>
+
 namespace BrazzGUI
 {
 	/**
@@ -12,6 +16,9 @@ namespace BrazzGUI
 		public:
 			int run();
 			void stop();
+			
+			void connect(const Event&, const std::function<void(void)>&);
+			void postEvent(const Event&);
 	};
 }
 

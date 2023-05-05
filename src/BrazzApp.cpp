@@ -1,5 +1,8 @@
 #include "BrazzApp.hpp"
 #include "EventHandling/EventMaker.hpp"
+#include "EventHandling/EventSlotting.hpp"
+
+#include <iostream>
 
 using namespace BrazzGUI;
 
@@ -7,9 +10,9 @@ int BrazzApp::run()
 {
 	auto event = EventHandling::getNextEvent();
 	
-	while (event.getType() != EventHandling::EventType::QUIT)
+	while (event.getType() != EventType::QUIT)
 	{
-		//TODO pass event somewhere...
+		EventHandling::runSlots(event);
 		event = EventHandling::getNextEvent();
 	}
 	return 0; 
@@ -18,4 +21,14 @@ int BrazzApp::run()
 void BrazzApp::stop() 
 { 
 	EventHandling::postStopEvent();
+}
+
+void BrazzApp::connect(const Event& e, const std::function<void(void)>& slot)
+{
+	EventHandling::connect(e, slot);
+}
+
+void BrazzApp::postEvent(const Event& e)
+{
+	EventHandling::postEvent(e);
 }

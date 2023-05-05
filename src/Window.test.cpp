@@ -1,7 +1,8 @@
 #include <catch2/catch_test_macros.hpp>
 #include "Window.hpp"
+#include "BrazzApp.hpp"
 
-using BrazzGUI::Window;
+using namespace BrazzGUI;
 
 TEST_CASE("Window creates", "[Window]")
 {
@@ -44,5 +45,16 @@ TEST_CASE("Window repositions", "[Window]")
 
 TEST_CASE("Window sends clicked signal", "[Window]")
 {
-	REQUIRE(false);
+	BrazzApp testApp;
+	Window testWindow;
+	bool recv = false;
+	testApp.connect(Event(testWindow.getID(), EventType::LEFT_CLICK_DOWN), 
+	[&]()
+	{
+		recv = true;
+		testApp.stop();
+	});
+	testApp.postEvent(Event(testWindow.getID(), EventType::LEFT_CLICK_DOWN));
+	testApp.run();
+	REQUIRE(recv);
 }
