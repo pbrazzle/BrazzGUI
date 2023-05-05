@@ -17,6 +17,13 @@ namespace BrazzGUI
 		void setHeight(const ControlID&, const int&);
 		
 		void setText(const ControlID&, const std::string&);
+		
+		int getX(const ControlID&);
+		int getY(const ControlID&);
+		int getWidth(const ControlID&);
+		int getHeight(const ControlID&);
+		
+		std::string getText(const ControlID&);
 	}
 }
 

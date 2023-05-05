@@ -16,3 +16,10 @@ void Control::setWidth(const int& width) { ControlStyling::setWidth(id, width); 
 void Control::setHeight(const int& height) { ControlStyling::setHeight(id, height); }
 
 void Control::setText(const std::string& text) { ControlStyling::setText(id, text); }
+
+int Control::getX() const { return ControlStyling::getX(id); }
+int Control::getY() const { return ControlStyling::getY(id); }
+int Control::getWidth() const { return ControlStyling::getWidth(id); }
+int Control::getHeight() const { return ControlStyling::getHeight(id); }
+
+std::string Control::getText() const { return ControlStyling::getText(id); }
