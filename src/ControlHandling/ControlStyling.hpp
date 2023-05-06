@@ -24,6 +24,8 @@ namespace BrazzGUI
 		int getHeight(const ControlID&);
 		
 		std::string getText(const ControlID&);
+		
+		void setChild(const ControlID& parent, const ControlID& child);
 	}
 }
 

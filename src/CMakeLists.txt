@@ -5,7 +5,8 @@ set(LIB_SOURCES
 	BrazzApp.cpp
 	Window.cpp
 	Control.cpp
-	ControlID.cpp)
+	ControlID.cpp
+	Button.cpp)
 	
 add_library(BrazzGUI ${LIB_SOURCES})
 target_link_libraries(BrazzGUI PRIVATE EventHandling ControlHandling)

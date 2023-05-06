@@ -9,7 +9,8 @@ namespace BrazzGUI
 	{
 		enum class ControlType
 		{
-			Window
+			Window,
+			Button
 		};
 		
 		ControlID createControl(const ControlType& type);

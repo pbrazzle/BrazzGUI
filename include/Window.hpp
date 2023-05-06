@@ -9,6 +9,8 @@ namespace BrazzGUI
 	{
 		public:
 			Window();
+			
+			void addControl(const Control&);
 	};
 }
 

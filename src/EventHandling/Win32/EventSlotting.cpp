@@ -20,5 +20,6 @@ void BrazzGUI::EventHandling::connect(const Event& e, const std::function<void(v
 
 void BrazzGUI::EventHandling::runSlots(const Event& e)
 {
-	slotMap[e]();
+	if (slotMap.count(e))
+		slotMap[e]();
 }

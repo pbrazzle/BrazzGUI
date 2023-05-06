@@ -2,6 +2,7 @@
 #include "ControlHandling/Win32/ControlHandling.hpp"
 
 #include <windows.h>
+#include <iostream>
 
 using namespace BrazzGUI;
 
@@ -20,17 +21,25 @@ void ControlStyling::show(const ControlID& id)
 void ControlStyling::setX(const ControlID& id, const int& x) 
 { 
 	auto handle = getHandleFromID(id);
+	auto parent = GetParent(handle);
 	RECT windowPos;
 	GetWindowRect(handle, &windowPos);
-	SetWindowPos(handle, NULL, x, windowPos.top, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+	POINT client = {windowPos.left, windowPos.top};
+	if (handle != parent)
+		ScreenToClient(parent, &client);
+	SetWindowPos(handle, NULL, x, client.y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }
 
 void ControlStyling::setY(const ControlID& id, const int& y) 
 { 
 	auto handle = getHandleFromID(id);
+	auto parent = GetParent(handle);
 	RECT windowPos;
 	GetWindowRect(handle, &windowPos);
-	SetWindowPos(handle, NULL, windowPos.left, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+	POINT client = {windowPos.left, windowPos.top};
+	if (handle != parent)
+		ScreenToClient(parent, &client);
+	SetWindowPos(handle, NULL, client.x, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }
 
 void ControlStyling::setWidth(const ControlID& id, const int& width) 
@@ -58,17 +67,25 @@ void ControlStyling::setText(const ControlID& id, const std::string& text)
 int ControlStyling::getX(const ControlID& id)
 {
 	auto handle = getHandleFromID(id);
+	auto parent = GetParent(handle);
 	RECT windowPos;
 	GetWindowRect(handle, &windowPos);
-	return windowPos.left;
+	POINT client = {windowPos.left, windowPos.top};
+	if (handle != parent)
+		ScreenToClient(parent, &client);
+	return client.x;
 }
 
 int ControlStyling::getY(const ControlID& id)
 {
 	auto handle = getHandleFromID(id);
+	auto parent = GetParent(handle);
 	RECT windowPos;
 	GetWindowRect(handle, &windowPos);
-	return windowPos.top;
+	POINT client = {windowPos.left, windowPos.top};
+	if (handle != parent)
+		ScreenToClient(parent, &client);
+	return client.y;
 }
 
 int ControlStyling::getWidth(const ControlID& id)
@@ -96,4 +113,13 @@ std::string ControlStyling::getText(const ControlID& id)
 	std::string textStr(textBuf);
 	delete [] textBuf;
 	return textStr;
+}
+
+void ControlStyling::setChild(const ControlID& parent, const ControlID& child)
+{
+	auto parentHandle = getHandleFromID(parent);
+	auto childHandle = getHandleFromID(child);
+	auto result = SetParent(childHandle, parentHandle);
+	SetWindowPos(childHandle, NULL, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER);
+	if (result == NULL) std::cout << "SetParent failed!\n";
 }
