@@ -6,7 +6,11 @@ set(LIB_SOURCES
 	Window.cpp
 	Control.cpp
 	ControlID.cpp
-	Button.cpp)
+	Button.cpp
+	Checkbox.cpp
+	Textbox.cpp
+	RadioButton.cpp
+	Label.cpp)
 	
 add_library(BrazzGUI ${LIB_SOURCES})
 target_link_libraries(BrazzGUI PRIVATE EventHandling ControlHandling)

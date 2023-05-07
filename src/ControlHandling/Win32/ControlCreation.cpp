@@ -82,6 +82,98 @@ HWND createButton()
 	return hwnd;
 }
 
+HWND createTextbox()
+{
+	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
+	
+	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle();
+	HWND hwnd = CreateWindowEx(
+		0,
+        "EDIT",                     // Window class
+        "",    // Window text
+        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | ES_LEFT,            // Window style
+        // position and size
+        0, 0, 10, 10,
+        parentHandle,       // Parent window    
+        NULL,       // Menu
+        GetModuleHandle(NULL),  // Instance handle
+        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
+        );
+		
+	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
+		
+	return hwnd;
+}
+
+HWND createCheckbox()
+{
+	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
+	
+	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle();
+	HWND hwnd = CreateWindowEx(
+		0,
+        "BUTTON",                     // Window class
+        "Button",    // Window text
+        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | BS_CHECKBOX,            // Window style
+        // position and size
+        0, 0, 10, 10,
+        parentHandle,       // Parent window    
+        NULL,       // Menu
+        GetModuleHandle(NULL),  // Instance handle
+        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
+        );
+		
+	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
+		
+	return hwnd;
+}
+
+HWND createLabel()
+{
+	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
+	
+	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle();
+	HWND hwnd = CreateWindowEx(
+		0,
+        "STATIC",                     // Window class
+        "Label",    // Window text
+        WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | SS_CENTER,            // Window style
+        // position and size
+        0, 0, 10, 10,
+        parentHandle,       // Parent window    
+        NULL,       // Menu
+        GetModuleHandle(NULL),  // Instance handle
+        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
+        );
+		
+	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createLabel");
+		
+	return hwnd;
+}
+
+HWND createRadioButton()
+{
+	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
+	
+	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle();
+	HWND hwnd = CreateWindowEx(
+		0,
+        "BUTTON",                     // Window class
+        "Button",    // Window text
+        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | BS_RADIOBUTTON,            // Window style
+        // position and size
+        0, 0, 10, 10,
+        parentHandle,       // Parent window    
+        NULL,       // Menu
+        GetModuleHandle(NULL),  // Instance handle
+        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
+        );
+		
+	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
+		
+	return hwnd;
+}
+
 ControlID ControlCreation::createControl(const ControlCreation::ControlType& type)
 {
 	HWND hwnd;
@@ -92,6 +184,18 @@ ControlID ControlCreation::createControl(const ControlCreation::ControlType& typ
 			break;
 		case ControlType::Button:
 			hwnd = createButton();
+			break;
+		case ControlType::Textbox:
+			hwnd = createTextbox();
+			break;
+		case ControlType::Checkbox:
+			hwnd = createCheckbox();
+			break;
+		case ControlType::RadioButton:
+			hwnd = createRadioButton();
+			break;
+		case ControlType::Label:
+			hwnd = createLabel();
 			break;
 	}
 		
