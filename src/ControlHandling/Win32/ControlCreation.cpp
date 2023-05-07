@@ -72,7 +72,7 @@ HWND createButton()
         // position and size
         0, 0, 10, 10,
         parentHandle,       // Parent window    
-        NULL,       // Menu
+        reinterpret_cast<HMENU>((long long)nextID),       // Menu
         GetModuleHandle(NULL),  // Instance handle
         reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
         );
@@ -91,11 +91,11 @@ HWND createTextbox()
 		0,
         "EDIT",                     // Window class
         "",    // Window text
-        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | ES_LEFT,            // Window style
+        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | ES_LEFT | WS_BORDER,            // Window style
         // position and size
         0, 0, 10, 10,
         parentHandle,       // Parent window    
-        NULL,       // Menu
+        reinterpret_cast<HMENU>((long long)nextID),       // Menu
         GetModuleHandle(NULL),  // Instance handle
         reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
         );
@@ -118,7 +118,7 @@ HWND createCheckbox()
         // position and size
         0, 0, 10, 10,
         parentHandle,       // Parent window    
-        NULL,       // Menu
+        reinterpret_cast<HMENU>((long long)nextID),       // Menu
         GetModuleHandle(NULL),  // Instance handle
         reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
         );
@@ -137,11 +137,11 @@ HWND createLabel()
 		0,
         "STATIC",                     // Window class
         "Label",    // Window text
-        WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | SS_CENTER,            // Window style
+        WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | SS_CENTER | SS_NOTIFY,            // Window style
         // position and size
         0, 0, 10, 10,
         parentHandle,       // Parent window    
-        NULL,       // Menu
+        reinterpret_cast<HMENU>((long long)nextID),       // Menu
         GetModuleHandle(NULL),  // Instance handle
         reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
         );
@@ -164,7 +164,7 @@ HWND createRadioButton()
         // position and size
         0, 0, 10, 10,
         parentHandle,       // Parent window    
-        NULL,       // Menu
+        reinterpret_cast<HMENU>((long long)nextID),       // Menu
         GetModuleHandle(NULL),  // Instance handle
         reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
         );

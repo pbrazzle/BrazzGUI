@@ -23,6 +23,7 @@ namespace BrazzGUI
 			void setY(const int&);
 			void setWidth(const int&);
 			void setHeight(const int&);
+			void setPosition(const int&, const int&, const int&, const int&);
 			
 			void setText(const std::string&);
 			

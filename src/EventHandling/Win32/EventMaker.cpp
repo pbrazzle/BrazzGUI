@@ -4,6 +4,7 @@
 
 #include <windows.h>
 #include <queue>
+#include <iostream>
 
 using namespace BrazzGUI::EventHandling;
 using namespace BrazzGUI;
@@ -22,19 +23,25 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
-
+	case WM_COMMAND:
+		if (HIWORD(wParam) == BN_CLICKED || HIWORD(wParam) == STN_CLICKED || HIWORD(wParam) == EN_SETFOCUS)
+		{
+			idVal = static_cast<int>(LOWORD(wParam));
+			eventQueue.push(Event(idVal, EventType::LEFT_CLICK_DOWN));
+		}
+		return 0;
     case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hwnd, &ps);
+		{
+			PAINTSTRUCT ps;
+			HDC hdc = BeginPaint(hwnd, &ps);
 
-            // All painting occurs here, between BeginPaint and EndPaint.
+			// All painting occurs here, between BeginPaint and EndPaint.
 
-            FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
+			FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
 
-            EndPaint(hwnd, &ps);
-        }
-        return 0;
+			EndPaint(hwnd, &ps);
+		}
+		return 0;
 
     }
     return DefWindowProc(hwnd, uMsg, wParam, lParam);

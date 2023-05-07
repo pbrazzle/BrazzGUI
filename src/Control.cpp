@@ -15,6 +15,14 @@ void Control::setY(const int& y) { ControlStyling::setY(id, y); }
 void Control::setWidth(const int& width) { ControlStyling::setWidth(id, width); }
 void Control::setHeight(const int& height) { ControlStyling::setHeight(id, height); }
 
+void Control::setPosition(const int& x, const int& y, const int& width, const int& height)
+{
+	setX(x);
+	setY(y);
+	setWidth(width);
+	setHeight(height);
+}
+
 void Control::setText(const std::string& text) { ControlStyling::setText(id, text); }
 
 int Control::getX() const { return ControlStyling::getX(id); }
