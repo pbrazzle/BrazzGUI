@@ -10,7 +10,12 @@ set(LIB_SOURCES
 	Checkbox.cpp
 	Textbox.cpp
 	RadioButton.cpp
-	Label.cpp)
+	Label.cpp
+	Menu.cpp
+	MenuItem.cpp
+	RadioButtonGroup.cpp
+	TextArea.cpp
+	DrawPane.cpp)
 	
 add_library(BrazzGUI ${LIB_SOURCES})
 target_link_libraries(BrazzGUI PRIVATE EventHandling ControlHandling)
