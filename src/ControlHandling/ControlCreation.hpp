@@ -17,7 +17,8 @@ namespace BrazzGUI
 			DrawPane,
 			Checkbox,
 			RadioButton,
-			RadioButtonGroup
+			RadioButtonGroup,
+			ComboBox
 		};
 		
 		ControlID createControl(const ControlType& type);

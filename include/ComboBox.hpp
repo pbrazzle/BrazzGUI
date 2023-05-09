@@ -1,11 +1,14 @@
 #ifndef COMBOBOX
 #define COMBOBOX
 
+#include "Control.hpp"
+
 namespace BrazzGUI
 {
-	class ComboBox
+	class ComboBox : public Control
 	{
-	
+		public:
+			ComboBox();
 	};
 }
 

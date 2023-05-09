@@ -15,7 +15,8 @@ set(LIB_SOURCES
 	MenuItem.cpp
 	RadioButtonGroup.cpp
 	TextArea.cpp
-	DrawPane.cpp)
+	DrawPane.cpp
+	ComboBox.cpp)
 	
 add_library(BrazzGUI ${LIB_SOURCES})
 target_link_libraries(BrazzGUI PRIVATE EventHandling ControlHandling)
@@ -36,6 +37,7 @@ set(TEST_SOURCES
 	MenuItem.test.cpp
 	DrawPane.test.cpp
 	RadioButtonGroup.test.cpp
-	TextArea.test.cpp)
+	TextArea.test.cpp
+	ComboBox.test.cpp)
 
 add_catch_tests(TARGETS ${TEST_SOURCES} LIBS BrazzGUI)
