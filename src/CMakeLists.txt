@@ -31,6 +31,11 @@ set(TEST_SOURCES
 	Checkbox.test.cpp
 	RadioButton.test.cpp
 	Textbox.test.cpp
-	Label.test.cpp)
+	Label.test.cpp
+	Menu.test.cpp
+	MenuItem.test.cpp
+	DrawPane.test.cpp
+	RadioButtonGroup.test.cpp
+	TextArea.test.cpp)
 
 add_catch_tests(TARGETS ${TEST_SOURCES} LIBS BrazzGUI)

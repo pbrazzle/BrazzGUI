@@ -1,67 +1,17 @@
-#include <catch2/catch_test_macros.hpp>
-#include "Window.hpp"
+#include "Control.test.hpp"
 #include "RadioButton.hpp"
-#include "BrazzApp.hpp"
 
-using namespace BrazzGUI;
-
-TEST_CASE("RadioButton creates", "[RadioButton]")
+class RadioButtonTests : public ControlTests
 {
-	Window testWindow;
-	std::unique_ptr<RadioButton> testButton;
-	CHECK_NOTHROW(testButton.reset(new RadioButton()));
-}
+	public:
+		std::unique_ptr<Control> getTestInstance() 
+		{ 
+			return std::make_unique<RadioButton>(); 
+		}
+};
 
-TEST_CASE("RadioButton shows", "[RadioButton]")
+TEST_CASE("RadioButton Control tests", "[RadioButton]")
 {
-	Window testWindow;
-	RadioButton testButton;
-	CHECK_NOTHROW(testButton.show());
-}
-
-TEST_CASE("RadioButton resizes", "[RadioButton]")
-{
-	Window testWindow;
-	RadioButton testButton;
-	auto currentWidth = testButton.getWidth(), currentHeight = testButton.getHeight();
-	testButton.setWidth(currentWidth / 2);
-	testButton.setHeight(currentHeight / 2);
-	REQUIRE(testButton.getHeight() == currentHeight/2);
-	REQUIRE(testButton.getWidth() == currentWidth/2);
-}
-
-TEST_CASE("RadioButton changes text", "[RadioButton]")
-{
-	Window testWindow;
-	RadioButton testButton;
-	testButton.setText("TEST TEXT");
-	REQUIRE(testButton.getText() == "TEST TEXT");
-}
-
-TEST_CASE("RadioButton repositions", "[RadioButton]")
-{
-	Window testWindow;
-	RadioButton testButton;
-	auto currentX = testButton.getX(), currentY = testButton.getY();
-	testButton.setX(currentX / 2);
-	testButton.setY(currentY / 2);
-	REQUIRE(testButton.getX() == currentX/2);
-	REQUIRE(testButton.getY() == currentY/2);
-}
-
-TEST_CASE("RadioButton sends clicked signal", "[RadioButton]")
-{
-	BrazzApp testApp;
-	Window testWindow;
-	RadioButton testButton;
-	bool recv = false;
-	testApp.connect(Event(testButton.getID(), EventType::LEFT_CLICK_DOWN), 
-	[&]()
-	{
-		recv = true;
-		testApp.stop();
-	});
-	testApp.postEvent(Event(testButton.getID(), EventType::LEFT_CLICK_DOWN));
-	testApp.run();
-	REQUIRE(recv);
+	RadioButtonTests tests;
+	tests.run();
 }

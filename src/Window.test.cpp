@@ -1,60 +1,17 @@
-#include <catch2/catch_test_macros.hpp>
+#include "Control.test.hpp"
 #include "Window.hpp"
-#include "BrazzApp.hpp"
 
-using namespace BrazzGUI;
-
-TEST_CASE("Window creates", "[Window]")
+class WindowTests : public ControlTests
 {
-	std::unique_ptr<Window> testWindow;
-	CHECK_NOTHROW(testWindow.reset(new Window()));
-}
+	public:
+		std::unique_ptr<Control> getTestInstance() 
+		{ 
+			return std::make_unique<Window>(); 
+		}
+};
 
-TEST_CASE("Window shows", "[Window]")
+TEST_CASE("Window Control tests", "[Window]")
 {
-	Window testWindow;
-	CHECK_NOTHROW(testWindow.show());
-}
-
-TEST_CASE("Window resizes", "[Window]")
-{
-	Window testWindow;
-	auto currentWidth = testWindow.getWidth(), currentHeight = testWindow.getHeight();
-	testWindow.setWidth(currentWidth / 2);
-	testWindow.setHeight(currentHeight / 2);
-	REQUIRE(testWindow.getHeight() == currentHeight/2);
-	REQUIRE(testWindow.getWidth() == currentWidth/2);
-}
-
-TEST_CASE("Window changes text", "[Window]")
-{
-	Window testWindow;
-	testWindow.setText("TEST TEXT");
-	REQUIRE(testWindow.getText() == "TEST TEXT");
-}
-
-TEST_CASE("Window repositions", "[Window]")
-{
-	Window testWindow;
-	auto currentX = testWindow.getX(), currentY = testWindow.getY();
-	testWindow.setX(currentX / 2);
-	testWindow.setY(currentY / 2);
-	REQUIRE(testWindow.getX() == currentX/2);
-	REQUIRE(testWindow.getY() == currentY/2);
-}
-
-TEST_CASE("Window sends clicked signal", "[Window]")
-{
-	BrazzApp testApp;
-	Window testWindow;
-	bool recv = false;
-	testApp.connect(Event(testWindow.getID(), EventType::LEFT_CLICK_DOWN), 
-	[&]()
-	{
-		recv = true;
-		testApp.stop();
-	});
-	testApp.postEvent(Event(testWindow.getID(), EventType::LEFT_CLICK_DOWN));
-	testApp.run();
-	REQUIRE(recv);
+	WindowTests tests;
+	tests.run();
 }

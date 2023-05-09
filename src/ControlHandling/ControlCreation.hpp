@@ -13,8 +13,11 @@ namespace BrazzGUI
 			Button,
 			Label,
 			Textbox,
+			TextArea,
+			DrawPane,
 			Checkbox,
-			RadioButton
+			RadioButton,
+			RadioButtonGroup
 		};
 		
 		ControlID createControl(const ControlType& type);
