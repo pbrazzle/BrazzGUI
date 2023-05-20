@@ -14,6 +14,10 @@ using namespace BrazzGUI;
 class ControlTests
 {
 	public:
+		bool hasWindowText = true;
+		int minimumHeight = 30;
+		int minimumWidth = 30;
+	
 		virtual std::unique_ptr<Control> getTestInstance() = 0;
 		
 		void run()
@@ -36,18 +40,22 @@ class ControlTests
 				Window testWindow;
 				auto testControl = getTestInstance();
 				auto currentWidth = testControl->getWidth(), currentHeight = testControl->getHeight();
-				testControl->setWidth(currentWidth / 2);
-				testControl->setHeight(currentHeight / 2);
-				REQUIRE(testControl->getHeight() == currentHeight/2);
-				REQUIRE(testControl->getWidth() == currentWidth/2);
+				int newHeight = minimumHeight, newWidth = minimumWidth;
+				testControl->setWidth(newHeight);
+				testControl->setHeight(newWidth);
+				REQUIRE(testControl->getHeight() == newHeight);
+				REQUIRE(testControl->getWidth() == newWidth);
 			}
 
-			SECTION("Control changes text", "[Control]")
+			if (hasWindowText)
 			{
-				Window testWindow;
-				auto testControl = getTestInstance();
-				testControl->setText("TEST TEXT");
-				REQUIRE(testControl->getText() == "TEST TEXT");
+				SECTION("Control changes text", "[Control]")
+				{
+					Window testWindow;
+					auto testControl = getTestInstance();
+					testControl->setText("TEST TEXT");
+					REQUIRE(testControl->getText() == "TEST TEXT");
+				}
 			}
 
 			SECTION("Control repositions", "[Control]")

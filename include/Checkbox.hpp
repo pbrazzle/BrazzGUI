@@ -9,6 +9,9 @@ namespace BrazzGUI
 	{
 		public:
 			Checkbox();
+			
+			bool isChecked();
+			void setCheck(const bool&);
 	};
 }
 

@@ -9,6 +9,8 @@ namespace BrazzGUI
 	{
 		public:
 			ComboBox();
+			
+			int getHeight() const override;
 	};
 }
 

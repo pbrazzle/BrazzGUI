@@ -22,6 +22,7 @@ namespace BrazzGUI
 		int getY(const ControlID&);
 		int getWidth(const ControlID&);
 		int getHeight(const ControlID&);
+		int getComboBoxHeight(const ControlID&);
 		
 		std::string getText(const ControlID&);
 		

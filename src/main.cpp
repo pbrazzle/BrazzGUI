@@ -5,7 +5,9 @@
 #include "RadioButton.hpp"
 #include "Checkbox.hpp"
 #include "Textbox.hpp"
+#include "ComboBox.hpp"
 #include "Event.hpp"
+#include "TextArea.hpp"
 
 #include <windows.h>
 #include <iostream>
@@ -46,6 +48,17 @@ int main()
 	myCheckbox.setPosition(200, 0, 100, 100);
 	myApp.connect(Event(myCheckbox.getID(), EventType::LEFT_CLICK_DOWN), []() { std::cout << "click!\n"; });
 	myWindow.addControl(myCheckbox);
+	
+	ComboBox myComboBox;
+	myComboBox.setText("TEST");
+	myComboBox.setPosition(200, 100, 100, 30);
+	myApp.connect(Event(myComboBox.getID(), EventType::LEFT_CLICK_DOWN), []() { std::cout << "click!\n"; });
+	myWindow.addControl(myComboBox);
+	
+	TextArea myTextArea;
+	myTextArea.setPosition(300, 0, 100, 100);
+	myApp.connect(Event(myTextArea.getID(), EventType::LEFT_CLICK_DOWN), []() { std::cout << "click!\n"; });
+	myWindow.addControl(myTextArea);
 	
 	myWindow.show();
 	

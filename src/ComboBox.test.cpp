@@ -13,5 +13,6 @@ class ComboBoxTests : public ControlTests
 TEST_CASE("ComboBox Control tests", "[ComboBox]")
 {
 	ComboBoxTests tests;
+	tests.hasWindowText = false;
 	tests.run();
 }

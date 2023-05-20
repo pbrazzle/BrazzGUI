@@ -10,7 +10,7 @@ namespace BrazzGUI
 {
 	class Control
 	{
-		private:
+		protected:
 			ControlID id;
 			
 		public:
@@ -30,7 +30,7 @@ namespace BrazzGUI
 			int getX() const;
 			int getY() const;
 			int getWidth() const;
-			int getHeight() const;
+			virtual int getHeight() const;
 			
 			std::string getText() const;
 			

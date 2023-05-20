@@ -88,6 +88,14 @@ int ControlStyling::getY(const ControlID& id)
 	return client.y;
 }
 
+int ControlStyling::getComboBoxHeight(const ControlID& id)
+{
+	auto handle = getHandleFromID(id);
+	RECT comboBoxRect;
+	SendMessage(handle, CB_GETDROPPEDCONTROLRECT, NULL, (LPARAM) &comboBoxRect);
+	return comboBoxRect.bottom-comboBoxRect.top;
+}
+
 int ControlStyling::getWidth(const ControlID& id)
 {
 	auto handle = getHandleFromID(id);

@@ -174,6 +174,98 @@ HWND createRadioButton()
 	return hwnd;
 }
 
+HWND createTextArea() 
+{ 
+	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
+	
+	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle(); 
+	HWND hwnd = CreateWindowEx(
+		0,
+        "EDIT",                     // Window class
+        "TextArea",    // Window text
+		WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | ES_LEFT | ES_MULTILINE | ES_WANTRETURN,            // Window style
+        // position and size
+        0, 0, 10, 10,
+        parentHandle,       // Parent window    
+        reinterpret_cast<HMENU>((long long)nextID),       // Menu
+        GetModuleHandle(NULL),  // Instance handle
+        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
+        );
+		
+	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
+		
+	return hwnd;
+}
+
+HWND createDrawPane() 
+{ 
+	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
+	
+	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle(); 
+	HWND hwnd = CreateWindowEx(
+		0,
+        "BUTTON",                     // Window class
+        "Group",    // Window text
+        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_GROUP | BS_GROUPBOX,           // Window style
+        // position and size
+        0, 0, 10, 10,
+        parentHandle,       // Parent window    
+        reinterpret_cast<HMENU>((long long)nextID),       // Menu
+        GetModuleHandle(NULL),  // Instance handle
+        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
+        );
+		
+	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
+		
+	return hwnd;
+}
+
+HWND createRadioButtonGroup() 
+{ 
+	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
+	
+	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle(); 
+	HWND hwnd = CreateWindowEx(
+		0,
+        "BUTTON",                     // Window class
+        "Group",    // Window text
+        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_GROUP | BS_GROUPBOX,            // Window style
+        // position and size
+        0, 0, 10, 10,
+        parentHandle,       // Parent window    
+        reinterpret_cast<HMENU>((long long)nextID),       // Menu
+        GetModuleHandle(NULL),  // Instance handle
+        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
+        );
+		
+	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
+		
+	return hwnd;
+}
+
+HWND createComboBox() 
+{ 
+	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
+	
+	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle(); 
+	HWND hwnd = CreateWindowEx(
+		0,
+        "COMBOBOX",                     // Window class
+        "Combo",    // Window text
+        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | CBS_DROPDOWNLIST | CBS_NOINTEGRALHEIGHT | CBS_HASSTRINGS,  // Window style
+        // position and size
+        0, 0, 10, 10,
+        parentHandle,       // Parent window    
+        reinterpret_cast<HMENU>((long long)nextID),       // Menu
+        GetModuleHandle(NULL),  // Instance handle
+        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
+        );
+		
+	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
+		
+	return hwnd;
+}
+
 ControlID ControlCreation::createControl(const ControlCreation::ControlType& type)
 {
 	HWND hwnd;
@@ -196,6 +288,18 @@ ControlID ControlCreation::createControl(const ControlCreation::ControlType& typ
 			break;
 		case ControlType::Label:
 			hwnd = createLabel();
+			break;
+		case ControlType::TextArea:
+			hwnd = createTextArea();
+			break;
+		case ControlType::DrawPane:
+			hwnd = createDrawPane();
+			break;
+		case ControlType::RadioButtonGroup:
+			hwnd = createRadioButtonGroup();
+			break;
+		case ControlType::ComboBox:
+			hwnd = createComboBox();
 			break;
 	}
 		
