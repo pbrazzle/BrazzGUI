@@ -8,7 +8,7 @@ using namespace BrazzGUI;
 auto slotMap = std::map<Event, std::vector<std::function<void(const Event&)>>, std::function<bool(const Event&, const Event&)>>{
 	[](const Event& e1, const Event& e2)
 	{
-		if (e1.getControl() < e2.getControl()) return true;
+		if (e1.getControl() != e2.getControl()) return e1.getControl() < e2.getControl();
 		return e1.getType() < e2.getType();
 	}
 };

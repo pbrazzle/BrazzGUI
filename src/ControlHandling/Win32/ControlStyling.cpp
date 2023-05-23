@@ -76,6 +76,7 @@ void ControlStyling::setText(const ControlID& id, const std::string& text)
 { 
 	auto handle = getHandleFromID(id);
 	SetWindowText(handle, text.c_str());
+	EventHandling::postEvent(Event(id, EventType::TEXT_CHANGED));
 }
 
 int ControlStyling::getX(const ControlID& id)

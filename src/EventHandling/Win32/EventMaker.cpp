@@ -29,6 +29,11 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 			idVal = static_cast<int>(LOWORD(wParam));
 			eventQueue.push(Event(idVal, EventType::LEFT_CLICK_DOWN));
 		}
+		else if (HIWORD(wParam) == EN_CHANGE)
+		{
+			idVal = static_cast<int>(LOWORD(wParam));
+			eventQueue.push(Event(idVal, EventType::TEXT_CHANGED));
+		}
 		return 0;
     case WM_PAINT:
 		{

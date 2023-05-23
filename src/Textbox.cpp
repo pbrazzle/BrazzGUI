@@ -3,4 +3,4 @@
 
 using namespace BrazzGUI;
 
-Textbox::Textbox() : Control(ControlCreation::ControlType::Textbox) { }
+Textbox::Textbox() : TextControl(ControlCreation::ControlType::Textbox) { }

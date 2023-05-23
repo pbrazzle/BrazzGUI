@@ -1,11 +1,11 @@
 #ifndef TEXTBOX
 #define TEXTBOX
 
-#include "Control.hpp"
+#include "TextControl.hpp"
 
 namespace BrazzGUI
 {
-	class Textbox : public Control
+	class Textbox : public TextControl
 	{
 		public:
 			Textbox();

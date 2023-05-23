@@ -42,6 +42,7 @@ int main()
 	Textbox myTextbox;
 	myTextbox.setPosition(100, 100, 100, 100);
 	myApp.connect(Event(myTextbox.getID(), EventType::LEFT_CLICK_DOWN), [](const Event&) { std::cout << "click!\n"; });
+	myApp.connect(Event(myTextbox.getID(), EventType::TEXT_CHANGED), [](const Event&) { std::cout << "text changed!\n"; });
 	myWindow.addControl(myTextbox);
 	
 	Checkbox myCheckbox;

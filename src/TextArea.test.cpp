@@ -1,7 +1,7 @@
-#include "Control.test.hpp"
+#include "TextControl.test.hpp"
 #include "TextArea.hpp"
 
-class TextAreaTests : public ControlTests
+class TextAreaTests : public TextControlTests
 {
 	public:
 		std::unique_ptr<Control> getTestInstance() 
@@ -14,4 +14,10 @@ TEST_CASE("TextArea Control tests", "[TextArea]")
 {
 	TextAreaTests tests;
 	tests.run();
+}	
+
+TEST_CASE("TextArea TextControl tests", "[TextArea]")
+{
+	TextAreaTests tests;
+	tests.runTextTests();
 }	

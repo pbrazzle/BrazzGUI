@@ -5,4 +5,4 @@
 using namespace BrazzGUI;
 
 TextArea::TextArea() 
-	: Control(ControlCreation::ControlType::TextArea) { }
+	: TextControl(ControlCreation::ControlType::TextArea) { }

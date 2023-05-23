@@ -12,6 +12,7 @@ namespace BrazzGUI
 			ControlID(const int&);
 		
 			bool operator<(const ControlID& rhs) const;
+			bool operator!=(const ControlID& rhs) const;
 		
 			int getValue() const;
 	};

@@ -1,11 +1,11 @@
 #ifndef TEXTAREA
 #define TEXTAREA
 
-#include "Control.hpp"
+#include "TextControl.hpp"
 
 namespace BrazzGUI
 {
-	class TextArea : public Control
+	class TextArea : public TextControl
 	{
 		public:
 			TextArea();

@@ -8,6 +8,7 @@ set(LIB_SOURCES
 	ControlID.cpp
 	Button.cpp
 	Checkbox.cpp
+	TextControl.cpp
 	Textbox.cpp
 	RadioButton.cpp
 	Label.cpp
