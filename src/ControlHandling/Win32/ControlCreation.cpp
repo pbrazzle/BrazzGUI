@@ -1,7 +1,11 @@
 #include "ControlHandling/ControlCreation.hpp"
 #include "ControlHandling/Win32/ControlHandling.hpp"
 
+#include "EventHandling/EventSlotting.hpp"
+#include "EventHandling/EventMaker.hpp"
+
 #include <windows.h>
+#include <windowsx.h>
 #include <map>
 #include <memory>
 #include <exception>
@@ -124,6 +128,15 @@ HWND createCheckbox()
         );
 		
 	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
+	
+	// Checkbox changes check on click
+	EventHandling::connect(Event(nextID, EventType::LEFT_CLICK_DOWN), [&](const Event& e) 
+	{ 
+		auto id = e.getControl();
+		auto osData = static_cast<const ControlHandling::Win32Data&>(ControlHandling::getDataFromID(id));
+		Button_SetCheck(osData.getHandle(), !Button_GetCheck(osData.getHandle()));
+		EventHandling::postEvent(Event(id, EventType::CHECK_CHANGED));
+	});
 		
 	return hwnd;
 }

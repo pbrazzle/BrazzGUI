@@ -8,7 +8,8 @@ namespace BrazzGUI
 	enum class EventType
 	{
 		QUIT,
-		LEFT_CLICK_DOWN
+		LEFT_CLICK_DOWN,
+		CHECK_CHANGED
 	};
 	
 	class Event

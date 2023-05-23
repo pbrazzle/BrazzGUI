@@ -23,7 +23,7 @@ void BrazzApp::stop()
 	EventHandling::postStopEvent();
 }
 
-void BrazzApp::connect(const Event& e, const std::function<void(void)>& slot)
+void BrazzApp::connect(const Event& e, const std::function<void(const Event&)>& slot)
 {
 	EventHandling::connect(e, slot);
 }

@@ -1,7 +1,10 @@
 #include "ControlHandling/ControlStyling.hpp"
 #include "ControlHandling/Win32/ControlHandling.hpp"
 
+#include "EventHandling/EventMaker.hpp"
+
 #include <windows.h>
+#include <windowsx.h>
 #include <iostream>
 
 using namespace BrazzGUI;
@@ -10,6 +13,17 @@ HWND getHandleFromID(const ControlID& id)
 {
 	auto osData = static_cast<const ControlHandling::Win32Data&>(ControlHandling::getDataFromID(id));
 	return osData.getHandle();
+}
+
+void ControlStyling::setCheck(const ControlID& id, const bool& c)
+{
+	Button_SetCheck(getHandleFromID(id), c);
+	EventHandling::postEvent(Event(id, EventType::CHECK_CHANGED));
+}
+
+bool ControlStyling::isChecked(const ControlID& id)
+{
+	return Button_GetCheck(getHandleFromID(id));
 }
 
 void ControlStyling::show(const ControlID& id)

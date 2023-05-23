@@ -17,7 +17,7 @@ namespace BrazzGUI
 			int run();
 			void stop();
 			
-			void connect(const Event&, const std::function<void(void)>&);
+			void connect(const Event&, const std::function<void(const Event&)>&);
 			void postEvent(const Event&);
 	};
 }

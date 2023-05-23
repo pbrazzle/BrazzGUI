@@ -18,6 +18,9 @@ namespace BrazzGUI
 		
 		void setText(const ControlID&, const std::string&);
 		
+		void setCheck(const ControlID&, const bool&);
+		bool isChecked(const ControlID&);
+		
 		int getX(const ControlID&);
 		int getY(const ControlID&);
 		int getWidth(const ControlID&);

@@ -5,7 +5,7 @@
 using namespace BrazzGUI::EventHandling;
 using namespace BrazzGUI;
 
-auto slotMap = std::map<Event, std::function<void(void)>, std::function<bool(const Event&, const Event&)>>{
+auto slotMap = std::map<Event, std::vector<std::function<void(const Event&)>>, std::function<bool(const Event&, const Event&)>>{
 	[](const Event& e1, const Event& e2)
 	{
 		if (e1.getControl() < e2.getControl()) return true;
@@ -13,13 +13,16 @@ auto slotMap = std::map<Event, std::function<void(void)>, std::function<bool(con
 	}
 };
 
-void BrazzGUI::EventHandling::connect(const Event& e, const std::function<void(void)>& slot)
+void BrazzGUI::EventHandling::connect(const Event& e, const std::function<void(const Event&)>& slot)
 {
-	slotMap[e] = slot;
+	slotMap[e].push_back(slot);
 }
 
 void BrazzGUI::EventHandling::runSlots(const Event& e)
 {
 	if (slotMap.count(e))
-		slotMap[e]();
+	{
+		for (auto slot : slotMap[e])
+			slot(e);
+	}
 }

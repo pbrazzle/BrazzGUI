@@ -76,7 +76,7 @@ class ControlTests
 				auto testControl = getTestInstance();
 				bool recv = false;
 				testApp.connect(Event(testControl->getID(), EventType::LEFT_CLICK_DOWN), 
-				[&]()
+				[&](const Event&)
 				{
 					recv = true;
 					testApp.stop();
