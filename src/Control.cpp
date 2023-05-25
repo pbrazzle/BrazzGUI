@@ -25,6 +25,12 @@ void Control::setPosition(const int& x, const int& y, const int& width, const in
 
 void Control::setText(const std::string& text) { ControlStyling::setText(id, text); }
 
+void Control::setFontSize(const int& s) 
+{ 
+	font.setSize(s);
+	ControlStyling::setFont(id, font);
+}
+
 int Control::getX() const { return ControlStyling::getX(id); }
 int Control::getY() const { return ControlStyling::getY(id); }
 int Control::getWidth() const { return ControlStyling::getWidth(id); }
@@ -33,3 +39,5 @@ int Control::getHeight() const { return ControlStyling::getHeight(id); }
 std::string Control::getText() const { return ControlStyling::getText(id); }
 
 ControlID Control::getID() const { return id; }
+
+int Control::getFontSize() const { return font.getSize(); }

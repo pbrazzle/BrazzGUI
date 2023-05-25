@@ -2,6 +2,7 @@
 #define CONTROL_STYLING
 
 #include "ControlID.hpp"
+#include "Font.hpp"
 
 #include <string>
 
@@ -17,6 +18,8 @@ namespace BrazzGUI
 		void setHeight(const ControlID&, const int&);
 		
 		void setText(const ControlID&, const std::string&);
+		
+		void setFont(const ControlID&, const Font&);
 		
 		void setCheck(const ControlID&, const bool&);
 		bool isChecked(const ControlID&);

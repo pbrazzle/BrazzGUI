@@ -26,7 +26,12 @@ int main()
 	myButton.setHeight(100);
 	myButton.setX(0);
 	myButton.setY(0);
-	myApp.connect(Event(myButton.getID(), EventType::LEFT_CLICK_DOWN), [](const Event&) { std::cout << "click!\n"; });
+	myButton.setFontSize(10);
+	myApp.connect(Event(myButton.getID(), EventType::LEFT_CLICK_DOWN), [&](const Event&) 
+	{ 
+		std::cout << "click!\n";
+		myButton.setFontSize(myButton.getFontSize() + 1);
+	});
 	myWindow.addControl(myButton);
 	
 	Label myLabel;

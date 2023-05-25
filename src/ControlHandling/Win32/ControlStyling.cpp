@@ -1,5 +1,6 @@
 #include "ControlHandling/ControlStyling.hpp"
 #include "ControlHandling/Win32/ControlHandling.hpp"
+#include "ControlHandling/Win32/FontHandler.hpp"
 
 #include "EventHandling/EventMaker.hpp"
 
@@ -8,6 +9,7 @@
 #include <iostream>
 
 using namespace BrazzGUI;
+using namespace BrazzGUI::ControlHandling;
 
 HWND getHandleFromID(const ControlID& id)
 {
@@ -77,6 +79,14 @@ void ControlStyling::setText(const ControlID& id, const std::string& text)
 	auto handle = getHandleFromID(id);
 	SetWindowText(handle, text.c_str());
 	EventHandling::postEvent(Event(id, EventType::TEXT_CHANGED));
+}
+
+void ControlStyling::setFont(const ControlID& id, const Font& font)
+{
+	HFONT fontHandle = FontHandler::getFontHandle(font);
+	auto handle = getHandleFromID(id);
+	
+	SendMessage(handle, WM_SETFONT, (WPARAM) fontHandle, (LPARAM) TRUE);
 }
 
 int ControlStyling::getX(const ControlID& id)
