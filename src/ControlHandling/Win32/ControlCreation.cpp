@@ -29,22 +29,49 @@ const ControlHandling::ControlOSData& ControlHandling::getDataFromID(const Contr
 	return *idMap.at(id);
 }
 
+const wchar_t* to_wchar(const std::string& s)
+{
+    auto wstring = std::wstring(s.begin(), s.end());
+    return wstring.c_str();
+}
+
+HWND createChildWindow(const std::string& className, const std::string& defaultText, DWORD style)
+{
+    if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
+	
+	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle();
+	HWND hwnd = CreateWindowEx(
+		0,
+        className.c_str(),                     // Window class
+        defaultText.c_str(),    // Window text
+        style,            // Window style
+        // position and size
+        0, 0, 10, 10,
+        parentHandle,       // Parent window    
+        reinterpret_cast<HMENU>((long long)nextID),       // Menu
+        GetModuleHandle(NULL),  // Instance handle
+        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
+        );
+		
+	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createChildWindow");
+		
+	return hwnd;
+}
+
 HWND createWindow()
 {
-	const CHAR CLASS_NAME[]  = "Sample Window Class";
-    
     WNDCLASS wc = { };
 
     wc.lpfnWndProc   = BrazzGUIWndProc;
     wc.hInstance     = GetModuleHandle(NULL);
-    wc.lpszClassName = CLASS_NAME;
+    wc.lpszClassName = "BrazzGUI Window";
 
     RegisterClass(&wc);
 
     // Create the window.
     HWND hwnd = CreateWindowEx(
         0,                              // Optional window styles.
-        CLASS_NAME,                     // Window class
+        "BrazzGUI Window",                     // Window class
         "Learn to Program Windows",    // Window text
         WS_OVERLAPPEDWINDOW,            // Window style
 
@@ -63,74 +90,22 @@ HWND createWindow()
 	return hwnd;
 }
 
+const DWORD defaultStyle = WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS;
+
 HWND createButton()
 {
-	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
-	
-	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle();
-	HWND hwnd = CreateWindowEx(
-		0,
-        "BUTTON",                     // Window class
-        "Button",    // Window text
-        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | BS_DEFPUSHBUTTON,            // Window style
-        // position and size
-        0, 0, 10, 10,
-        parentHandle,       // Parent window    
-        reinterpret_cast<HMENU>((long long)nextID),       // Menu
-        GetModuleHandle(NULL),  // Instance handle
-        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
-        );
-		
-	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
-		
-	return hwnd;
+    return createChildWindow("BUTTON", "Button", defaultStyle | BS_DEFPUSHBUTTON);
 }
 
 HWND createTextbox()
 {
-	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
-	
-	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle();
-	HWND hwnd = CreateWindowEx(
-		0,
-        "EDIT",                     // Window class
-        "",    // Window text
-        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | ES_LEFT | WS_BORDER,            // Window style
-        // position and size
-        0, 0, 10, 10,
-        parentHandle,       // Parent window    
-        reinterpret_cast<HMENU>((long long)nextID),       // Menu
-        GetModuleHandle(NULL),  // Instance handle
-        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
-        );
-		
-	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
-		
-	return hwnd;
+    return createChildWindow("EDIT", "", defaultStyle | ES_LEFT | WS_BORDER);
 }
 
 HWND createCheckbox()
 {
-	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
-	
-	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle();
-	HWND hwnd = CreateWindowEx(
-		0,
-        "BUTTON",                     // Window class
-        "Button",    // Window text
-        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | BS_CHECKBOX,            // Window style
-        // position and size
-        0, 0, 10, 10,
-        parentHandle,       // Parent window    
-        reinterpret_cast<HMENU>((long long)nextID),       // Menu
-        GetModuleHandle(NULL),  // Instance handle
-        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
-        );
-		
-	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
-	
 	// Checkbox changes check on click
-	EventHandling::connect(Event(nextID, EventType::LEFT_CLICK_DOWN), [&](const Event& e) 
+	EventHandling::connect(Event(nextID, EventType::LEFT_CLICK_DOWN), [](const Event& e) 
 	{ 
 		auto id = e.getControl();
 		auto osData = static_cast<const ControlHandling::Win32Data&>(ControlHandling::getDataFromID(id));
@@ -138,145 +113,38 @@ HWND createCheckbox()
 		EventHandling::postEvent(Event(id, EventType::CHECK_CHANGED));
 	});
 		
-	return hwnd;
+    return createChildWindow("BUTTON", "Button", defaultStyle | BS_CHECKBOX);
 }
 
 HWND createLabel()
 {
-	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
-	
-	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle();
-	HWND hwnd = CreateWindowEx(
-		0,
-        "STATIC",                     // Window class
-        "Label",    // Window text
-        WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | SS_CENTER | SS_NOTIFY,            // Window style
-        // position and size
-        0, 0, 10, 10,
-        parentHandle,       // Parent window    
-        reinterpret_cast<HMENU>((long long)nextID),       // Menu
-        GetModuleHandle(NULL),  // Instance handle
-        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
-        );
-		
-	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createLabel");
-		
-	return hwnd;
+    return createChildWindow("STATIC", "Label", defaultStyle | SS_CENTER | SS_NOTIFY);
 }
 
 HWND createRadioButton()
 {
-	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
-	
-	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle();
-	HWND hwnd = CreateWindowEx(
-		0,
-        "BUTTON",                     // Window class
-        "Button",    // Window text
-        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | BS_RADIOBUTTON,            // Window style
-        // position and size
-        0, 0, 10, 10,
-        parentHandle,       // Parent window    
-        reinterpret_cast<HMENU>((long long)nextID),       // Menu
-        GetModuleHandle(NULL),  // Instance handle
-        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
-        );
-		
-	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
-		
-	return hwnd;
+    return createChildWindow("BUTTON", "Button", defaultStyle | BS_RADIOBUTTON);
 }
 
 HWND createTextArea() 
 { 
-	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
-	
-	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle(); 
-	HWND hwnd = CreateWindowEx(
-		0,
-        "EDIT",                     // Window class
-        "TextArea",    // Window text
-		WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | ES_LEFT | ES_MULTILINE | ES_WANTRETURN,            // Window style
-        // position and size
-        0, 0, 10, 10,
-        parentHandle,       // Parent window    
-        reinterpret_cast<HMENU>((long long)nextID),       // Menu
-        GetModuleHandle(NULL),  // Instance handle
-        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
-        );
-		
-	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
-		
-	return hwnd;
+    return createChildWindow("EDIT", "TextArea", defaultStyle | ES_LEFT | ES_MULTILINE | ES_WANTRETURN);
 }
 
 HWND createDrawPane() 
 { 
-	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
-	
-	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle(); 
-	HWND hwnd = CreateWindowEx(
-		0,
-        "BUTTON",                     // Window class
-        "Group",    // Window text
-        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_GROUP | BS_GROUPBOX,           // Window style
-        // position and size
-        0, 0, 10, 10,
-        parentHandle,       // Parent window    
-        reinterpret_cast<HMENU>((long long)nextID),       // Menu
-        GetModuleHandle(NULL),  // Instance handle
-        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
-        );
-		
-	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
-		
-	return hwnd;
+    //TODO give this the right class and style
+    return createChildWindow("BUTTON", "Group", defaultStyle | WS_GROUP | BS_GROUPBOX);
 }
 
 HWND createRadioButtonGroup() 
 { 
-	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
-	
-	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle(); 
-	HWND hwnd = CreateWindowEx(
-		0,
-        "BUTTON",                     // Window class
-        "Group",    // Window text
-        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_GROUP | BS_GROUPBOX,            // Window style
-        // position and size
-        0, 0, 10, 10,
-        parentHandle,       // Parent window    
-        reinterpret_cast<HMENU>((long long)nextID),       // Menu
-        GetModuleHandle(NULL),  // Instance handle
-        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
-        );
-		
-	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
-		
-	return hwnd;
+    return createChildWindow("BUTTON", "Group", defaultStyle | WS_GROUP | BS_GROUPBOX);
 }
 
 HWND createComboBox() 
 { 
-	if (topWindowData.size() == 0) throw std::logic_error("Cannot create a child control without top-level window");
-	
-	auto parentHandle = static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())->getHandle(); 
-	HWND hwnd = CreateWindowEx(
-		0,
-        "COMBOBOX",                     // Window class
-        "Combo",    // Window text
-        WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | CBS_DROPDOWNLIST | CBS_NOINTEGRALHEIGHT | CBS_HASSTRINGS,  // Window style
-        // position and size
-        0, 0, 10, 10,
-        parentHandle,       // Parent window    
-        reinterpret_cast<HMENU>((long long)nextID),       // Menu
-        GetModuleHandle(NULL),  // Instance handle
-        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
-        );
-		
-	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createButton");
-		
-	return hwnd;
+    return createChildWindow("COMBOBOX", "Combo", defaultStyle | CBS_DROPDOWNLIST | CBS_NOINTEGRALHEIGHT | CBS_HASSTRINGS);
 }
 
 ControlID ControlCreation::createControl(const ControlCreation::ControlType& type)
