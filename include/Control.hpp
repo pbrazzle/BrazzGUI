@@ -3,6 +3,7 @@
 
 #include "ControlID.hpp"
 #include "Font.hpp"
+#include "Color.hpp"
 
 namespace BrazzGUI::ControlCreation
 {
@@ -17,6 +18,8 @@ namespace BrazzGUI
 	{
 		private:
 			Font font;
+			Color backgroundColor;
+			Color textColor;
 			
 		protected:
 			ControlID id;
@@ -32,6 +35,8 @@ namespace BrazzGUI
 			void setWidth(const int&);
 			void setHeight(const int&);
 			void setPosition(const int&, const int&, const int&, const int&);
+			void setBackgroundColor(const Color);
+			void setTextColor(const Color);
 			
 			void setText(const std::string&);
 			
@@ -42,6 +47,8 @@ namespace BrazzGUI
 			int getWidth() const;
 			virtual int getHeight() const;
 			int getFontSize() const;
+			Color getBackgroundColor() const;
+			Color getTextColor() const;
 			
 			std::string getText() const;
 			

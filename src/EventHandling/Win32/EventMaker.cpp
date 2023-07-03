@@ -14,48 +14,49 @@ std::queue<Event> eventQueue;
 
 LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	auto idVal = static_cast<int>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+	auto osData = reinterpret_cast<const ControlHandling::Win32Data*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
 	
+	if (!osData)
+		return DefWindowProc(hwnd, uMsg, wParam, lParam);
+
+	auto id = osData->getID();
+
     switch (uMsg)
     {
 	case WM_LBUTTONDOWN:
-		eventQueue.push(Event(idVal, EventType::LEFT_CLICK_DOWN));
-		return 0;
+		eventQueue.push(Event(id, EventType::LEFT_CLICK_DOWN));
+		break;
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
 	case WM_COMMAND:
 		if (HIWORD(wParam) == BN_CLICKED || HIWORD(wParam) == STN_CLICKED || HIWORD(wParam) == EN_SETFOCUS)
 		{
-			idVal = static_cast<int>(LOWORD(wParam));
+			auto idVal = static_cast<int>(LOWORD(wParam));
 			eventQueue.push(Event(idVal, EventType::LEFT_CLICK_DOWN));
 		}
 		else if (HIWORD(wParam) == EN_CHANGE)
 		{
-			idVal = static_cast<int>(LOWORD(wParam));
+			auto idVal = static_cast<int>(LOWORD(wParam));
 			eventQueue.push(Event(idVal, EventType::TEXT_CHANGED));
 		}
-		return 0;
+		break;
     case WM_PAINT:
-		{
-			PAINTSTRUCT ps;
-			HDC hdc = BeginPaint(hwnd, &ps);
-
-			// All painting occurs here, between BeginPaint and EndPaint.
-
-			FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
-
-			EndPaint(hwnd, &ps);
-		}
-		return 0;
+		EventHandling::runSlots(Event(id, EventType::PAINT));
+		break;
+	case WM_ERASEBKGND:
+	{
+		EventHandling::runSlots(Event(id, EventType::DRAW_BACKGROUND));
+		break;
+	}
 	case WM_SIZE:
 	{
-		EventHandling::runSlots(Event(idVal, EventType::RESIZED));
-		return 0;
+		EventHandling::runSlots(Event(id, EventType::RESIZED));
+		break;
 	}
 
     }
-    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+	return osData->callDefaultWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
 bool handleMessage()

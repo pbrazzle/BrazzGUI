@@ -20,6 +20,7 @@ int main()
 	BrazzApp myApp;
 	
 	Window myWindow;
+	myWindow.setBackgroundColor({255, 0, 0});
 	
 	Button myButton;
 	myButton.setWidth(100);

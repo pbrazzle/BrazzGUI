@@ -3,6 +3,7 @@
 
 #include "ControlID.hpp"
 #include "Font.hpp"
+#include "Color.hpp"
 
 #include <string>
 
@@ -35,6 +36,9 @@ namespace BrazzGUI
 		std::string getText(const ControlID&);
 		
 		void setChild(const ControlID& parent, const ControlID& child);
+
+		void drawBackground(const ControlID, const Color);
+		void drawText(const ControlID, const Color);
 	}
 }
 

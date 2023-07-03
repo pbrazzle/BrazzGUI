@@ -10,6 +10,7 @@
 #include <memory>
 #include <exception>
 #include <system_error>
+#include <iostream>
 
 #ifndef UNICODE
 #define UNICODE
@@ -22,10 +23,12 @@ static int nextID = 0;
 extern LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 std::map<ControlID, std::unique_ptr<ControlHandling::ControlOSData>> idMap;
+const ControlHandling::Win32Data defaultData(-1, 0);
 std::vector<std::unique_ptr<ControlHandling::ControlOSData>> topWindowData;
 
 const ControlHandling::ControlOSData& ControlHandling::getDataFromID(const ControlID& id)
 {
+	if (!idMap.count(id)) return defaultData;
 	return *idMap.at(id);
 }
 
@@ -48,12 +51,19 @@ HWND createChildWindow(const std::string& className, const std::string& defaultT
         // position and size
         0, 0, 10, 10,
         parentHandle,       // Parent window    
-        reinterpret_cast<HMENU>((long long)nextID),       // Menu
+        reinterpret_cast<HMENU>(nextID),       // Menu
         GetModuleHandle(NULL),  // Instance handle
-        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
+        NULL
         );
 		
 	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createChildWindow");
+
+	auto prevProc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(hwnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&BrazzGUIWndProc)));
+
+	ControlID id = { nextID };
+	idMap[id] = std::make_unique<ControlHandling::Win32Data>(id, hwnd, prevProc);
+
+	SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(idMap[id].get()));
 
 	return hwnd;
 }
@@ -73,7 +83,7 @@ HWND createWindow()
         0,                              // Optional window styles.
         "BrazzGUI Window",                     // Window class
         "Learn to Program Windows",    // Window text
-        WS_OVERLAPPEDWINDOW,            // Window style
+        WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,            // Window style
 
         // Size and position
         CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
@@ -81,12 +91,17 @@ HWND createWindow()
         NULL,       // Parent window    
         NULL,       // Menu
         GetModuleHandle(NULL),  // Instance handle
-        reinterpret_cast<void*>((uintptr_t)nextID)        // Additional application data
+        NULL        // Additional application data
         );
 		
 	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createWindow");
 
-	topWindowData.emplace_back(std::make_unique<ControlHandling::Win32Data>(hwnd));
+	ControlID id{ nextID };
+	idMap[id] = std::make_unique<ControlHandling::Win32Data>(id, hwnd);
+
+	SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(idMap[id].get()));
+
+	topWindowData.emplace_back(std::make_unique<ControlHandling::Win32Data>(id, hwnd));
 	return hwnd;
 }
 
@@ -184,8 +199,7 @@ ControlID ControlCreation::createControl(const ControlCreation::ControlType& typ
 			break;
 	}
 		
-	ControlID id = { nextID };
-	idMap[id] = std::make_unique<ControlHandling::Win32Data>(hwnd);
+	ControlID id{ nextID };
 	nextID++;
 	return id;
 }

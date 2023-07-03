@@ -17,7 +17,6 @@ HFONT FontHandler::getFontHandle(const Font& f)
 {	
 	if (fontMap.count(f)) return fontMap[f];
 	
-	std::cout << "Creating font of size " << f.getSize() << '\n';
 	fontMap[f] = CreateFont(
 		f.getSize(),
 		0.5*f.getSize(),

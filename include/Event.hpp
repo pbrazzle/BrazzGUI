@@ -11,7 +11,9 @@ namespace BrazzGUI
 		LEFT_CLICK_DOWN,
 		CHECK_CHANGED,
 		TEXT_CHANGED,
-		RESIZED
+		RESIZED,
+		DRAW_BACKGROUND,
+		PAINT
 	};
 	
 	class Event

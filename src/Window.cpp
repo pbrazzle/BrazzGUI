@@ -12,6 +12,11 @@ Window::Window() : Control(ControlCreation::ControlType::Window) {
 	{ 
 		layout.updatePositions();
 	});
+
+	EventHandling::connect(Event(id, EventType::DRAW_BACKGROUND), [&](const Event& e) 
+	{ 
+		ControlStyling::drawBackground(id, getBackgroundColor());
+	});
 }
 
 void Window::addControl(Control& child)

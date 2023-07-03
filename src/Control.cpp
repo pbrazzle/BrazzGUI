@@ -2,10 +2,16 @@
 
 #include "ControlHandling/ControlCreation.hpp"
 #include "ControlHandling/ControlStyling.hpp"
+#include "EventHandling/EventSlotting.hpp"
 
 using namespace BrazzGUI;
 
-Control::Control(const ControlCreation::ControlType& type) : id(ControlCreation::createControl(type)) { }
+Control::Control(const ControlCreation::ControlType& type) : id(ControlCreation::createControl(type)) 
+{ 
+	backgroundColor = {255, 255, 255};
+}
+
+
 Control::~Control() { }
 
 void Control::show() { ControlStyling::show(id); }
@@ -22,6 +28,10 @@ void Control::setPosition(const int& x, const int& y, const int& width, const in
 	setWidth(width);
 	setHeight(height);
 }
+
+void Control::setBackgroundColor(Color bg) { backgroundColor = bg; }
+
+void Control::setTextColor(Color t) { textColor = t; }
 
 void Control::setText(const std::string& text) { ControlStyling::setText(id, text); }
 
@@ -41,3 +51,6 @@ std::string Control::getText() const { return ControlStyling::getText(id); }
 ControlID Control::getID() const { return id; }
 
 int Control::getFontSize() const { return font.getSize(); }
+
+Color Control::getBackgroundColor() const { return backgroundColor; }
+Color Control::getTextColor() const { return textColor; }

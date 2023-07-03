@@ -52,7 +52,6 @@ void LayoutController::addControl(Control* c, const LayoutType type){
 #include <iostream>
 
 void LayoutController::updatePositions() const{
-    // TODO update positions of all Controls
     // EAST, WEST take 20% of their respective sides
     // NORTH, SOUTH take 20% and take priority from EAST, WEST
     // CENTER takes the rest of the available space
@@ -65,8 +64,6 @@ void LayoutController::updatePositions() const{
 
     auto remainingHeight = height;
     auto remainingWidth = width;
-
-    std::cout << "Layout updating: Parent width " << width << " height " << height << std::endl;
 
     if (north)
     {

@@ -172,3 +172,23 @@ void ControlStyling::setChild(const ControlID& parent, const ControlID& child)
 	SetWindowPos(childHandle, NULL, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER);
 	if (result == NULL) std::cout << "SetParent failed!\n";
 }
+
+void ControlStyling::drawBackground(const ControlID id, const Color color)
+{
+	auto handle = getHandleFromID(id);
+	auto hdc = GetDC(handle);
+	RECT clientRect;
+	GetClientRect(handle, &clientRect);
+	auto brush = CreateSolidBrush(RGB(color.r, color.g, color.b));
+	FillRect(hdc, &clientRect, brush);
+	DeleteObject(brush);
+	ReleaseDC(handle, hdc);
+}
+
+void ControlStyling::drawText(const ControlID id, const Color color)
+{
+	auto handle = getHandleFromID(id);
+	auto dc = GetDC(handle);
+	SetTextColor(dc, RGB(color.r, color.g, color.b));
+	ReleaseDC(handle, dc);
+}

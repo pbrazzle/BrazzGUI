@@ -10,10 +10,20 @@ namespace BrazzGUI::ControlHandling
 	{
 		private:
 			HWND handle;
+			WNDPROC defaultWindowProc;
+			ControlID id;
+
 		public:
-			Win32Data(const HWND& h) : handle(h) { }
+			Win32Data(const ControlID i, const HWND h, const WNDPROC defProc = &DefWindowProc) 
+			: id(i), handle(h), defaultWindowProc(defProc) { }
 		
 			HWND getHandle() const { return handle; }
+
+			ControlID getID() const { return id; }
+
+			LRESULT callDefaultWindowProc(HWND handle, UINT msg, WPARAM wp, LPARAM lp) const{
+				return CallWindowProc(defaultWindowProc, handle, msg, wp, lp);
+			}
 	};
 }
 
