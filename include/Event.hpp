@@ -10,7 +10,8 @@ namespace BrazzGUI
 		QUIT,
 		LEFT_CLICK_DOWN,
 		CHECK_CHANGED,
-		TEXT_CHANGED
+		TEXT_CHANGED,
+		RESIZED
 	};
 	
 	class Event

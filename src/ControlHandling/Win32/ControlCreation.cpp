@@ -54,7 +54,7 @@ HWND createChildWindow(const std::string& className, const std::string& defaultT
         );
 		
 	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createChildWindow");
-		
+
 	return hwnd;
 }
 
@@ -85,7 +85,7 @@ HWND createWindow()
         );
 		
 	if (hwnd == NULL) throw std::system_error(std::error_code(GetLastError(), std::system_category()), "createWindow");
-		
+
 	topWindowData.emplace_back(std::make_unique<ControlHandling::Win32Data>(hwnd));
 	return hwnd;
 }

@@ -137,6 +137,22 @@ int ControlStyling::getHeight(const ControlID& id)
 	return windowPos.bottom-windowPos.top;
 }
 
+int ControlStyling::getClientWidth(const ControlID id)
+{
+	auto handle = getHandleFromID(id);
+	RECT windowPos;
+	GetClientRect(handle, &windowPos);
+	return windowPos.right-windowPos.left;
+}
+
+int ControlStyling::getClientHeight(const ControlID id)
+{
+	auto handle = getHandleFromID(id);
+	RECT windowPos;
+	GetClientRect(handle, &windowPos);
+	return windowPos.bottom-windowPos.top;
+}
+
 std::string ControlStyling::getText(const ControlID& id)
 {
 	auto handle = getHandleFromID(id);

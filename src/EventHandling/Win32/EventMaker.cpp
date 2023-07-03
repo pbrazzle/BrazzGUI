@@ -1,4 +1,5 @@
 #include "EventHandling/EventMaker.hpp"
+#include "EventHandling/EventSlotting.hpp"
 #include "Event.hpp"
 #include "ControlHandling/Win32/ControlHandling.hpp"
 
@@ -47,6 +48,11 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 			EndPaint(hwnd, &ps);
 		}
 		return 0;
+	case WM_SIZE:
+	{
+		EventHandling::runSlots(Event(idVal, EventType::RESIZED));
+		return 0;
+	}
 
     }
     return DefWindowProc(hwnd, uMsg, wParam, lParam);

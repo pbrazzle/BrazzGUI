@@ -18,15 +18,12 @@ set(LIB_SOURCES
 	TextArea.cpp
 	DrawPane.cpp
 	ComboBox.cpp
-	Font.cpp)
+	Font.cpp
+	LayoutController.cpp)
 	
 add_library(BrazzGUI ${LIB_SOURCES})
 target_link_libraries(BrazzGUI PRIVATE EventHandling ControlHandling)
 target_include_directories(BrazzGUI PRIVATE ${CMAKE_SOURCE_DIR}/src PUBLIC ${CMAKE_SOURCE_DIR}/include)
-
-add_executable(main main.cpp)
-target_link_libraries(main PRIVATE BrazzGUI)
-target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
 set(TEST_SOURCES
 	Window.test.cpp

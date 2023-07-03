@@ -2,8 +2,12 @@
 #define CONTROL
 
 #include "ControlID.hpp"
-#include "ControlHandling/ControlCreation.hpp"
 #include "Font.hpp"
+
+namespace BrazzGUI::ControlCreation
+{
+enum class ControlType;
+}
 
 #include <string>
 
