@@ -19,7 +19,8 @@ set(LIB_SOURCES
 	DrawPane.cpp
 	ComboBox.cpp
 	Font.cpp
-	LayoutController.cpp)
+	LayoutController.cpp
+	ParentControl.cpp)
 	
 add_library(BrazzGUI ${LIB_SOURCES})
 target_link_libraries(BrazzGUI PRIVATE EventHandling ControlHandling)

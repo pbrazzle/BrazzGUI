@@ -16,7 +16,7 @@ void checkParentChild(const Control* parent, const Control* child){
         //throw std::logic_error("Control::isParent not implemented");
 }
 
-void LayoutController::setParent(Window* p) {
+void LayoutController::setParent(ParentControl* p) {
     checkParentChild(p, center);
     checkParentChild(p, north);
     checkParentChild(p, south);

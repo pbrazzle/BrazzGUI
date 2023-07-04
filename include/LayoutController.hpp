@@ -6,7 +6,7 @@
 namespace BrazzGUI
 {
 
-class Window;
+class ParentControl;
 
 enum class LayoutType
 {
@@ -19,13 +19,13 @@ enum class LayoutType
 
 class LayoutController{
     private:
-        Window* parent;
+        ParentControl* parent;
         Control* center, *east, *west, *north, *south;
 
     public:
         LayoutController();
 
-        void setParent(Window*);
+        void setParent(ParentControl*);
         void addControl(Control*, const LayoutType);
 
         void updatePositions() const;
