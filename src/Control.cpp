@@ -9,6 +9,11 @@ using namespace BrazzGUI;
 Control::Control(const ControlCreation::ControlType& type) : id(ControlCreation::createControl(type)) 
 { 
 	backgroundColor = {255, 255, 255};
+
+	EventHandling::connect(Event(id, EventType::CHILD_SET_COLORS), [&](const Event& e) 
+	{ 
+		ControlStyling::setBackgroundColor(id, getBackgroundColor());
+	});
 }
 
 
@@ -29,7 +34,10 @@ void Control::setPosition(const int& x, const int& y, const int& width, const in
 	setHeight(height);
 }
 
-void Control::setBackgroundColor(Color bg) { backgroundColor = bg; }
+void Control::setBackgroundColor(Color bg) { 
+	backgroundColor = bg; 
+	ControlStyling::setBackgroundColor(id, bg);
+}
 
 void Control::setTextColor(Color t) { textColor = t; }
 

@@ -23,13 +23,13 @@ static int nextID = 0;
 extern LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 std::map<ControlID, std::unique_ptr<ControlHandling::ControlOSData>> idMap;
-const ControlHandling::Win32Data defaultData(-1, 0);
+ControlHandling::Win32Data defaultData(-1, 0);
 std::vector<std::unique_ptr<ControlHandling::ControlOSData>> topWindowData;
 
-const ControlHandling::ControlOSData& ControlHandling::getDataFromID(const ControlID& id)
+ControlHandling::ControlOSData& ControlHandling::getDataFromID(const ControlID& id)
 {
 	if (!idMap.count(id)) return defaultData;
-	return *idMap.at(id);
+	return *idMap[id];
 }
 
 const wchar_t* to_wchar(const std::string& s)

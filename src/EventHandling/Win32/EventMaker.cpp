@@ -15,7 +15,7 @@ std::queue<Event> eventQueue;
 LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	auto osData = reinterpret_cast<const ControlHandling::Win32Data*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
-	
+
 	if (!osData)
 		return DefWindowProc(hwnd, uMsg, wParam, lParam);
 
@@ -33,7 +33,7 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 		if (HIWORD(wParam) == BN_CLICKED || HIWORD(wParam) == STN_CLICKED || HIWORD(wParam) == EN_SETFOCUS)
 		{
 			auto idVal = static_cast<int>(LOWORD(wParam));
-			eventQueue.push(Event(idVal, EventType::LEFT_CLICK_DOWN));
+			//eventQueue.push(Event(idVal, EventType::LEFT_CLICK_DOWN));
 		}
 		else if (HIWORD(wParam) == EN_CHANGE)
 		{
@@ -53,6 +53,24 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 	{
 		EventHandling::runSlots(Event(id, EventType::RESIZED));
 		break;
+	}
+	case WM_CTLCOLORBTN:
+	case WM_CTLCOLOREDIT:
+	// For some reason clicking the combobox crashes...
+	//case WM_CTLCOLORLISTBOX:
+	case WM_CTLCOLORSTATIC:
+	{
+		osData = reinterpret_cast<const ControlHandling::Win32Data*>
+				(GetWindowLongPtr(reinterpret_cast<HWND>(lParam), GWLP_USERDATA));
+
+		auto bgColor = osData->getBackgroundColor();
+		auto hdc = reinterpret_cast<HDC>(wParam);
+		SetBkColor(hdc, RGB(bgColor.r, bgColor.g, bgColor.b));
+		SetBkMode(hdc, TRANSPARENT);
+
+		auto color = GetBkColor(hdc);
+
+		return reinterpret_cast<INT_PTR>(osData->getBackgroundBrush());
 	}
 
     }

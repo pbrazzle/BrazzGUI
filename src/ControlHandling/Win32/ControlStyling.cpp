@@ -185,6 +185,13 @@ void ControlStyling::drawBackground(const ControlID id, const Color color)
 	ReleaseDC(handle, hdc);
 }
 
+void ControlStyling::setBackgroundColor(const ControlID id, const Color color)
+{
+	std::cout << "Control " << id.getValue() << " setting background color\n";
+	auto& osData = getDataFromID(id);
+	osData.setBackgroundColor(color);
+}
+
 void ControlStyling::drawText(const ControlID id, const Color color)
 {
 	auto handle = getHandleFromID(id);

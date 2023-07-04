@@ -2,6 +2,7 @@
 #define CONTROL_HANDLING
 
 #include "ControlID.hpp"
+#include "Color.hpp"
 
 #include <map>
 #include <memory>
@@ -15,9 +16,11 @@ namespace BrazzGUI
 		{
 			public:
 				virtual ~ControlOSData() = 0 { }
+
+				virtual void setBackgroundColor(const Color) = 0;
 		};
 
-		const ControlOSData& getDataFromID(const ControlID&);
+		ControlOSData& getDataFromID(const ControlID&);
 		
 		const std::vector<std::unique_ptr<ControlOSData>>& getTopWindows();
 	}

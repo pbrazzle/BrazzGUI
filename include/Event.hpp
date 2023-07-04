@@ -13,7 +13,8 @@ namespace BrazzGUI
 		TEXT_CHANGED,
 		RESIZED,
 		DRAW_BACKGROUND,
-		PAINT
+		PAINT,
+		CHILD_SET_COLORS
 	};
 	
 	class Event

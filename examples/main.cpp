@@ -23,6 +23,7 @@ int main()
 	myWindow.setBackgroundColor({255, 0, 0});
 	
 	Button myButton;
+	myButton.setBackgroundColor({0, 255, 0});
 	myButton.setWidth(100);
 	myButton.setHeight(100);
 	myButton.setX(0);
@@ -36,6 +37,7 @@ int main()
 	myWindow.addControl(myButton);
 	
 	Label myLabel;
+	myLabel.setBackgroundColor({0, 255, 0});
 	myLabel.setPosition(100, 0, 100, 100);
 	myApp.connect(Event(myLabel.getID(), EventType::LEFT_CLICK_DOWN), [](const Event&) { std::cout << "click!\n"; });
 	myWindow.addControl(myLabel);
