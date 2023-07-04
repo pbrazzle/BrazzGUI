@@ -56,17 +56,26 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 	}
 	case WM_CTLCOLORBTN:
 	case WM_CTLCOLOREDIT:
-	// For some reason clicking the combobox crashes...
-	//case WM_CTLCOLORLISTBOX:
+	case WM_CTLCOLORLISTBOX:
 	case WM_CTLCOLORSTATIC:
 	{
-		osData = reinterpret_cast<const ControlHandling::Win32Data*>
-				(GetWindowLongPtr(reinterpret_cast<HWND>(lParam), GWLP_USERDATA));
+		hwnd = reinterpret_cast<HWND>(lParam);
 
+		// Get ComboBox parent from ListBox
+		if (uMsg == WM_CTLCOLORLISTBOX)
+			hwnd = GetParent(hwnd);
+
+		osData = reinterpret_cast<const ControlHandling::Win32Data*>
+				(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+
+		// ComboBox has NULL osData somehow???
+		if (osData == NULL) return DefWindowProc(hwnd, uMsg, wParam, lParam);
 		auto bgColor = osData->getBackgroundColor();
+		auto textColor = osData->getTextColor();
 		auto hdc = reinterpret_cast<HDC>(wParam);
 		SetBkColor(hdc, RGB(bgColor.r, bgColor.g, bgColor.b));
 		SetBkMode(hdc, TRANSPARENT);
+		SetTextColor(hdc, RGB(textColor.r, textColor.g, textColor.b));
 
 		auto color = GetBkColor(hdc);
 

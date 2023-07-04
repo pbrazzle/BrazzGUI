@@ -39,7 +39,10 @@ void Control::setBackgroundColor(Color bg) {
 	ControlStyling::setBackgroundColor(id, bg);
 }
 
-void Control::setTextColor(Color t) { textColor = t; }
+void Control::setTextColor(Color t) { 
+	textColor = t; 
+	ControlStyling::setTextColor(id, t);
+}
 
 void Control::setText(const std::string& text) { ControlStyling::setText(id, text); }
 

@@ -16,16 +16,17 @@ namespace BrazzGUI::ControlHandling
 			ControlID id;
 			HBRUSH backgroundBrush;
 			Color backgroundColor;
+			Color textColor;
 
 		public:
 			Win32Data(const ControlID i, const HWND h, const WNDPROC defProc = &DefWindowProc) 
-			: id(i), handle(h), defaultWindowProc(defProc), backgroundColor{255, 255, 255} { 
+			: id(i), handle(h), defaultWindowProc(defProc), backgroundColor{255, 255, 255}, textColor{0, 0, 0} { 
 				backgroundBrush = CreateSolidBrush(RGB(backgroundColor.r, backgroundColor.g, backgroundColor.b));
 			}
 
 			Win32Data(const Win32Data& other)
 			: id(other.id), handle(other.handle), 
-			defaultWindowProc(other.defaultWindowProc), backgroundColor(other.backgroundColor) {
+			defaultWindowProc(other.defaultWindowProc), backgroundColor(other.backgroundColor), textColor{0, 0, 0} {
 				backgroundBrush = CreateSolidBrush(RGB(backgroundColor.r, backgroundColor.g, backgroundColor.b));
 			}
 
@@ -35,6 +36,7 @@ namespace BrazzGUI::ControlHandling
 				defaultWindowProc = other.defaultWindowProc;
 				backgroundColor = other.backgroundColor;
 				backgroundBrush = CreateSolidBrush(RGB(backgroundColor.r, backgroundColor.g, backgroundColor.b));
+				textColor = other.textColor;
 			}
 
 			~Win32Data() {
@@ -55,6 +57,10 @@ namespace BrazzGUI::ControlHandling
 				backgroundBrush = CreateSolidBrush(RGB(backgroundColor.r, backgroundColor.g, backgroundColor.b));
 			}
 
+			void setTextColor(const Color c) {
+				textColor = c;
+			}
+
 			HBRUSH getBackgroundBrush() const {
 				return backgroundBrush;
 			}
@@ -62,6 +68,8 @@ namespace BrazzGUI::ControlHandling
 			Color getBackgroundColor() const {
 				return backgroundColor;
 			}
+
+			Color getTextColor() const { return textColor; }
 	};
 }
 

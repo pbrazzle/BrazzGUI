@@ -18,6 +18,7 @@ namespace BrazzGUI
 				virtual ~ControlOSData() = 0 { }
 
 				virtual void setBackgroundColor(const Color) = 0;
+				virtual void setTextColor(const Color) = 0;
 		};
 
 		ControlOSData& getDataFromID(const ControlID&);

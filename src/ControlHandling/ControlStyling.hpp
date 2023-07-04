@@ -40,6 +40,7 @@ namespace BrazzGUI
 		void drawBackground(const ControlID, const Color);
 		void setBackgroundColor(const ControlID, const Color);
 		void drawText(const ControlID, const Color);
+		void setTextColor(const ControlID, const Color);
 	}
 }
 

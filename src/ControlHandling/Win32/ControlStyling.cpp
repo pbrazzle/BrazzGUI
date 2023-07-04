@@ -199,3 +199,9 @@ void ControlStyling::drawText(const ControlID id, const Color color)
 	SetTextColor(dc, RGB(color.r, color.g, color.b));
 	ReleaseDC(handle, dc);
 }
+
+void ControlStyling::setTextColor(const ControlID id, const Color color)
+{
+	auto& osData = getDataFromID(id);
+	osData.setTextColor(color);
+}
