@@ -5,31 +5,51 @@
 
 namespace BrazzGUI
 {
-	enum class EventType
-	{
-		QUIT,
-		LEFT_CLICK_DOWN,
-		CHECK_CHANGED,
-		TEXT_CHANGED,
-		RESIZED,
-		DRAW_BACKGROUND,
-		PAINT,
-		CHILD_SET_COLORS
-	};
-	
-	class Event
-	{
-		private:
-			EventType type;
-			ControlID control;
-			
-		public:
-			Event(const EventType& t) : control(-1), type(t) { }
-			Event(const ControlID& id, const EventType& t) : control(id), type(t) { }
-			
-			ControlID getControl() const { return control; }
-			EventType getType() const { return type; }
-	};
+/**
+ * TODO document this enum
+*/
+enum class EventType
+{
+	QUIT,
+	LEFT_CLICK_DOWN,
+	CHECK_CHANGED,
+	TEXT_CHANGED,
+	RESIZED,
+	DRAW_BACKGROUND,
+	PAINT,
+	CHILD_SET_COLORS
+};
+
+/**
+ * TODO document this class
+*/
+class Event
+{
+	private:
+		EventType type;
+		ControlID control;
+		
+	public:
+		/**
+		 * TODO document this function
+		*/
+		Event(const EventType& t) : control(-1), type(t) { }
+		
+		/**
+		 * TODO document this function
+		*/
+		Event(const ControlID& id, const EventType& t) : control(id), type(t) { }
+		
+		/**
+		 * TODO document this function
+		*/
+		ControlID getControl() const { return control; }
+		
+		/**
+		 * TODO document this function
+		*/
+		EventType getType() const { return type; }
+};
 }
 
 #endif

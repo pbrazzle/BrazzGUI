@@ -3,26 +3,23 @@
 
 #include "Event.hpp"
 
-namespace BrazzGUI
+namespace BrazzGUI::EventHandling
 {
-	namespace EventHandling
-	{
-		/**
-		*	Pops the next GUI Event from the OS message queue
-		*	/return A GUI Event
-		*/
-		Event getNextEvent();
-		
-		/**
-		*	Enqueues a stop Event to the OS message queue
-		*/
-		void postStopEvent();
-		
-		/**
-		*	Enqueues an Event to the BrazzGUI Event queue
-		*/
-		void postEvent(const Event&);
-	}
+/**
+*	Pops the next GUI Event from the OS message queue
+*	/return A GUI Event
+*/
+Event getNextEvent();
+
+/**
+*	Enqueues a stop Event to the OS message queue
+*/
+void postStopEvent();
+
+/**
+*	Enqueues an Event to the BrazzGUI Event queue
+*/
+void postEvent(const Event&);
 }
 
 #endif

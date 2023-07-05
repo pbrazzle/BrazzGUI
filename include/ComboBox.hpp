@@ -5,13 +5,22 @@
 
 namespace BrazzGUI
 {
-	class ComboBox : public Control
-	{
-		public:
-			ComboBox();
-			
-			int getHeight() const override;
-	};
+/**
+ * TODO document this class
+*/
+class ComboBox : public Control
+{
+	public:
+		/**
+		 * TODO document this function
+		*/
+		ComboBox();
+
+		/**
+		 * TODO document this function
+		*/
+		int getHeight() const override;
+};
 }
 
 #endif

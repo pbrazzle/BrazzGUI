@@ -7,9 +7,15 @@
 
 namespace BrazzGUI::EventHandling
 {
-	void connect(const Event&, const std::function<void(const Event&)>&);
-	
-	void runSlots(const Event&);
+/**
+ * TODO document this function
+*/
+void connect(const Event&, const std::function<void(const Event&)>&);
+
+/**
+ * TODO document this function
+*/
+void runSlots(const Event&);
 }
 
 #endif

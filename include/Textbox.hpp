@@ -5,11 +5,17 @@
 
 namespace BrazzGUI
 {
-	class Textbox : public TextControl
-	{
-		public:
-			Textbox();
-	};
+/**
+ * TODO document this class
+*/
+class Textbox : public TextControl
+{
+	public:
+		/**
+         * TODO document this function
+        */
+		Textbox();
+};
 }
 
 #endif

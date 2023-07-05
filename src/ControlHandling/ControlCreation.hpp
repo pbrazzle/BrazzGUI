@@ -3,26 +3,30 @@
 
 #include "ControlID.hpp"
 
-namespace BrazzGUI
+namespace BrazzGUI::ControlCreation
 {
-	namespace ControlCreation
-	{
-		enum class ControlType
-		{
-			Window,
-			Button,
-			Label,
-			Textbox,
-			TextArea,
-			DrawPane,
-			Checkbox,
-			RadioButton,
-			RadioButtonGroup,
-			ComboBox
-		};
-		
-		ControlID createControl(const ControlType& type);
-	}
+/**
+ * TODO document this enum
+*/
+enum class ControlType
+{
+	Window,
+	Button,
+	Label,
+	Textbox,
+	TextArea,
+	DrawPane,
+	Checkbox,
+	RadioButton,
+	RadioButtonGroup,
+	ComboBox,
+	Panel
+};
+
+/**
+ * TODO document this function
+*/
+ControlID createControl(const ControlType& type);
 }
 
 #endif

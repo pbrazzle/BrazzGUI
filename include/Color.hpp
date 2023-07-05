@@ -4,6 +4,9 @@
 namespace BrazzGUI
 {
 
+/**
+ * TODO document this struct
+*/
 struct Color
 {
     int r, g, b;

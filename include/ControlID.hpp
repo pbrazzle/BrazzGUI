@@ -3,19 +3,35 @@
 
 namespace BrazzGUI
 {
-	class ControlID
-	{
-		private:
-			int id;
+/**
+ * TODO document this class
+*/
+class ControlID
+{
+	private:
+		int id;
+	
+	public:
+		/**
+		 * TODO document this function
+		*/
+		ControlID(const int&);
+	
+		/**
+		 * TODO document this function
+		*/
+		bool operator<(const ControlID& rhs) const;
 		
-		public:
-			ControlID(const int&);
-		
-			bool operator<(const ControlID& rhs) const;
-			bool operator!=(const ControlID& rhs) const;
-		
-			int getValue() const;
-	};
+		/**
+		 * TODO document this function
+		*/
+		bool operator!=(const ControlID& rhs) const;
+	
+		/**
+		 * TODO document this function
+		*/
+		int getValue() const;
+};
 }
 
 #endif

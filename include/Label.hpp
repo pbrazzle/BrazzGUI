@@ -5,11 +5,17 @@
 
 namespace BrazzGUI
 {
-	class Label : public Control
-	{
-		public:
-			Label();
-	};
+/**
+ * TODO document this class
+*/
+class Label : public Control
+{
+	public:
+		/**
+		 * TODO document this function
+		*/
+		Label();
+};
 }
 
 #endif

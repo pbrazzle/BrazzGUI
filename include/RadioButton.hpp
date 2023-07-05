@@ -5,11 +5,17 @@
 
 namespace BrazzGUI
 {
-	class RadioButton : public Control
-	{
-		public:
-			RadioButton();
-	};
+/**
+ * TODO document this class
+*/
+class RadioButton : public Control
+{
+	public:
+		/**
+         * TODO document this function
+        */
+		RadioButton();
+};
 }
 
 #endif

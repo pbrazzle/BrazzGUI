@@ -9,16 +9,23 @@
 
 namespace BrazzGUI::ControlHandling
 {
-	using namespace BrazzGUI;
-	
-	class FontHandler
-	{
-		private:
-			static std::map<Font, HFONT, std::function<bool(const Font&, const Font&)>> fontMap;
-		
-		public:
-			static HFONT getFontHandle(const Font&);
-	};
+/**
+ * TODO document this class
+*/
+class FontHandler
+{
+	private:
+		/**
+		 * TODO document this function
+		*/
+		static std::map<Font, HFONT, std::function<bool(const Font&, const Font&)>> fontMap;
+
+	public:
+		/**
+		 * TODO document this function
+		*/
+		static HFONT getFontHandle(const Font&);
+};
 }
 
 #endif

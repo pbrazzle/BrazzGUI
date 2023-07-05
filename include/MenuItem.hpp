@@ -3,10 +3,13 @@
 
 namespace BrazzGUI
 {
-	class MenuItem
-	{
-	
-	};
+/**
+ * TODO document this class
+*/
+class MenuItem
+{
+
+};
 }
 
 #endif

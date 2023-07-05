@@ -5,12 +5,22 @@
 
 namespace BrazzGUI
 {
-	class TextControl : public Control
-	{
-		public:
-			TextControl(const ControlCreation::ControlType& type);
-			virtual ~TextControl() = 0;
-	};
+/**
+ * TODO document this class
+*/
+class TextControl : public Control
+{
+	public:
+		/**
+         * TODO document this function
+        */
+		TextControl(const ControlCreation::ControlType& type);
+
+		/**
+         * TODO document this function
+        */
+		virtual ~TextControl() = 0;
+};
 }
 
 #endif

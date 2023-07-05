@@ -6,11 +6,17 @@
 
 namespace BrazzGUI
 {
-	class Window : public ParentControl
-	{
-		public:
-			Window();
-	};
+/**
+ * TODO document this function
+*/
+class Window : public ParentControl
+{
+	public:
+		/**
+         * TODO document this function
+        */
+		Window();
+};
 }
 
 #endif

@@ -14,10 +14,24 @@ namespace BrazzGUI
 	class BrazzApp
 	{
 		public:
+			/**
+			 * TODO document this function
+			*/
 			int run();
+
+			/**
+			 * TODO document this function
+			*/
 			void stop();
 			
+			/**
+			 * TODO document this function
+			*/
 			void connect(const Event&, const std::function<void(const Event&)>&);
+
+			/**
+			 * TODO document this function
+			*/
 			void postEvent(const Event&);
 	};
 }

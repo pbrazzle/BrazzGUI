@@ -162,6 +162,11 @@ HWND createComboBox()
     return createChildWindow("COMBOBOX", "Combo", defaultStyle | CBS_DROPDOWNLIST | CBS_NOINTEGRALHEIGHT | CBS_HASSTRINGS);
 }
 
+HWND createPanel()
+{
+	return createChildWindow("BrazzGUI Window", "", defaultStyle | WS_CLIPCHILDREN);
+}
+
 ControlID ControlCreation::createControl(const ControlCreation::ControlType& type)
 {
 	HWND hwnd;
@@ -196,6 +201,9 @@ ControlID ControlCreation::createControl(const ControlCreation::ControlType& typ
 			break;
 		case ControlType::ComboBox:
 			hwnd = createComboBox();
+			break;
+		case ControlType::Panel:
+			hwnd = createPanel();
 			break;
 	}
 		
