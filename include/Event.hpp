@@ -5,7 +5,9 @@
 
 namespace BrazzGUI {
 /**
- * TODO document this enum
+ * Enum to specify different types of Events
+ * Each unique type can have a different handler depending on the Control
+ * associated with it
  */
 enum class EventType {
     QUIT,
@@ -19,32 +21,45 @@ enum class EventType {
 };
 
 /**
- * TODO document this class
+ * BrazzGUI applications are based on Events
+ * Events are created and handled to trigger response callback functions
  */
 class Event {
 
     private:
+    // The type of this Event
     EventType type;
+
+    // The ControlID of the associated Control for this Event
     ControlID control;
 
     public:
     /**
-     * TODO document this function
+     * Creates a new Event with no associated Control
+     *
+     * @param t EventType of this Event
      */
     Event(const EventType& t) : control(-1), type(t) {}
 
     /**
-     * TODO document this function
+     * Creates a new Event
+     *
+     * @param id ControlID of the handling Control
+     * @param t EventType of this Event
      */
     Event(const ControlID& id, const EventType& t) : control(id), type(t) {}
 
     /**
-     * TODO document this function
+     * Returns the ControlID associated with this Event
+     *
+     * @return ControlID associated with this Event
      */
     ControlID getControl() const { return control; }
 
     /**
-     * TODO document this function
+     * Returns the EventType of this Event
+     *
+     * @return EventType of this Event
      */
     EventType getType() const { return type; }
 };

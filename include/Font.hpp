@@ -3,7 +3,7 @@
 
 namespace BrazzGUI {
 /**
- * TODO document this class
+ * Fonts contain all style information about a Controls text
  */
 class Font {
     private:
@@ -11,24 +11,30 @@ class Font {
 
     public:
     /**
-     * TODO document this function
+     * Creates a default Font
      */
     Font() = default;
 
     /**
-     * TODO document this function
+     * Creates a Font with a given size
+     *
+     * @param size Size for this Font
      */
-    Font(const int&);
+    Font(const int& size);
 
     /**
-     * TODO document this function
+     * Returns the size of this Font
+     *
+     * @return Size of this Font
      */
     int getSize() const;
 
     /**
-     * TODO document this function
+     * Sets a new size for this Font
+     *
+     * @param size New size for this Font
      */
-    void setSize(const int&);
+    void setSize(const int& size);
 };
 } // namespace BrazzGUI
 

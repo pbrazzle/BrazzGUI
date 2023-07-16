@@ -13,7 +13,9 @@ enum class ControlType;
 
 namespace BrazzGUI {
 /**
- * TODO document this class
+ * Every visible component in BrazzGUI is a Control
+ * Controls handle Events created by the user in a BrazzGUI application
+ * (clicks, text changes)
  */
 class Control {
     private:
@@ -26,107 +28,159 @@ class Control {
 
     public:
     /**
-     * TODO document this function
+     * Creates a Control
+     *
+     * @param type Type of Control to create
      */
     Control(const ControlCreation::ControlType& type);
 
     /**
-     * TODO document this function
+     * Virtual desctructor
      */
     virtual ~Control() = 0;
 
     /**
-     * TODO document this function
+     * Makes the Control visible
      */
     void show();
 
     /**
-     * TODO document this function
+     * Sets the x position for this Control
+     * A Controls position is relative to its parent window
+     *
+     * @param x New x position
      */
-    void setX(const int&);
+    void setX(const int& x);
 
     /**
-     * TODO document this function
+     * Sets the y position for this Control
+     * A Controls position is relative to its parent window
+     *
+     * @param y New y position
      */
-    void setY(const int&);
+    void setY(const int& y);
 
     /**
-     * TODO document this function
+     * Sets the width for this Control in pixels
+     *
+     * @param width New width in pixels
      */
-    void setWidth(const int&);
+    void setWidth(const int& width);
 
     /**
-     * TODO document this function
+     * Sets the height for this Control in pixels
+     *
+     * @param height New width in pixels
      */
-    void setHeight(const int&);
+    void setHeight(const int& height);
 
     /**
-     * TODO document this function
+     * Sets the position for this Control
+     *
+     * @param x New x position
+     * @param y New y position
+     * @param width New width in pixels
+     * @param height New height in pixels
      */
-    void setPosition(const int&, const int&, const int&, const int&);
+    void setPosition(const int& x, const int& y, const int& width,
+                     const int& height);
 
     /**
-     * TODO document this function
+     * Sets the background color for this Control
+     * Some Controls cannot control their colors
+     *
+     * @param color New background color
      */
-    void setBackgroundColor(const Color);
+    void setBackgroundColor(const Color color);
 
     /**
-     * TODO document this function
+     * Sets the text color for this Control
+     * Some Controls cannot control their colors
+     *
+     * @param color New text color
      */
-    void setTextColor(const Color);
+    void setTextColor(const Color color);
 
     /**
-     * TODO document this function
+     * Sets the text shown for this Control
+     * For example, a Buttons text is displayed in the middle of its client
+     * window
+     *
+     * @param text New shown text
      */
-    void setText(const std::string&);
+    void setText(const std::string& text);
 
     /**
-     * TODO document this function
+     * Sets the font size for this Controls text
+     * Not all Controls can control their font size
+     * Some Controls do not show text at all
+     *
+     * @param size New font size
      */
-    void setFontSize(const int&);
+    void setFontSize(const int& size);
 
     /**
-     * TODO document this function
+     * Gets the x position for this Control
+     * A Controls position is relative to its parents client window
+     *
+     * @return X position for this Control
      */
     int getX() const;
 
     /**
-     * TODO document this function
+     * Gets the y position for this Control
+     * A Controls position is relative to its parents client window
+     *
+     * @return Y position for this Control
      */
     int getY() const;
 
     /**
-     * TODO document this function
+     * Gets the width for this Control in pixels
+     *
+     * @return Width for this Control in pixels
      */
     int getWidth() const;
 
     /**
-     * TODO document this function
+     * Gets the height for this Control in pixels
+     *
+     * @return Height for this Control in pixels
      */
     virtual int getHeight() const;
 
     /**
-     * TODO document this function
+     * Gets the font size for this Controls text
+     *
+     * @return Font size for this Control
      */
     int getFontSize() const;
 
     /**
-     * TODO document this function
+     * Gets the background color for this Control
+     *
+     * @return Background color for this Control
      */
     Color getBackgroundColor() const;
 
     /**
-     * TODO document this function
+     * Gets the text color for this Control
+     *
+     * @return Text color for this Control
      */
     Color getTextColor() const;
 
     /**
-     * TODO document this function
+     * Gets the text shown for this Control
+     *
+     * @return Text for this Control
      */
     std::string getText() const;
 
     /**
-     * TODO document this function
+     * Gets the ID for this Control
+     *
+     * @return This Controls ID
      */
     ControlID getID() const;
 };

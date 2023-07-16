@@ -5,12 +5,13 @@
 
 namespace BrazzGUI {
 /**
- * TODO document this class
+ * Labels are Controls with static readonly text
+ * Labels can control their background and text colors
  */
 class Label : public Control {
     public:
     /**
-     * TODO document this function
+     * Creates a new Label
      */
     Label();
 };

@@ -23,25 +23,9 @@ set(LIB_SOURCES
 	ParentControl.cpp
 	Panel.cpp
 	FileOpenDialog.cpp
-	FileSelectDialog.cpp
+	FileSaveDialog.cpp
 	OKCancelDialog.cpp)
 	
 add_library(BrazzGUI ${LIB_SOURCES})
 target_link_libraries(BrazzGUI PRIVATE EventHandling ControlHandling)
 target_include_directories(BrazzGUI PRIVATE ${CMAKE_SOURCE_DIR}/src PUBLIC ${CMAKE_SOURCE_DIR}/include)
-
-set(TEST_SOURCES
-	Window.test.cpp
-	Button.test.cpp
-	Checkbox.test.cpp
-	RadioButton.test.cpp
-	Textbox.test.cpp
-	Label.test.cpp
-	Menu.test.cpp
-	MenuItem.test.cpp
-	DrawPane.test.cpp
-	RadioButtonGroup.test.cpp
-	TextArea.test.cpp
-	ComboBox.test.cpp)
-
-add_catch_tests(TARGETS ${TEST_SOURCES} LIBS BrazzGUI)

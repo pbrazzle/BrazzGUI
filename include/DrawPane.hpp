@@ -5,12 +5,15 @@
 
 namespace BrazzGUI {
 /**
- * TODO document this class
+ * TODO which event does DrawPane handle?
+ * A DrawPane appears as a blank window, but it provides a ??? Event to perform
+ * drawing operations
+ * This allows for custom graphics in BrazzGUI applications
  */
 class DrawPane : public Control {
     public:
     /**
-     * TODO document this function
+     * Creates a DrawPane
      */
     DrawPane();
 };

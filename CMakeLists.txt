@@ -42,4 +42,5 @@ function(add_catch_tests)
 endfunction()
 
 add_subdirectory(src)
+add_subdirectory(tests)
 add_subdirectory(examples)

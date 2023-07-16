@@ -4,10 +4,17 @@
 namespace BrazzGUI {
 
 /**
- * TODO document this struct
+ * Struct for color values
  */
 struct Color {
-    int r, g, b;
+    // Red color value
+    int r;
+
+    // Green color value
+    int g;
+
+    // Blue color value
+    int b;
 };
 
 } // namespace BrazzGUI
