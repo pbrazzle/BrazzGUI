@@ -21,7 +21,10 @@ set(LIB_SOURCES
 	Font.cpp
 	LayoutController.cpp
 	ParentControl.cpp
-	Panel.cpp)
+	Panel.cpp
+	FileOpenDialog.cpp
+	FileSelectDialog.cpp
+	OKCancelDialog.cpp)
 	
 add_library(BrazzGUI ${LIB_SOURCES})
 target_link_libraries(BrazzGUI PRIVATE EventHandling ControlHandling)

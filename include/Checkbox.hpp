@@ -6,25 +6,30 @@
 namespace BrazzGUI
 {
 	/**
-	 * TODO document this class
+	 * The Checkbox Control class displays a check box in the BrazzApp GUI.
+	 * Checkboxes will automatically toggle their check when clicked.
 	*/
 	class Checkbox : public Control
 	{
 		public:
 			/**
-			 * TODO document this function
+			 * Creates a Checkbox
 			*/
 			Checkbox();
 			
 			/**
-			 * TODO document this function
+			 * Returns a Boolean value determining whether this Checkbox is checked
+			 * 
+			 * @return True is the Checkbox is checked, false otherwise
 			*/
 			bool isChecked();
 
 			/**
-			 * TODO document this function
+			 * Sets the check value for this Checkbox
+			 * 
+			 * @param check If True, checks the Checkbox. Otherwise, removes the check.
 			*/
-			void setCheck(const bool&);
+			void setCheck(const bool& check);
 	};
 }
 

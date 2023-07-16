@@ -8,31 +8,42 @@
 namespace BrazzGUI
 {
 	/**
-	*	The BrazzApp class is responsible for the GUI message loop
-	*   It has control over starting and stopping the loop
+	*	The BrazzApp class is responsible for the GUI Event loop
+	*   It has control over starting and stopping the Event loop
 	*/
 	class BrazzApp
 	{
 		public:
 			/**
-			 * TODO document this function
+			 * Starts handling Events sent to this BrazzApp.
+			 * Function will hang until the BrazzApp receives a stop Event.
+			 * 
+			 * @return 0 if there is no error. Nonzero error code otherwise.
 			*/
 			int run();
 
 			/**
-			 * TODO document this function
+			 * Sends a stop Event to this BrazzApp.
 			*/
 			void stop();
 			
 			/**
-			 * TODO document this function
+			 * Connects a callback function to an Event template.
+			 * When this BrazzApp receives an Event with the same type and id as the template,
+			 * it will run the connected callback functions.
+			 * An Event template can be connected to multiple callbacks.
+			 * 
+			 * @param event Event template to connect to callback function
+			 * @param callback Callback function to run whenever this BrazzApp receives the Event template
 			*/
-			void connect(const Event&, const std::function<void(const Event&)>&);
+			void connect(const Event& event, const std::function<void(const Event&)>& callback);
 
 			/**
-			 * TODO document this function
+			 * Sends an Event to this BrazzApp's Event queue
+			 * 
+			 * @param event Event to be placed in the queue
 			*/
-			void postEvent(const Event&);
+			void postEvent(const Event& event);
 	};
 }
 

@@ -10,6 +10,9 @@ namespace BrazzGUI {
 */
 class Panel : public ParentControl {
     public:
+        /**
+         * TODO document this function
+        */
         Panel();
 };
 
