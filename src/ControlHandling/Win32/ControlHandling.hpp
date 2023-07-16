@@ -3,6 +3,7 @@
 
 #include "Color.hpp"
 #include "ControlHandling/ControlHandling.hpp"
+
 #include <iostream>
 #include <windows.h>
 
@@ -24,9 +25,12 @@ class Win32Data : public ControlOSData {
      * TODO document this function
      */
     Win32Data(const ControlID i, const HWND h,
-              const WNDPROC defProc = &DefWindowProc)
-        : id(i), handle(h), defaultWindowProc(defProc),
-          backgroundColor{255, 255, 255}, textColor{0, 0, 0} {
+              const WNDPROC defProc = &DefWindowProc) :
+        id(i),
+        handle(h),
+        defaultWindowProc(defProc),
+        backgroundColor{255, 255, 255},
+        textColor{0, 0, 0} {
         backgroundBrush = CreateSolidBrush(
             RGB(backgroundColor.r, backgroundColor.g, backgroundColor.b));
     }
@@ -34,10 +38,12 @@ class Win32Data : public ControlOSData {
     /**
      * TODO document this function
      */
-    Win32Data(const Win32Data &other)
-        : id(other.id), handle(other.handle),
-          defaultWindowProc(other.defaultWindowProc),
-          backgroundColor(other.backgroundColor), textColor{0, 0, 0} {
+    Win32Data(const Win32Data& other) :
+        id(other.id),
+        handle(other.handle),
+        defaultWindowProc(other.defaultWindowProc),
+        backgroundColor(other.backgroundColor),
+        textColor{0, 0, 0} {
         backgroundBrush = CreateSolidBrush(
             RGB(backgroundColor.r, backgroundColor.g, backgroundColor.b));
     }
@@ -45,7 +51,7 @@ class Win32Data : public ControlOSData {
     /**
      * TODO document this function
      */
-    Win32Data &operator=(const Win32Data &other) {
+    Win32Data& operator=(const Win32Data& other) {
         id = other.id;
         handle = other.handle;
         defaultWindowProc = other.defaultWindowProc;

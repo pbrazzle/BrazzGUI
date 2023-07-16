@@ -4,5 +4,5 @@
 
 using namespace BrazzGUI;
 
-RadioButtonGroup::RadioButtonGroup()
-    : Control(ControlCreation::ControlType::RadioButtonGroup) {}
+RadioButtonGroup::RadioButtonGroup() :
+    Control(ControlCreation::ControlType::RadioButtonGroup) {}

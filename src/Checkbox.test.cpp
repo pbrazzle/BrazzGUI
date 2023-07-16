@@ -1,4 +1,5 @@
 #include "Checkbox.hpp"
+
 #include "Control.test.hpp"
 
 class CheckboxTests : public ControlTests {
@@ -13,7 +14,7 @@ class CheckboxTests : public ControlTests {
         Checkbox testControl;
         bool recv = false;
         testApp.connect(Event(testControl.getID(), EventType::CHECK_CHANGED),
-                        [&](const Event &) { recv = true; });
+                        [&](const Event&) { recv = true; });
         testControl.setCheck(!testControl.isChecked());
         testApp.stop();
         testApp.run();
@@ -26,7 +27,7 @@ class CheckboxTests : public ControlTests {
         Checkbox testControl;
         bool recv = false;
         testApp.connect(Event(testControl.getID(), EventType::CHECK_CHANGED),
-                        [&](const Event &) { recv = true; });
+                        [&](const Event&) { recv = true; });
         testApp.postEvent(
             Event(testControl.getID(), EventType::LEFT_CLICK_DOWN));
         testApp.stop();

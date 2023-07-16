@@ -12,7 +12,7 @@ class TextControl : public Control {
     /**
      * TODO document this function
      */
-    TextControl(const ControlCreation::ControlType &type);
+    TextControl(const ControlCreation::ControlType& type);
 
     /**
      * TODO document this function

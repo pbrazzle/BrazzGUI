@@ -17,7 +17,7 @@ enum class LayoutType { CENTER, EAST, WEST, NORTH, SOUTH };
  */
 class LayoutController {
     private:
-    ParentControl *parent;
+    ParentControl* parent;
     Control *center, *east, *west, *north, *south;
 
     public:
@@ -29,12 +29,12 @@ class LayoutController {
     /**
      * TODO document this function
      */
-    void setParent(ParentControl *);
+    void setParent(ParentControl*);
 
     /**
      * TODO document this function
      */
-    void addControl(Control *, const LayoutType);
+    void addControl(Control*, const LayoutType);
 
     /**
      * TODO document this function

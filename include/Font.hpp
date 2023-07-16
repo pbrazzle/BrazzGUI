@@ -18,7 +18,7 @@ class Font {
     /**
      * TODO document this function
      */
-    Font(const int &);
+    Font(const int&);
 
     /**
      * TODO document this function
@@ -28,7 +28,7 @@ class Font {
     /**
      * TODO document this function
      */
-    void setSize(const int &);
+    void setSize(const int&);
 };
 } // namespace BrazzGUI
 

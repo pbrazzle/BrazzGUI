@@ -35,15 +35,15 @@ class BrazzApp {
      * @param callback Callback function to run whenever this BrazzApp receives
      * the Event template
      */
-    void connect(const Event &event,
-                 const std::function<void(const Event &)> &callback);
+    void connect(const Event& event,
+                 const std::function<void(const Event&)>& callback);
 
     /**
      * Sends an Event to this BrazzApp's Event queue
      *
      * @param event Event to be placed in the queue
      */
-    void postEvent(const Event &event);
+    void postEvent(const Event& event);
 };
 } // namespace BrazzGUI
 

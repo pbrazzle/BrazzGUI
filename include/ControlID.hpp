@@ -13,17 +13,17 @@ class ControlID {
     /**
      * TODO document this function
      */
-    ControlID(const int &);
+    ControlID(const int&);
 
     /**
      * TODO document this function
      */
-    bool operator<(const ControlID &rhs) const;
+    bool operator<(const ControlID& rhs) const;
 
     /**
      * TODO document this function
      */
-    bool operator!=(const ControlID &rhs) const;
+    bool operator!=(const ControlID& rhs) const;
 
     /**
      * TODO document this function

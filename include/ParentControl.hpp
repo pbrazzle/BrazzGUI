@@ -27,12 +27,12 @@ class ParentControl : public Control {
     /**
      * TODO document this function
      */
-    void addControl(Control &);
+    void addControl(Control&);
 
     /**
      * TODO document this function
      */
-    void addControl(Control &, const LayoutType);
+    void addControl(Control&, const LayoutType);
 
     /**
      * TODO document this function

@@ -1,4 +1,5 @@
 #include "LayoutController.hpp"
+
 #include "Window.hpp"
 
 #include <exception>
@@ -6,16 +7,20 @@
 
 using namespace BrazzGUI;
 
-LayoutController::LayoutController()
-    : parent(nullptr), north(nullptr), center(nullptr), south(nullptr),
-      east(nullptr), west(nullptr) {}
+LayoutController::LayoutController() :
+    parent(nullptr),
+    north(nullptr),
+    center(nullptr),
+    south(nullptr),
+    east(nullptr),
+    west(nullptr) {}
 
-void checkParentChild(const Control *parent, const Control *child) {
+void checkParentChild(const Control* parent, const Control* child) {
     // if (parent && child)
     // throw std::logic_error("Control::isParent not implemented");
 }
 
-void LayoutController::setParent(ParentControl *p) {
+void LayoutController::setParent(ParentControl* p) {
     checkParentChild(p, center);
     checkParentChild(p, north);
     checkParentChild(p, south);
@@ -25,25 +30,25 @@ void LayoutController::setParent(ParentControl *p) {
     parent = p;
 }
 
-void LayoutController::addControl(Control *c, const LayoutType type) {
+void LayoutController::addControl(Control* c, const LayoutType type) {
     checkParentChild(parent, c);
 
     switch (type) {
-    case LayoutType::CENTER:
-        center = c;
-        break;
-    case LayoutType::NORTH:
-        north = c;
-        break;
-    case LayoutType::SOUTH:
-        south = c;
-        break;
-    case LayoutType::EAST:
-        east = c;
-        break;
-    case LayoutType::WEST:
-        west = c;
-        break;
+        case LayoutType::CENTER:
+            center = c;
+            break;
+        case LayoutType::NORTH:
+            north = c;
+            break;
+        case LayoutType::SOUTH:
+            south = c;
+            break;
+        case LayoutType::EAST:
+            east = c;
+            break;
+        case LayoutType::WEST:
+            west = c;
+            break;
     }
 }
 
@@ -54,8 +59,7 @@ void LayoutController::updatePositions() const {
     // NORTH, SOUTH take 20% and take priority from EAST, WEST
     // CENTER takes the rest of the available space
 
-    if (!parent)
-        return;
+    if (!parent) return;
 
     auto width = parent->getClientWidth();
     auto height = parent->getClientHeight();

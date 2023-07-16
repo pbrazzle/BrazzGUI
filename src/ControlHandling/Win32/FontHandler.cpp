@@ -6,14 +6,13 @@
 using namespace BrazzGUI;
 using namespace BrazzGUI::ControlHandling;
 
-std::map<Font, HFONT, std::function<bool(const Font &, const Font &)>>
-    FontHandler::fontMap{[](const Font &f1, const Font &f2) {
+std::map<Font, HFONT, std::function<bool(const Font&, const Font&)>>
+    FontHandler::fontMap{[](const Font& f1, const Font& f2) {
         return f1.getSize() < f2.getSize();
     }};
 
-HFONT FontHandler::getFontHandle(const Font &f) {
-    if (fontMap.count(f))
-        return fontMap[f];
+HFONT FontHandler::getFontHandle(const Font& f) {
+    if (fontMap.count(f)) return fontMap[f];
 
     fontMap[f] = CreateFont(f.getSize(), 0.5 * f.getSize(),
                             0,                           // Escapement angle
@@ -29,8 +28,7 @@ HFONT FontHandler::getFontHandle(const Font &f) {
                             FF_DONTCARE | DEFAULT_PITCH, // Pitch & family
                             "Arial"                      // Font name
     );
-    if (fontMap[f] == NULL)
-        std::cout << "NULL HFONT!!!\n";
+    if (fontMap[f] == NULL) std::cout << "NULL HFONT!!!\n";
 
     return fontMap[f];
 }

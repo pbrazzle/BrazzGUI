@@ -1,4 +1,5 @@
 #include "RadioButtonGroup.hpp"
+
 #include "Control.test.hpp"
 
 class RadioButtonGroupTests : public ControlTests {

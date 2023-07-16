@@ -1,4 +1,5 @@
 #include "Panel.hpp"
+
 #include "ControlHandling/ControlCreation.hpp"
 
 using namespace BrazzGUI;

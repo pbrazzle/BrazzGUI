@@ -16,15 +16,14 @@ class FontHandler {
     /**
      * TODO document this function
      */
-    static std::map<Font, HFONT,
-                    std::function<bool(const Font &, const Font &)>>
+    static std::map<Font, HFONT, std::function<bool(const Font&, const Font&)>>
         fontMap;
 
     public:
     /**
      * TODO document this function
      */
-    static HFONT getFontHandle(const Font &);
+    static HFONT getFontHandle(const Font&);
 };
 } // namespace BrazzGUI::ControlHandling
 

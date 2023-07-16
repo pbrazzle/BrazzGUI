@@ -1,12 +1,11 @@
 #ifndef CONTROL_TESTS
 #define CONTROL_TESTS
 
-#include <catch2/catch_test_macros.hpp>
-
 #include "BrazzApp.hpp"
 #include "Control.hpp"
 #include "Window.hpp"
 
+#include <catch2/catch_test_macros.hpp>
 #include <memory>
 
 using namespace BrazzGUI;
@@ -69,7 +68,7 @@ class ControlTests {
             bool recv = false;
             testApp.connect(
                 Event(testControl->getID(), EventType::LEFT_CLICK_DOWN),
-                [&](const Event &) {
+                [&](const Event&) {
                     recv = true;
                     testApp.stop();
                 });

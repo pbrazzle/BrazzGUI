@@ -1,6 +1,6 @@
 #include "ControlHandling/ControlCreation.hpp"
-#include "ControlHandling/Win32/ControlHandling.hpp"
 
+#include "ControlHandling/Win32/ControlHandling.hpp"
 #include "EventHandling/EventMaker.hpp"
 #include "EventHandling/EventSlotting.hpp"
 
@@ -27,26 +27,25 @@ std::map<ControlID, std::unique_ptr<ControlHandling::ControlOSData>> idMap;
 ControlHandling::Win32Data defaultData(-1, 0);
 std::vector<std::unique_ptr<ControlHandling::ControlOSData>> topWindowData;
 
-ControlHandling::ControlOSData &
-ControlHandling::getDataFromID(const ControlID &id) {
-    if (!idMap.count(id))
-        return defaultData;
+ControlHandling::ControlOSData&
+ControlHandling::getDataFromID(const ControlID& id) {
+    if (!idMap.count(id)) return defaultData;
     return *idMap[id];
 }
 
-const wchar_t *to_wchar(const std::string &s) {
+const wchar_t* to_wchar(const std::string& s) {
     auto wstring = std::wstring(s.begin(), s.end());
     return wstring.c_str();
 }
 
-HWND createChildWindow(const std::string &className,
-                       const std::string &defaultText, DWORD style) {
+HWND createChildWindow(const std::string& className,
+                       const std::string& defaultText, DWORD style) {
     if (topWindowData.size() == 0)
         throw std::logic_error(
             "Cannot create a child control without top-level window");
 
     auto parentHandle =
-        static_cast<ControlHandling::Win32Data *>(topWindowData[0].get())
+        static_cast<ControlHandling::Win32Data*>(topWindowData[0].get())
             ->getHandle();
     HWND hwnd = CreateWindowEx(0,
                                className.c_str(),   // Window class
@@ -132,9 +131,9 @@ HWND createTextbox() {
 HWND createCheckbox() {
     // Checkbox changes check on click
     EventHandling::connect(
-        Event(nextID, EventType::LEFT_CLICK_DOWN), [](const Event &e) {
+        Event(nextID, EventType::LEFT_CLICK_DOWN), [](const Event& e) {
             auto id = e.getControl();
-            auto osData = static_cast<const ControlHandling::Win32Data &>(
+            auto osData = static_cast<const ControlHandling::Win32Data&>(
                 ControlHandling::getDataFromID(id));
             Button_SetCheck(osData.getHandle(),
                             !Button_GetCheck(osData.getHandle()));
@@ -182,42 +181,42 @@ HWND createPanel() {
 }
 
 ControlID
-ControlCreation::createControl(const ControlCreation::ControlType &type) {
+ControlCreation::createControl(const ControlCreation::ControlType& type) {
     HWND hwnd;
     switch (type) {
-    case ControlType::Window:
-        hwnd = createWindow();
-        break;
-    case ControlType::Button:
-        hwnd = createButton();
-        break;
-    case ControlType::Textbox:
-        hwnd = createTextbox();
-        break;
-    case ControlType::Checkbox:
-        hwnd = createCheckbox();
-        break;
-    case ControlType::RadioButton:
-        hwnd = createRadioButton();
-        break;
-    case ControlType::Label:
-        hwnd = createLabel();
-        break;
-    case ControlType::TextArea:
-        hwnd = createTextArea();
-        break;
-    case ControlType::DrawPane:
-        hwnd = createDrawPane();
-        break;
-    case ControlType::RadioButtonGroup:
-        hwnd = createRadioButtonGroup();
-        break;
-    case ControlType::ComboBox:
-        hwnd = createComboBox();
-        break;
-    case ControlType::Panel:
-        hwnd = createPanel();
-        break;
+        case ControlType::Window:
+            hwnd = createWindow();
+            break;
+        case ControlType::Button:
+            hwnd = createButton();
+            break;
+        case ControlType::Textbox:
+            hwnd = createTextbox();
+            break;
+        case ControlType::Checkbox:
+            hwnd = createCheckbox();
+            break;
+        case ControlType::RadioButton:
+            hwnd = createRadioButton();
+            break;
+        case ControlType::Label:
+            hwnd = createLabel();
+            break;
+        case ControlType::TextArea:
+            hwnd = createTextArea();
+            break;
+        case ControlType::DrawPane:
+            hwnd = createDrawPane();
+            break;
+        case ControlType::RadioButtonGroup:
+            hwnd = createRadioButtonGroup();
+            break;
+        case ControlType::ComboBox:
+            hwnd = createComboBox();
+            break;
+        case ControlType::Panel:
+            hwnd = createPanel();
+            break;
     }
 
     ControlID id{nextID};
@@ -225,7 +224,7 @@ ControlCreation::createControl(const ControlCreation::ControlType &type) {
     return id;
 }
 
-const std::vector<std::unique_ptr<ControlHandling::ControlOSData>> &
+const std::vector<std::unique_ptr<ControlHandling::ControlOSData>>&
 ControlHandling::getTopWindows() {
     return topWindowData;
 }

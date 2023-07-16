@@ -1,4 +1,5 @@
 #include "Label.hpp"
+
 #include "Control.test.hpp"
 
 class LabelTests : public ControlTests {

@@ -27,7 +27,7 @@ class Checkbox : public Control {
      *
      * @param check If True, checks the Checkbox. Otherwise, removes the check.
      */
-    void setCheck(const bool &check);
+    void setCheck(const bool& check);
 };
 } // namespace BrazzGUI
 

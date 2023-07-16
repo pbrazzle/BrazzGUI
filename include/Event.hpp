@@ -31,12 +31,12 @@ class Event {
     /**
      * TODO document this function
      */
-    Event(const EventType &t) : control(-1), type(t) {}
+    Event(const EventType& t) : control(-1), type(t) {}
 
     /**
      * TODO document this function
      */
-    Event(const ControlID &id, const EventType &t) : control(id), type(t) {}
+    Event(const ControlID& id, const EventType& t) : control(id), type(t) {}
 
     /**
      * TODO document this function

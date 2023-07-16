@@ -1,4 +1,5 @@
 #include "ComboBox.hpp"
+
 #include "Control.test.hpp"
 
 class ComboBoxTests : public ControlTests {

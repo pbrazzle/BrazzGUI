@@ -1,4 +1,5 @@
 #include "Button.hpp"
+
 #include "Control.test.hpp"
 
 class ButtonTests : public ControlTests {

@@ -1,4 +1,5 @@
 #include "TextArea.hpp"
+
 #include "TextControl.test.hpp"
 
 class TextAreaTests : public TextControlTests {

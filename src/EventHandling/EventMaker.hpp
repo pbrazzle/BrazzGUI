@@ -18,7 +18,7 @@ void postStopEvent();
 /**
  *	Enqueues an Event to the BrazzGUI Event queue
  */
-void postEvent(const Event &);
+void postEvent(const Event&);
 } // namespace BrazzGUI::EventHandling
 
 #endif

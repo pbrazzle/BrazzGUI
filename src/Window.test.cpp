@@ -1,4 +1,5 @@
 #include "Window.hpp"
+
 #include "Control.test.hpp"
 
 class WindowTests : public ControlTests {

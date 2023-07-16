@@ -1,4 +1,5 @@
 #include "DrawPane.hpp"
+
 #include "Control.test.hpp"
 
 class DrawPaneTests : public ControlTests {

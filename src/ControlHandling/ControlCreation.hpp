@@ -24,7 +24,7 @@ enum class ControlType {
 /**
  * TODO document this function
  */
-ControlID createControl(const ControlType &type);
+ControlID createControl(const ControlType& type);
 } // namespace BrazzGUI::ControlCreation
 
 #endif

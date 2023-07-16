@@ -28,7 +28,7 @@ class Control {
     /**
      * TODO document this function
      */
-    Control(const ControlCreation::ControlType &type);
+    Control(const ControlCreation::ControlType& type);
 
     /**
      * TODO document this function
@@ -43,27 +43,27 @@ class Control {
     /**
      * TODO document this function
      */
-    void setX(const int &);
+    void setX(const int&);
 
     /**
      * TODO document this function
      */
-    void setY(const int &);
+    void setY(const int&);
 
     /**
      * TODO document this function
      */
-    void setWidth(const int &);
+    void setWidth(const int&);
 
     /**
      * TODO document this function
      */
-    void setHeight(const int &);
+    void setHeight(const int&);
 
     /**
      * TODO document this function
      */
-    void setPosition(const int &, const int &, const int &, const int &);
+    void setPosition(const int&, const int&, const int&, const int&);
 
     /**
      * TODO document this function
@@ -78,12 +78,12 @@ class Control {
     /**
      * TODO document this function
      */
-    void setText(const std::string &);
+    void setText(const std::string&);
 
     /**
      * TODO document this function
      */
-    void setFontSize(const int &);
+    void setFontSize(const int&);
 
     /**
      * TODO document this function

@@ -10,7 +10,7 @@ class TextControlTests : public ControlTests {
             bool recv = false;
             testApp.connect(
                 Event(testControl->getID(), EventType::TEXT_CHANGED),
-                [&](const Event &) { recv = true; });
+                [&](const Event&) { recv = true; });
             testControl->setText("TEST");
             testApp.stop();
             testApp.run();

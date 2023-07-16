@@ -1,4 +1,5 @@
 #include "BrazzApp.hpp"
+
 #include "EventHandling/EventMaker.hpp"
 #include "EventHandling/EventSlotting.hpp"
 
@@ -18,9 +19,9 @@ int BrazzApp::run() {
 
 void BrazzApp::stop() { EventHandling::postStopEvent(); }
 
-void BrazzApp::connect(const Event &e,
-                       const std::function<void(const Event &)> &slot) {
+void BrazzApp::connect(const Event& e,
+                       const std::function<void(const Event&)>& slot) {
     EventHandling::connect(e, slot);
 }
 
-void BrazzApp::postEvent(const Event &e) { EventHandling::postEvent(e); }
+void BrazzApp::postEvent(const Event& e) { EventHandling::postEvent(e); }

@@ -23,12 +23,12 @@ class ControlOSData {
 /**
  * TODO document this function
  */
-ControlOSData &getDataFromID(const ControlID &);
+ControlOSData& getDataFromID(const ControlID&);
 
 /**
  * TODO document this function
  */
-const std::vector<std::unique_ptr<ControlOSData>> &getTopWindows();
+const std::vector<std::unique_ptr<ControlOSData>>& getTopWindows();
 } // namespace BrazzGUI::ControlHandling
 
 #endif

@@ -15,7 +15,7 @@ class OKCancelDialog {
     /*
      *   TODO document this function
      */
-    bool show(std::string &title, std::string &message);
+    bool show(std::string& title, std::string& message);
 };
 
 } // namespace BrazzGUI
