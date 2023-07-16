@@ -1,22 +1,20 @@
 #ifndef WINDOW
 #define WINDOW
 
-#include "ParentControl.hpp"
 #include "LayoutController.hpp"
+#include "ParentControl.hpp"
 
-namespace BrazzGUI
-{
+namespace BrazzGUI {
 /**
  * TODO document this function
-*/
-class Window : public ParentControl
-{
-	public:
-		/**
-         * TODO document this function
-        */
-		Window();
+ */
+class Window : public ParentControl {
+    public:
+    /**
+     * TODO document this function
+     */
+    Window();
 };
-}
+} // namespace BrazzGUI
 
 #endif

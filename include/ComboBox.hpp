@@ -3,24 +3,22 @@
 
 #include "Control.hpp"
 
-namespace BrazzGUI
-{
+namespace BrazzGUI {
 /**
  * TODO document this class
-*/
-class ComboBox : public Control
-{
-	public:
-		/**
-		 * TODO document this function
-		*/
-		ComboBox();
+ */
+class ComboBox : public Control {
+    public:
+    /**
+     * TODO document this function
+     */
+    ComboBox();
 
-		/**
-		 * TODO document this function
-		*/
-		int getHeight() const override;
+    /**
+     * TODO document this function
+     */
+    int getHeight() const override;
 };
-}
+} // namespace BrazzGUI
 
 #endif

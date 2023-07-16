@@ -3,24 +3,22 @@
 
 #include "Control.hpp"
 
-namespace BrazzGUI
-{
+namespace BrazzGUI {
 /**
  * TODO document this class
-*/
-class TextControl : public Control
-{
-	public:
-		/**
-         * TODO document this function
-        */
-		TextControl(const ControlCreation::ControlType& type);
+ */
+class TextControl : public Control {
+    public:
+    /**
+     * TODO document this function
+     */
+    TextControl(const ControlCreation::ControlType &type);
 
-		/**
-         * TODO document this function
-        */
-		virtual ~TextControl() = 0;
+    /**
+     * TODO document this function
+     */
+    virtual ~TextControl() = 0;
 };
-}
+} // namespace BrazzGUI
 
 #endif

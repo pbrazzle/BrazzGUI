@@ -3,23 +3,21 @@
 
 #include <filesystem>
 
-namespace BrazzGUI
-{
+namespace BrazzGUI {
 
 /*
-*   TODO document this class
-*/
-class FileSelectDialog
-{
+ *   TODO document this class
+ */
+class FileSelectDialog {
     public:
-        FileSelectDialog() = default;
+    FileSelectDialog() = default;
 
-        /*
-        *   TODO document this function
-        */
-        std::filesystem::path show();
+    /*
+     *   TODO document this function
+     */
+    std::filesystem::path show();
 };
 
-}
+} // namespace BrazzGUI
 
 #endif

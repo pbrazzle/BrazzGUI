@@ -3,19 +3,17 @@
 
 #include "TextControl.hpp"
 
-namespace BrazzGUI
-{
+namespace BrazzGUI {
 /**
  * TODO document this class
-*/
-class TextArea : public TextControl
-{
-	public:
-		/**
-         * TODO document this function
-        */
-		TextArea();
+ */
+class TextArea : public TextControl {
+    public:
+    /**
+     * TODO document this function
+     */
+    TextArea();
 };
-}
+} // namespace BrazzGUI
 
 #endif

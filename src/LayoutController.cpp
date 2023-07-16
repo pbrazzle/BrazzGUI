@@ -6,17 +6,16 @@
 
 using namespace BrazzGUI;
 
-LayoutController::LayoutController() : 
-    parent(nullptr), north(nullptr), 
-    center(nullptr), south(nullptr),
-    east(nullptr), west(nullptr) { }
+LayoutController::LayoutController()
+    : parent(nullptr), north(nullptr), center(nullptr), south(nullptr),
+      east(nullptr), west(nullptr) {}
 
-void checkParentChild(const Control* parent, const Control* child){
-    //if (parent && child)
-        //throw std::logic_error("Control::isParent not implemented");
+void checkParentChild(const Control *parent, const Control *child) {
+    // if (parent && child)
+    // throw std::logic_error("Control::isParent not implemented");
 }
 
-void LayoutController::setParent(ParentControl* p) {
+void LayoutController::setParent(ParentControl *p) {
     checkParentChild(p, center);
     checkParentChild(p, north);
     checkParentChild(p, south);
@@ -26,37 +25,37 @@ void LayoutController::setParent(ParentControl* p) {
     parent = p;
 }
 
-void LayoutController::addControl(Control* c, const LayoutType type){
+void LayoutController::addControl(Control *c, const LayoutType type) {
     checkParentChild(parent, c);
 
-    switch (type)
-    {
-        case LayoutType::CENTER:
-            center = c;
-            break;
-        case LayoutType::NORTH:
-            north = c;
-            break;
-        case LayoutType::SOUTH:
-            south = c;
-            break;
-        case LayoutType::EAST:
-            east = c;
-            break;
-        case LayoutType::WEST:
-            west = c;
-            break;
+    switch (type) {
+    case LayoutType::CENTER:
+        center = c;
+        break;
+    case LayoutType::NORTH:
+        north = c;
+        break;
+    case LayoutType::SOUTH:
+        south = c;
+        break;
+    case LayoutType::EAST:
+        east = c;
+        break;
+    case LayoutType::WEST:
+        west = c;
+        break;
     }
 }
 
 #include <iostream>
 
-void LayoutController::updatePositions() const{
+void LayoutController::updatePositions() const {
     // EAST, WEST take 20% of their respective sides
     // NORTH, SOUTH take 20% and take priority from EAST, WEST
     // CENTER takes the rest of the available space
 
-    if (!parent) return;
+    if (!parent)
+        return;
 
     auto width = parent->getClientWidth();
     auto height = parent->getClientHeight();
@@ -65,34 +64,29 @@ void LayoutController::updatePositions() const{
     auto remainingHeight = height;
     auto remainingWidth = width;
 
-    if (north)
-    {
+    if (north) {
         auto northHeight = static_cast<int>(height * 0.2);
         north->setPosition(0, 0, width, northHeight);
         remainingHeight -= northHeight;
         y += northHeight;
     }
-    if (south)
-    {
+    if (south) {
         auto southHeight = static_cast<int>(height * 0.2);
         south->setPosition(0, height - southHeight, width, southHeight);
         remainingHeight -= southHeight;
     }
-    if (east)
-    {
+    if (east) {
         auto eastWidth = static_cast<int>(width * 0.2);
         east->setPosition(0, y, eastWidth, remainingHeight);
         remainingWidth -= eastWidth;
         x += eastWidth;
     }
-    if (west)
-    {
+    if (west) {
         auto westWidth = static_cast<int>(width * 0.2);
-        west->setPosition(width-westWidth, y, westWidth, remainingHeight);
+        west->setPosition(width - westWidth, y, westWidth, remainingHeight);
         remainingWidth -= westWidth;
     }
-    if (center)
-    {
+    if (center) {
         center->setPosition(x, y, remainingWidth, remainingHeight);
     }
 }

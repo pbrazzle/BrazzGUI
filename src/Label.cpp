@@ -3,4 +3,4 @@
 
 using namespace BrazzGUI;
 
-Label::Label() : Control(ControlCreation::ControlType::Label) { }
+Label::Label() : Control(ControlCreation::ControlType::Label) {}

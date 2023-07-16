@@ -4,5 +4,4 @@
 
 using namespace BrazzGUI;
 
-DrawPane::DrawPane() 
-	: Control(ControlCreation::ControlType::DrawPane) { }
+DrawPane::DrawPane() : Control(ControlCreation::ControlType::DrawPane) {}

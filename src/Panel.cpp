@@ -3,4 +3,4 @@
 
 using namespace BrazzGUI;
 
-Panel::Panel() : ParentControl(ControlCreation::ControlType::Panel) { }
+Panel::Panel() : ParentControl(ControlCreation::ControlType::Panel) {}

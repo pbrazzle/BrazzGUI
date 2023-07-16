@@ -4,8 +4,8 @@
 
 using namespace BrazzGUI;
 
-Checkbox::Checkbox() : Control(ControlCreation::ControlType::Checkbox) { }
+Checkbox::Checkbox() : Control(ControlCreation::ControlType::Checkbox) {}
 
 bool Checkbox::isChecked() { return ControlStyling::isChecked(id); }
 
-void Checkbox::setCheck(const bool& c) { ControlStyling::setCheck(id, c); }
+void Checkbox::setCheck(const bool &c) { ControlStyling::setCheck(id, c); }

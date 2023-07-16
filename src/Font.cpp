@@ -2,7 +2,7 @@
 
 using namespace BrazzGUI;
 
-Font::Font(const int& s) : size(s) { }
+Font::Font(const int &s) : size(s) {}
 
 int Font::getSize() const { return size; }
-void Font::setSize(const int& s) { size = s; } 
+void Font::setSize(const int &s) { size = s; }

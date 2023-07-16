@@ -3,19 +3,17 @@
 
 #include "Control.hpp"
 
-namespace BrazzGUI
-{
+namespace BrazzGUI {
 /**
  * TODO document this class
-*/
-class DrawPane : public Control
-{
-	public:
-		/**
-		 * TODO document this function
-		*/
-		DrawPane();
+ */
+class DrawPane : public Control {
+    public:
+    /**
+     * TODO document this function
+     */
+    DrawPane();
 };
-}
+} // namespace BrazzGUI
 
 #endif

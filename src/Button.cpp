@@ -3,4 +3,4 @@
 
 using namespace BrazzGUI;
 
-Button::Button() : Control(ControlCreation::ControlType::Button) { }
+Button::Button() : Control(ControlCreation::ControlType::Button) {}

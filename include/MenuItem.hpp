@@ -1,15 +1,11 @@
 #ifndef MENU_ITEM
 #define MENU_ITEM
 
-namespace BrazzGUI
-{
+namespace BrazzGUI {
 /**
  * TODO document this class
-*/
-class MenuItem
-{
-
-};
-}
+ */
+class MenuItem {};
+} // namespace BrazzGUI
 
 #endif
