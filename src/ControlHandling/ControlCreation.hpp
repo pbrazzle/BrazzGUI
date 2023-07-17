@@ -5,7 +5,7 @@
 
 namespace BrazzGUI::ControlCreation {
 /**
- * TODO document this enum
+ * Enum for all types of Controls
  */
 enum class ControlType {
     Window,
@@ -22,7 +22,10 @@ enum class ControlType {
 };
 
 /**
- * TODO document this function
+ * Creates a new Control using the OS API
+ *
+ * @param type Type of Control to create
+ * @return ID of the created Control
  */
 ControlID createControl(const ControlType& type);
 } // namespace BrazzGUI::ControlCreation

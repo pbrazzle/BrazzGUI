@@ -9,20 +9,20 @@
 
 namespace BrazzGUI::ControlHandling {
 /**
- * TODO document this class
+ * Win32 specific OSData for each Control
  */
 class Win32Data : public ControlOSData {
     private:
-    HWND handle;
-    WNDPROC defaultWindowProc;
-    ControlID id;
-    HBRUSH backgroundBrush;
-    Color backgroundColor;
-    Color textColor;
+    HWND handle;               // HWND for the Control
+    WNDPROC defaultWindowProc; // Default window procedure for the Control
+    ControlID id;              // ID for the Control
+    HBRUSH backgroundBrush;    // Brush to draw the Control background
+    Color backgroundColor;     // Background color for the Control
+    Color textColor;           // Text color for the Control
 
     public:
     /**
-     * TODO document this function
+     * Creates a new Win32Data object
      */
     Win32Data(const ControlID i, const HWND h,
               const WNDPROC defProc = &DefWindowProc) :
@@ -36,7 +36,7 @@ class Win32Data : public ControlOSData {
     }
 
     /**
-     * TODO document this function
+     * Creates a new Win32Data object
      */
     Win32Data(const Win32Data& other) :
         id(other.id),
@@ -49,7 +49,8 @@ class Win32Data : public ControlOSData {
     }
 
     /**
-     * TODO document this function
+     * Assignment operator for Win32Data objects
+     * Creates a new brush for the assignee
      */
     Win32Data& operator=(const Win32Data& other) {
         id = other.id;
@@ -62,22 +63,33 @@ class Win32Data : public ControlOSData {
     }
 
     /**
-     * TODO document this function
+     * Destructor
+     * Frees the background brush
      */
     ~Win32Data() { DeleteObject(backgroundBrush); }
 
     /**
-     * TODO document this function
+     * Gets the handle for the Control
+     *
+     * @return Handle for the Control
      */
     HWND getHandle() const { return handle; }
 
     /**
-     * TODO document this function
+     * Gets the ControlID for the Control
+     *
+     * @return ID for the Control
      */
     ControlID getID() const { return id; }
 
     /**
-     * TODO document this function
+     * Sends a message to the default window procedure for the Control
+     *
+     * @param handle Handle for the Control
+     * @param msg Win32 message code
+     * @param wp Win32 message data
+     * @param lp Win32 message data
+     * @return Result of handling the message, 0 means the message was handled
      */
     LRESULT callDefaultWindowProc(HWND handle, UINT msg, WPARAM wp,
                                   LPARAM lp) const {
@@ -85,7 +97,9 @@ class Win32Data : public ControlOSData {
     }
 
     /**
-     * TODO document this function
+     * Sets the background color for the Control
+     *
+     * @param c New background color
      */
     void setBackgroundColor(const Color c) {
         backgroundColor = c;
@@ -95,22 +109,30 @@ class Win32Data : public ControlOSData {
     }
 
     /**
-     * TODO document this function
+     * Sets the text color for the Control
+     *
+     * @param c New text color
      */
     void setTextColor(const Color c) { textColor = c; }
 
     /**
-     * TODO document this function
+     * Gets the background brush for the Control
+     *
+     * @return Background brush for the Control
      */
     HBRUSH getBackgroundBrush() const { return backgroundBrush; }
 
     /**
-     * TODO document this function
+     * Gets the background color for the Control
+     *
+     * @return Background color for the Control
      */
     Color getBackgroundColor() const { return backgroundColor; }
 
     /**
-     * TODO document this function
+     * Gets the text color for the Control
+     *
+     * @return Text color for the Control
      */
     Color getTextColor() const { return textColor; }
 };

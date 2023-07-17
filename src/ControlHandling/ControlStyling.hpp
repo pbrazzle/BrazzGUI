@@ -7,116 +7,190 @@
 
 #include <string>
 
+/*
+ *   Namespace for OS specific operations for Controls
+ *   ControlStyling includes everything that changes the appearance of a Control
+ */
 namespace BrazzGUI::ControlStyling {
 /**
- * TODO document this function
+ * Makes the given Control visible
+ *
+ * @param id ID of the Control
  */
-void show(const ControlID&);
+void show(const ControlID& id);
 
 /**
- * TODO document this function
+ * Sets the x position of the given Control
+ * Control positions are relative to their parents client area
+ *
+ * @param id ID of the Control
+ * @param x New x position for the Control
  */
-void setX(const ControlID&, const int&);
+void setX(const ControlID& id, const int& x);
 
 /**
- * TODO document this function
+ * Sets the y position of the given Control
+ * Control positions are relative to their parents client area
+ *
+ * @param id ID of the Control
+ * @param y New y position for the Control
  */
-void setY(const ControlID&, const int&);
+void setY(const ControlID& id, const int& y);
 
 /**
- * TODO document this function
+ * Sets the width in pixels of the given Control
+ *
+ * @param id ID of the Control
+ * @param width New width of the Control in pixels
  */
-void setWidth(const ControlID&, const int&);
+void setWidth(const ControlID& id, const int& width);
 
 /**
- * TODO document this function
+ * Sets the height in pixels of the given Control
+ *
+ * @param id ID of the Control
+ * @param height New height of the Control in pixels
  */
-void setHeight(const ControlID&, const int&);
+void setHeight(const ControlID& id, const int& height);
 
 /**
- * TODO document this function
+ * Sets the text of the given Control
+ *
+ * @param id ID of the Control
+ * @param text New text of the Control
  */
-void setText(const ControlID&, const std::string&);
+void setText(const ControlID& id, const std::string& text);
 
 /**
- * TODO document this function
+ * Sets the font of the given Control
+ *
+ * @param id ID of the Control
+ * @param font New font of the Control
  */
-void setFont(const ControlID&, const Font&);
+void setFont(const ControlID& id, const Font& font);
 
 /**
- * TODO document this function
+ * Sets the check of the given Control
+ * Only relevant for Checkboxes and RadioButtons
+ *
+ * @param id ID of the Control
+ * @param check New check value of the Control
  */
-void setCheck(const ControlID&, const bool&);
+void setCheck(const ControlID& id, const bool& check);
 
 /**
- * TODO document this function
+ * Gets the check value of the given Control
+ *
+ * @param id ID of the Control
+ * @return Check value of the Control (false if the Control has no check)
  */
-bool isChecked(const ControlID&);
+bool isChecked(const ControlID& id);
 
 /**
- * TODO document this function
+ * Get the x position of the given Control
+ * Control positions are relevant to their parents client area
+ *
+ * @param id ID of the Control
+ * @return X position of the Control
  */
-int getX(const ControlID&);
+int getX(const ControlID& id);
 
 /**
- * TODO document this function
+ * Get the y position of the given Control
+ * Control positions are relevant to their parents client area
+ *
+ * @param id ID of the Control
+ * @return Y position of the Control
  */
-int getY(const ControlID&);
+int getY(const ControlID& id);
 
 /**
- * TODO document this function
+ * Get the width of the given Control in pixels
+ *
+ * @param id ID of the Control
+ * @return Width of the Control in pixels
  */
-int getWidth(const ControlID&);
+int getWidth(const ControlID& id);
 
 /**
- * TODO document this function
+ * Get the height of the given Control in pixels
+ *
+ * @param id ID of the Control
+ * @return Height of the Control in pixels
  */
-int getHeight(const ControlID&);
+int getHeight(const ControlID& id);
 
 /**
- * TODO document this function
+ * Get the width of the given Controls client area in pixels
+ *
+ * @param id ID of the Control
+ * @return Width of the Controls client area in pixels
  */
 int getClientWidth(const ControlID);
 
 /**
- * TODO document this function
+ * Get the height of the given Controls client area in pixels
+ *
+ * @param id ID of the Control
+ * @return Height of the Controls client area in pixels
  */
 int getClientHeight(const ControlID);
 
 /**
- * TODO document this function
+ * Gets the height of a ComboBox Control
+ *
+ * @param id ID of the ComboBox
+ * @return Height of the ComboBox in pixels, 0 if the Control is not a ComboBox
  */
-int getComboBoxHeight(const ControlID&);
+int getComboBoxHeight(const ControlID& id);
 
 /**
- * TODO document this function
+ * Gets the text of a Control
+ *
+ * @param id ID of the Control
+ * @return Text of the Control
  */
-std::string getText(const ControlID&);
+std::string getText(const ControlID& id);
 
 /**
- * TODO document this function
+ * Assigns a child Control to a parent
+ *
+ * @param parent Parent Control
+ * @param child Child Control to be added
  */
 void setChild(const ControlID& parent, const ControlID& child);
 
 /**
- * TODO document this function
+ * Draws the background of a Control
+ *
+ * @param id ID of the Control
+ * @param color Color of the background
  */
-void drawBackground(const ControlID, const Color);
+void drawBackground(const ControlID id, const Color color);
 
 /**
- * TODO document this function
+ * Sets the background color of a Control
+ *
+ * @param id ID of the Control
+ * @param color New background color of the Control
  */
-void setBackgroundColor(const ControlID, const Color);
+void setBackgroundColor(const ControlID id, const Color color);
 
 /**
- * TODO document this function
+ * Draws the text of a Control
+ *
+ * @param id ID of the Control
+ * @param color Color of the text
  */
-void drawText(const ControlID, const Color);
+void drawText(const ControlID id, const Color color);
 
 /**
- * TODO document this function
+ * Sets the text color of a Control
+ *
+ * @param id ID of the Control
+ * @param color New text color of the Control
  */
-void setTextColor(const ControlID, const Color);
+void setTextColor(const ControlID id, const Color color);
 } // namespace BrazzGUI::ControlStyling
 
 #endif

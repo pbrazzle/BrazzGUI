@@ -6,12 +6,13 @@
 
 namespace BrazzGUI {
 /**
- * TODO document this function
+ * Windows are top-level ParentControls
+ * They can also have Menus
  */
 class Window : public ParentControl {
     public:
     /**
-     * TODO document this function
+     * Creates a new Window
      */
     Window();
 };

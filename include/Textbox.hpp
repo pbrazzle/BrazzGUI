@@ -5,12 +5,12 @@
 
 namespace BrazzGUI {
 /**
- * TODO document this class
+ * The Textbox Control allows the user to type single line text
  */
 class Textbox : public TextControl {
     public:
     /**
-     * TODO document this function
+     * Creates a new Textbox
      */
     Textbox();
 };

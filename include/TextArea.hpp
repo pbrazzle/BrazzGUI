@@ -5,12 +5,12 @@
 
 namespace BrazzGUI {
 /**
- * TODO document this class
+ * The TextArea Control allows the user to type multiline text
  */
 class TextArea : public TextControl {
     public:
     /**
-     * TODO document this function
+     * Creates a new TextArea
      */
     TextArea();
 };

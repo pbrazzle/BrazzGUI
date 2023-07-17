@@ -7,12 +7,17 @@
 
 namespace BrazzGUI::EventHandling {
 /**
- * TODO document this function
+ * Assigns a callback function for a given Event template
+ * Event templates include a ControlID and an EventType
+ *
+ * @param event Event template to connect to
+ * @param callback Callback function to assign to the Event
  */
-void connect(const Event&, const std::function<void(const Event&)>&);
+void connect(const Event& event,
+             const std::function<void(const Event&)>& callback);
 
 /**
- * TODO document this function
+ * Runs all callback functions assigned to this Event
  */
 void runSlots(const Event&);
 } // namespace BrazzGUI::EventHandling

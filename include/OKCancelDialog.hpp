@@ -6,14 +6,19 @@
 namespace BrazzGUI {
 
 /*
- *   TODO document this class
+ *  The OKCancelDialog prompts a user with a simple message
+ *  The user can then click one or more response buttons (OK/Cancel)
  */
 class OKCancelDialog {
     public:
     OKCancelDialog() = default;
 
     /*
-     *   TODO document this function
+     *   Shows the dialog
+     *
+     * @param title Text to display the dialog window title
+     * @param message Message to display in the dialog body
+     * @return false if user selects cancel, true otherwise
      */
     bool show(std::string& title, std::string& message);
 };

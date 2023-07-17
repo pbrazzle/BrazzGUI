@@ -6,12 +6,13 @@
 namespace BrazzGUI {
 
 /**
- * TODO Write description of the Panel class
+ * The Panel Control simply groups child Controls
+ * This allows for more complex layouts, as each Panel can handle its own layout
  */
 class Panel : public ParentControl {
     public:
     /**
-     * TODO document this function
+     * Creates a new Panel
      */
     Panel();
 };

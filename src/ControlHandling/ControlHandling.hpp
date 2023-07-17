@@ -10,7 +10,7 @@
 
 namespace BrazzGUI::ControlHandling {
 /**
- * TODO document this class
+ * OS specific data for each Control
  */
 class ControlOSData {
     public:
@@ -21,12 +21,18 @@ class ControlOSData {
 };
 
 /**
- * TODO document this function
+ * Finds the OSData for a given Control
+ *
+ * @param id ControlID for the Control
+ * @return OSData for the Control
  */
-ControlOSData& getDataFromID(const ControlID&);
+ControlOSData& getDataFromID(const ControlID& id);
 
 /**
- * TODO document this function
+ * Finds all top-level windows OSData in the application
+ * New child Controls will be given to the first top-level window by default
+ *
+ * @return Vector of OSData for every top-level window
  */
 const std::vector<std::unique_ptr<ControlOSData>>& getTopWindows();
 } // namespace BrazzGUI::ControlHandling

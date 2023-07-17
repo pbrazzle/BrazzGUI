@@ -9,21 +9,25 @@
 
 namespace BrazzGUI::ControlHandling {
 /**
- * TODO document this class
+ * The FontHandler converts a BrazzGUI font to a Win32 font
  */
 class FontHandler {
     private:
     /**
-     * TODO document this function
+     * Maps BrazzGUI fonts to Win32 HFONTs
      */
     static std::map<Font, HFONT, std::function<bool(const Font&, const Font&)>>
         fontMap;
 
     public:
     /**
-     * TODO document this function
+     * Gets the Win32 HFONT for a given BrazzGUI Font
+     * If the font is not already registered with Win32, creates a new HFONT
+     *
+     * @param font A BrazzGUI Font
+     * @return HFONT for the given BrazzGUI Font
      */
-    static HFONT getFontHandle(const Font&);
+    static HFONT getFontHandle(const Font& font);
 };
 } // namespace BrazzGUI::ControlHandling
 

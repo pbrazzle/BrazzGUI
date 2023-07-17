@@ -7,7 +7,8 @@
 namespace BrazzGUI {
 
 /**
- * TODO document this class
+ * A ParentControl can have child Controls associated with it
+ * ParentControls use a LayoutController to manage the layout of its children
  */
 class ParentControl : public Control {
     private:
@@ -15,39 +16,52 @@ class ParentControl : public Control {
 
     public:
     /**
-     * TODO document this function
+     * Creates a new ParentControl
+     *
+     * @param type ControlType of this Control
      */
-    ParentControl(const ControlCreation::ControlType);
+    ParentControl(const ControlCreation::ControlType type);
 
     /**
-     * TODO document this function
+     * Virtual destructor
+     * Makes this class abstract
      */
     virtual ~ParentControl() = 0 {}
 
     /**
-     * TODO document this function
+     * Adds a new child Control to this ParentControl
+     *
+     * @param child Child Control to be added
      */
-    void addControl(Control&);
+    void addControl(Control& child);
 
     /**
-     * TODO document this function
+     * Adds a new child Control to this ParentControl
+     * Also specifies the LayoutType for this child
+     *
+     * @param child Child Control to be added
+     * @param layoutType LayoutType of the child
      */
-    void addControl(Control&, const LayoutType);
+    void addControl(Control& child, const LayoutType layoutType);
 
     /**
-     * TODO document this function
+     * Updates the position of all child Controls based on the layout
      */
     void updateLayout();
 
     /**
-     * TODO document this function
+     * Retuns the width of this Controls client area in pixels
+     *
+     * @return Width of the client area in pixels
      */
-    int getClientWidth();
+    [[nodiscard]] int getClientWidth();
 
     /**
-     * TODO document this function
+     * Returns the height of this Controls client area in pixels
+     *
+     * @return Height of the client area in pixels
      */
-    int getClientHeight();
+    [[nodiscard]] int getClientHeight();
 };
 
 } // namespace BrazzGUI

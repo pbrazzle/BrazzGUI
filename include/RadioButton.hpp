@@ -5,12 +5,13 @@
 
 namespace BrazzGUI {
 /**
- * TODO document this class
+ * The RadioButton allows the user to select between 2 or more exclusive options
+ * RadioButtons are composed in RadioButtonGroups
  */
 class RadioButton : public Control {
     public:
     /**
-     * TODO document this function
+     * Creates a new RadioButton
      */
     RadioButton();
 };

@@ -5,12 +5,16 @@
 
 namespace BrazzGUI {
 /**
- * TODO document this class
+ * RadioButtonGroups compose RadioButtons
+ * This Control handles the active choice in the group, checking the active
+ * choice and unchecking all others
+ *
+ * TODO add functions to add RadioButtons
  */
 class RadioButtonGroup : public Control {
     public:
     /**
-     * TODO document this function
+     * Creates a new RadioButtonGroup
      */
     RadioButtonGroup();
 };

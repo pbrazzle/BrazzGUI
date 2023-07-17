@@ -5,17 +5,20 @@
 
 namespace BrazzGUI {
 /**
- * TODO document this class
+ * TextControls include all Controls that handle user text input
  */
 class TextControl : public Control {
     public:
     /**
-     * TODO document this function
+     * Creates a new TextControl
+     *
+     * @param type ControlType for this Control
      */
     TextControl(const ControlCreation::ControlType& type);
 
     /**
-     * TODO document this function
+     * Virtual destructor
+     * Makes this an abstract class
      */
     virtual ~TextControl() = 0;
 };
