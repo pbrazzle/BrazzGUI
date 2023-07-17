@@ -1,6 +1,9 @@
 #include "FileSaveDialog.hpp"
 
+#include "DialogHandling/DialogHandling.hpp"
+
 using namespace BrazzGUI;
 
-// TODO implement
-std::filesystem::path FileSaveDialog::show() { return std::filesystem::path(); }
+std::filesystem::path FileSaveDialog::show() {
+    return DialogHandling::showFileSave();
+}

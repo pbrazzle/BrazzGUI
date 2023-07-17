@@ -1,6 +1,9 @@
 #include "OKCancelDialog.hpp"
 
+#include "DialogHandling/DialogHandling.hpp"
+
 using namespace BrazzGUI;
 
-// TODO implement this
-bool OKCancelDialog::show(std::string&, std::string&) { return false; }
+bool OKCancelDialog::show(std::string& title, std::string& message) {
+    return DialogHandling::showOKCancel(title, message);
+}

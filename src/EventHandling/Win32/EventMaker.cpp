@@ -4,6 +4,7 @@
 #include "Event.hpp"
 #include "EventHandling/EventSlotting.hpp"
 
+#include <exception>
 #include <iostream>
 #include <queue>
 #include <windows.h>
@@ -85,8 +86,7 @@ bool handleMessage() {
     BOOL result = GetMessage(&msg, NULL, 0, 0);
     if (result == 0) return false;
 
-    // TODO Check for error
-    // if (result == -1) throw -1;
+    if (result == -1) throw std::logic_error("Failed to retrieve next Event");
 
     TranslateMessage(&msg);
     DispatchMessage(&msg);

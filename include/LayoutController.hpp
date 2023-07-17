@@ -9,7 +9,9 @@ class ParentControl;
 
 /**
  * LayoutType determines how a Control is positioned with a LayoutController
- * TODO note percentages and positions for each LayoutType
+ * EAST, WEST take 20% of their respective sides
+ * NORTH, SOUTH take 20% and take priority from EAST, WEST
+ * CENTER takes the rest of the available space
  */
 enum class LayoutType { CENTER, EAST, WEST, NORTH, SOUTH };
 

@@ -159,9 +159,8 @@ HWND createTextArea() {
 }
 
 HWND createDrawPane() {
-    // TODO give this the right class and style
-    return createChildWindow("BUTTON", "Group",
-                             defaultStyle | WS_GROUP | BS_GROUPBOX);
+    return createChildWindow("BrazzGUI Window", "",
+                             defaultStyle | WS_CLIPCHILDREN);
 }
 
 HWND createRadioButtonGroup() {
