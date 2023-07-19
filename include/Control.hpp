@@ -22,7 +22,8 @@ enum class ControlType {
     RadioButton,
     RadioButtonGroup,
     ComboBox,
-    Panel
+    Panel,
+    TabGroup
 };
 
 /**

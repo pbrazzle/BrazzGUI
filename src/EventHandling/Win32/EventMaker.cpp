@@ -4,6 +4,7 @@
 #include "Event.hpp"
 #include "EventHandling/EventSlotting.hpp"
 
+#include <CommCtrl.h>
 #include <exception>
 #include <iostream>
 #include <queue>
@@ -40,6 +41,15 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
                 eventQueue.push(Event(idVal, EventType::TEXT_CHANGED));
             }
             break;
+        case WM_NOTIFY: {
+            auto notificationData = reinterpret_cast<LPNMHDR>(lParam);
+            auto idVal = ControlID(notificationData->idFrom);
+            switch (notificationData->code) {
+                case TCN_SELCHANGE:
+                    eventQueue.push(Event(idVal, EventType::TAB_CHANGED));
+                    break;
+            }
+        }
         case WM_PAINT:
             EventHandling::runSlots(Event(id, EventType::PAINT));
             break;

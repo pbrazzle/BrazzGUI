@@ -4,6 +4,7 @@
 #include "EventHandling/EventMaker.hpp"
 #include "EventHandling/EventSlotting.hpp"
 
+#include <CommCtrl.h>
 #include <exception>
 #include <iostream>
 #include <map>
@@ -11,6 +12,7 @@
 #include <system_error>
 #include <windows.h>
 #include <windowsx.h>
+
 
 #ifndef UNICODE
 #define UNICODE
@@ -65,6 +67,11 @@ HWND createChildWindow(const std::string& className,
 
     auto prevProc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(
         hwnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&BrazzGUIWndProc)));
+
+    // DefWindowProc is the def proc for BrazzGUI
+    if (prevProc == reinterpret_cast<WNDPROC>(&BrazzGUIWndProc)) {
+        prevProc = reinterpret_cast<WNDPROC>(&DefWindowProc);
+    }
 
     ControlID id = {nextID};
     idMap[id] =
@@ -159,7 +166,7 @@ HWND createTextArea() {
 }
 
 HWND createDrawPane() {
-    return createChildWindow("Button", "", defaultStyle | BS_GROUPBOX);
+    return createChildWindow("BrazzGUI Window", "", WS_CHILD);
 }
 
 HWND createRadioButtonGroup() {
@@ -174,7 +181,11 @@ HWND createComboBox() {
 }
 
 HWND createPanel() {
-    return createChildWindow("BUTTON", "", defaultStyle | BS_GROUPBOX);
+    return createChildWindow("BrazzGUI Window", "", WS_CHILD | WS_VISIBLE);
+}
+
+HWND createTabGroup() {
+    return createChildWindow(WC_TABCONTROL, "", defaultStyle);
 }
 
 ControlID ControlCreation::createControl(const BrazzGUI::ControlType& type) {
@@ -212,6 +223,9 @@ ControlID ControlCreation::createControl(const BrazzGUI::ControlType& type) {
             break;
         case ControlType::Panel:
             hwnd = createPanel();
+            break;
+        case ControlType::TabGroup:
+            hwnd = createTabGroup();
             break;
     }
 

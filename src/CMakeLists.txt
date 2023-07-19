@@ -12,6 +12,7 @@ set(LIB_SOURCES
 	MenuItem.cpp
 	RadioButtonGroup.cpp
 	ComboBox.cpp
+	TabGroup.cpp
 	Font.cpp
 	LayoutController.cpp
 	ParentControl.cpp

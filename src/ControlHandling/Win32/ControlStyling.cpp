@@ -4,6 +4,7 @@
 #include "ControlHandling/Win32/FontHandler.hpp"
 #include "EventHandling/EventMaker.hpp"
 
+#include <CommCtrl.h>
 #include <iostream>
 #include <windows.h>
 #include <windowsx.h>
@@ -181,4 +182,74 @@ void ControlStyling::drawText(const ControlID id, const Color color) {
 void ControlStyling::setTextColor(const ControlID id, const Color color) {
     auto& osData = getDataFromID(id);
     osData.setTextColor(color);
+}
+
+void ControlStyling::addTab(const ControlID id, std::string& tabName) {
+    auto handle = getHandleFromID(id);
+
+    // Get number of items
+    auto tabCount = TabCtrl_GetItemCount(handle);
+
+    // Insert a new tab
+    TCITEM newTab = {0};
+    newTab.mask = TCIF_TEXT;
+    newTab.pszText = reinterpret_cast<LPSTR>(tabName.data());
+    newTab.iImage = -1;
+
+    TabCtrl_InsertItem(handle, tabCount, &newTab);
+}
+
+int ControlStyling::getTabAreaWidth(const ControlID id) {
+    RECT tabRect;
+    auto handle = getHandleFromID(id);
+    auto parentHandle = GetParent(handle);
+    GetClientRect(parentHandle, &tabRect);
+
+    TabCtrl_AdjustRect(handle, FALSE, &tabRect);
+
+    return tabRect.right - tabRect.left;
+}
+
+int ControlStyling::getTabAreaHeight(const ControlID id) {
+    RECT tabRect;
+    auto handle = getHandleFromID(id);
+    auto parentHandle = GetParent(handle);
+    GetClientRect(parentHandle, &tabRect);
+
+    TabCtrl_AdjustRect(handle, FALSE, &tabRect);
+
+    return tabRect.bottom - tabRect.top;
+}
+
+int ControlStyling::getTabAreaX(const ControlID id) {
+    RECT tabRect;
+    auto handle = getHandleFromID(id);
+    auto parentHandle = GetParent(handle);
+    GetClientRect(parentHandle, &tabRect);
+
+    TabCtrl_AdjustRect(handle, FALSE, &tabRect);
+
+    return tabRect.left;
+}
+
+int ControlStyling::getTabAreaY(const ControlID id) {
+    RECT tabRect;
+    auto handle = getHandleFromID(id);
+    auto parentHandle = GetParent(handle);
+    GetClientRect(parentHandle, &tabRect);
+
+    TabCtrl_AdjustRect(handle, FALSE, &tabRect);
+
+    return tabRect.top;
+}
+
+int ControlStyling::getSelectedTabIndex(const ControlID id) {
+    auto handle = getHandleFromID(id);
+    return TabCtrl_GetCurSel(handle);
+}
+
+void ControlStyling::setVisible(const ControlID id, const bool visible) {
+    auto handle = getHandleFromID(id);
+    if (visible) ShowWindow(handle, SW_SHOW);
+    else ShowWindow(handle, SW_HIDE);
 }

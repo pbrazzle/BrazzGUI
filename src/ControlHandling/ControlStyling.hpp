@@ -191,6 +191,41 @@ void drawText(const ControlID id, const Color color);
  * @param color New text color of the Control
  */
 void setTextColor(const ControlID id, const Color color);
+
+/*
+ *   TODO document
+ */
+void addTab(const ControlID id, std::string& tabName);
+
+/*
+ *   TODO document
+ */
+int getTabAreaWidth(const ControlID id);
+
+/*
+ *   TODO document
+ */
+int getTabAreaHeight(const ControlID id);
+
+/*
+ *   TODO document
+ */
+int getTabAreaX(const ControlID id);
+
+/*
+ *   TODO document
+ */
+int getTabAreaY(const ControlID id);
+
+/*
+ *   TODO document
+ */
+int getSelectedTabIndex(const ControlID id);
+
+/*
+ *   TODO document
+ */
+void setVisible(const ControlID id, const bool visible);
 } // namespace BrazzGUI::ControlStyling
 
 #endif

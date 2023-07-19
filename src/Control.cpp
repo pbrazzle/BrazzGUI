@@ -23,6 +23,7 @@ template class BasicControl<ControlType::ComboBox>;
 template class BasicControl<ControlType::DrawPane>;
 template class BasicControl<ControlType::Label>;
 template class BasicControl<ControlType::RadioButton>;
+template class BasicControl<ControlType::TabGroup>;
 
 Control::~Control() {}
 

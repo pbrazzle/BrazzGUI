@@ -14,6 +14,7 @@ enum class LayoutType { CENTER, EAST, WEST, NORTH, SOUTH };
 
 template<ControlType type> class ParentControl;
 
+// TODO Fix case where there is no CENTER Control
 /**
  * The LayoutController automatically repositions Controls to adhere to a
  * specific layout

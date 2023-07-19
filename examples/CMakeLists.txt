@@ -8,3 +8,11 @@ target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/include)
 add_executable(layout layout.cpp)
 target_link_libraries(layout PRIVATE BrazzGUI)
 target_include_directories(layout PUBLIC ${CMAKE_SOURCE_DIR}/include)
+
+add_executable(panel panel.cpp)
+target_link_libraries(panel PRIVATE BrazzGUI)
+target_include_directories(panel PUBLIC ${CMAKE_SOURCE_DIR}/include)
+
+add_executable(tabs tabs.cpp)
+target_link_libraries(tabs PRIVATE BrazzGUI)
+target_include_directories(tabs PUBLIC ${CMAKE_SOURCE_DIR}/include)

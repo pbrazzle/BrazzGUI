@@ -17,7 +17,8 @@ enum class EventType {
     RESIZED,
     DRAW_BACKGROUND,
     PAINT,
-    CHILD_SET_COLORS
+    CHILD_SET_COLORS,
+    TAB_CHANGED
 };
 
 /**
