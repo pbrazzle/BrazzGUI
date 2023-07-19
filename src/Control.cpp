@@ -6,7 +6,7 @@
 
 using namespace BrazzGUI;
 
-Control::Control(const ControlCreation::ControlType& type) :
+Control::Control(const ControlType& type) :
     id(ControlCreation::createControl(type)) {
     backgroundColor = {255, 255, 255};
 
@@ -15,6 +15,14 @@ Control::Control(const ControlCreation::ControlType& type) :
             ControlStyling::setBackgroundColor(id, getBackgroundColor());
         });
 }
+
+template<ControlType type> BasicControl<type>::BasicControl() : Control(type) {}
+
+template class BasicControl<ControlType::Button>;
+template class BasicControl<ControlType::ComboBox>;
+template class BasicControl<ControlType::DrawPane>;
+template class BasicControl<ControlType::Label>;
+template class BasicControl<ControlType::RadioButton>;
 
 Control::~Control() {}
 

@@ -10,23 +10,15 @@ namespace BrazzGUI {
  * A ParentControl can have child Controls associated with it
  * ParentControls use a LayoutController to manage the layout of its children
  */
-class ParentControl : public Control {
+template<ControlType type> class ParentControl : public Control {
     private:
-    LayoutController layout;
+    LayoutController<type> layout;
 
     public:
     /**
      * Creates a new ParentControl
-     *
-     * @param type ControlType of this Control
      */
-    ParentControl(const ControlCreation::ControlType type);
-
-    /**
-     * Virtual destructor
-     * Makes this class abstract
-     */
-    virtual ~ParentControl() = 0 {}
+    ParentControl();
 
     /**
      * Adds a new child Control to this ParentControl

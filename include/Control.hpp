@@ -5,13 +5,26 @@
 #include "ControlID.hpp"
 #include "Font.hpp"
 
-namespace BrazzGUI::ControlCreation {
-enum class ControlType;
-}
-
 #include <string>
 
 namespace BrazzGUI {
+/**
+ * Enum for all types of Controls
+ */
+enum class ControlType {
+    Window,
+    Button,
+    Label,
+    Textbox,
+    TextArea,
+    DrawPane,
+    Checkbox,
+    RadioButton,
+    RadioButtonGroup,
+    ComboBox,
+    Panel
+};
+
 /**
  * Every visible component in BrazzGUI is a Control
  * Controls handle Events created by the user in a BrazzGUI application
@@ -32,7 +45,7 @@ class Control {
      *
      * @param type Type of Control to create
      */
-    Control(const ControlCreation::ControlType& type);
+    Control(const ControlType& type);
 
     /**
      * Virtual desctructor
@@ -184,6 +197,12 @@ class Control {
      */
     ControlID getID() const;
 };
+
+template<ControlType type> class BasicControl : public Control {
+    public:
+    BasicControl();
+};
+
 } // namespace BrazzGUI
 
 #endif

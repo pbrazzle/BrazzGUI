@@ -159,8 +159,7 @@ HWND createTextArea() {
 }
 
 HWND createDrawPane() {
-    return createChildWindow("BrazzGUI Window", "",
-                             defaultStyle | WS_CLIPCHILDREN);
+    return createChildWindow("Button", "", defaultStyle | BS_GROUPBOX);
 }
 
 HWND createRadioButtonGroup() {
@@ -175,12 +174,10 @@ HWND createComboBox() {
 }
 
 HWND createPanel() {
-    return createChildWindow("BrazzGUI Window", "",
-                             defaultStyle | WS_CLIPCHILDREN);
+    return createChildWindow("BUTTON", "", defaultStyle | BS_GROUPBOX);
 }
 
-ControlID
-ControlCreation::createControl(const ControlCreation::ControlType& type) {
+ControlID ControlCreation::createControl(const BrazzGUI::ControlType& type) {
     HWND hwnd;
     switch (type) {
         case ControlType::Window:

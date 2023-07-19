@@ -7,13 +7,7 @@ namespace BrazzGUI {
 /**
  * The Textbox Control allows the user to type single line text
  */
-class Textbox : public TextControl {
-    public:
-    /**
-     * Creates a new Textbox
-     */
-    Textbox();
-};
+using Textbox = TextControl<ControlType::Textbox>;
 } // namespace BrazzGUI
 
 #endif

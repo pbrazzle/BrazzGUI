@@ -7,7 +7,8 @@
 
 using namespace BrazzGUI;
 
-LayoutController::LayoutController() :
+template<ControlType type>
+LayoutController<type>::LayoutController() :
     parent(nullptr),
     north(nullptr),
     center(nullptr),
@@ -20,7 +21,8 @@ void checkParentChild(const Control* parent, const Control* child) {
     // throw std::logic_error("Control::isParent not implemented");
 }
 
-void LayoutController::setParent(ParentControl* p) {
+template<ControlType type>
+void LayoutController<type>::setParent(ParentControl<type>* p) {
     checkParentChild(p, center);
     checkParentChild(p, north);
     checkParentChild(p, south);
@@ -30,7 +32,8 @@ void LayoutController::setParent(ParentControl* p) {
     parent = p;
 }
 
-void LayoutController::addControl(Control* c, const LayoutType type) {
+template<ControlType type>
+void LayoutController<type>::addControl(Control* c, const LayoutType type) {
     checkParentChild(parent, c);
 
     switch (type) {
@@ -54,7 +57,8 @@ void LayoutController::addControl(Control* c, const LayoutType type) {
 
 #include <iostream>
 
-void LayoutController::updatePositions() const {
+template<ControlType type>
+void LayoutController<type>::updatePositions() const {
     // EAST, WEST take 20% of their respective sides
     // NORTH, SOUTH take 20% and take priority from EAST, WEST
     // CENTER takes the rest of the available space
@@ -94,3 +98,6 @@ void LayoutController::updatePositions() const {
         center->setPosition(x, y, remainingWidth, remainingHeight);
     }
 }
+
+template class LayoutController<ControlType::Window>;
+template class LayoutController<ControlType::Panel>;

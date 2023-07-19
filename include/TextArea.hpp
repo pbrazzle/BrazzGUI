@@ -7,13 +7,7 @@ namespace BrazzGUI {
 /**
  * The TextArea Control allows the user to type multiline text
  */
-class TextArea : public TextControl {
-    public:
-    /**
-     * Creates a new TextArea
-     */
-    TextArea();
-};
+using TextArea = TextControl<ControlType::TextArea>;
 } // namespace BrazzGUI
 
 #endif

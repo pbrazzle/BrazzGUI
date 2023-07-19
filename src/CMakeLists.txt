@@ -4,25 +4,17 @@ add_subdirectory(DialogHandling)
 
 set(LIB_SOURCES
 	BrazzApp.cpp
-	Window.cpp
 	Control.cpp
 	ControlID.cpp
-	Button.cpp
 	Checkbox.cpp
 	TextControl.cpp
-	Textbox.cpp
-	RadioButton.cpp
-	Label.cpp
 	Menu.cpp
 	MenuItem.cpp
 	RadioButtonGroup.cpp
-	TextArea.cpp
-	DrawPane.cpp
 	ComboBox.cpp
 	Font.cpp
 	LayoutController.cpp
 	ParentControl.cpp
-	Panel.cpp
 	FileOpenDialog.cpp
 	FileSaveDialog.cpp
 	OKCancelDialog.cpp)

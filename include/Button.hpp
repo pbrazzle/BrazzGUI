@@ -10,13 +10,7 @@ namespace BrazzGUI {
  * A Button always uses the default color scheme, and cannot currently be
  * changed. A Button can control its font size.
  */
-class Button : public Control {
-    public:
-    /**
-     * Creates a Button
-     */
-    Button();
-};
+using Button = BasicControl<ControlType::Button>;
 } // namespace BrazzGUI
 
 #endif

@@ -9,13 +9,7 @@ namespace BrazzGUI {
  * perform drawing operations This allows for custom graphics in BrazzGUI
  * applications
  */
-class DrawPane : public Control {
-    public:
-    /**
-     * Creates a DrawPane
-     */
-    DrawPane();
-};
+using DrawPane = BasicControl<ControlType::DrawPane>;
 } // namespace BrazzGUI
 
 #endif

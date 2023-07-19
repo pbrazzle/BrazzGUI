@@ -8,12 +8,12 @@ namespace BrazzGUI {
  * The ComboBox control contains a dropdown list of options for the user to
  * select As of now, ComboBoxes cannot control their colors or fonts
  */
-class ComboBox : public Control {
+class ComboBox : public BasicControl<ControlType::ComboBox> {
     public:
     /**
      * Creates a ComboBox
      */
-    ComboBox();
+    ComboBox() = default;
 
     /**
      * Returns the height of the ComboBox

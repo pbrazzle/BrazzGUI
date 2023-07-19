@@ -5,7 +5,7 @@
 
 using namespace BrazzGUI;
 
-Checkbox::Checkbox() : Control(ControlCreation::ControlType::Checkbox) {}
+Checkbox::Checkbox() : Control(ControlType::Checkbox) {}
 
 bool Checkbox::isChecked() { return ControlStyling::isChecked(id); }
 

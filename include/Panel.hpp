@@ -9,14 +9,7 @@ namespace BrazzGUI {
  * The Panel Control simply groups child Controls
  * This allows for more complex layouts, as each Panel can handle its own layout
  */
-class Panel : public ParentControl {
-    public:
-    /**
-     * Creates a new Panel
-     */
-    Panel();
-};
-
+using Panel = ParentControl<ControlType::Panel>;
 } // namespace BrazzGUI
 
 #endif

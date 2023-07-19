@@ -1,5 +1,6 @@
 #include "Control.test.hpp"
 
+// TODO add this to TextControl.test.cpp
 class TextControlTests : public ControlTests {
     public:
     void runTextTests() {

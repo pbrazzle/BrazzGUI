@@ -4,9 +4,6 @@
 #include "Control.hpp"
 
 namespace BrazzGUI {
-
-class ParentControl;
-
 /**
  * LayoutType determines how a Control is positioned with a LayoutController
  * EAST, WEST take 20% of their respective sides
@@ -15,16 +12,18 @@ class ParentControl;
  */
 enum class LayoutType { CENTER, EAST, WEST, NORTH, SOUTH };
 
+template<ControlType type> class ParentControl;
+
 /**
  * The LayoutController automatically repositions Controls to adhere to a
  * specific layout
  * When a parent Control is resized, the LayoutController will update all child
  * controls
  */
-class LayoutController {
+template<ControlType type> class LayoutController {
     private:
     // Pointer to the parent Control
-    ParentControl* parent;
+    ParentControl<type>* parent;
 
     // Pointers to the child Controls
     Control *center, *east, *west, *north, *south;
@@ -40,7 +39,7 @@ class LayoutController {
      *
      * @param parent New parent Control for this LayoutController
      */
-    void setParent(ParentControl* parent);
+    void setParent(ParentControl<type>* parent);
 
     /**
      * Sets a child Control of this LayoutController

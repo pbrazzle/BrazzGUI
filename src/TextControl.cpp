@@ -2,7 +2,7 @@
 
 using namespace BrazzGUI;
 
-TextControl::TextControl(const ControlCreation::ControlType& type) :
-    Control(type) {}
+template<ControlType type> TextControl<type>::TextControl() : Control(type) {}
 
-TextControl::~TextControl() {}
+template class TextControl<ControlType::TextArea>;
+template class TextControl<ControlType::Textbox>;

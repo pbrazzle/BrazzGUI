@@ -5,28 +5,35 @@
 
 using namespace BrazzGUI;
 
-ParentControl::ParentControl(const ControlCreation::ControlType type) :
-    Control(type) {
+template<ControlType type>
+ParentControl<type>::ParentControl() : Control(type) {
     layout.setParent(this);
     EventHandling::connect(Event(id, EventType::RESIZED),
                            [&](const Event& e) { layout.updatePositions(); });
 }
 
-void ParentControl::addControl(Control& child) {
+template<ControlType type>
+void ParentControl<type>::addControl(Control& child) {
     ControlStyling::setChild(getID(), child.getID());
 }
 
-void ParentControl::addControl(Control& child, const LayoutType type) {
+template<ControlType type>
+void ParentControl<type>::addControl(Control& child, const LayoutType type) {
     ControlStyling::setChild(getID(), child.getID());
     layout.addControl(&child, type);
 }
 
-void ParentControl::updateLayout() { layout.updatePositions(); }
+template<ControlType type> void ParentControl<type>::updateLayout() {
+    layout.updatePositions();
+}
 
-int ParentControl::getClientWidth() {
+template<ControlType type> int ParentControl<type>::getClientWidth() {
     return ControlStyling::getClientWidth(getID());
 }
 
-int ParentControl::getClientHeight() {
+template<ControlType type> int ParentControl<type>::getClientHeight() {
     return ControlStyling::getClientHeight(getID());
 }
+
+template class ParentControl<ControlType::Window>;
+template class ParentControl<ControlType::Panel>;

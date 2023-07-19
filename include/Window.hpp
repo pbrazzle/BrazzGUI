@@ -9,13 +9,7 @@ namespace BrazzGUI {
  * Windows are top-level ParentControls
  * They can also have Menus
  */
-class Window : public ParentControl {
-    public:
-    /**
-     * Creates a new Window
-     */
-    Window();
-};
+using Window = ParentControl<ControlType::Window>;
 } // namespace BrazzGUI
 
 #endif

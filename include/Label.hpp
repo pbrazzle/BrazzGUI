@@ -8,13 +8,7 @@ namespace BrazzGUI {
  * Labels are Controls with static readonly text
  * Labels can control their background and text colors
  */
-class Label : public Control {
-    public:
-    /**
-     * Creates a new Label
-     */
-    Label();
-};
+using Label = BasicControl<ControlType::Label>;
 } // namespace BrazzGUI
 
 #endif
