@@ -1,39 +1,46 @@
 #include "Handlers/Win32/Win32MenuHandler.hpp"
 
 #include "ControlHandling/Win32/ControlHandling.hpp"
-#include "MenuItem.hpp"
 #include "Window.hpp"
 
-using namespace BrazzGUI;
+#include <windows.h>
 
-void Handlers::Win32::Win32MenuHandler::addTopLevelItem(const Window& window,
-                                                        const MenuItem& item) {
-    // Check if Window has a Menu
-    auto parentHandle = ControlHandling::getHandleFromID(window.getID());
+using namespace BrazzGUI::Handlers::Win32;
 
-    auto menu = GetMenu(parentHandle);
-
-    // Create a Menu for the Window if it has none
-    if (menu == NULL) {
-        menu = CreateMenu();
-        SetMenu(parentHandle, menu);
+Win32MenuHandler::Win32MenuHandler(const MenuType type) :
+    MenuHandler(type),
+    parentHandle(NULL) {
+    switch (type) {
+        case MenuType::MenuBar:
+            handle = CreateMenu();
+            break;
+        case MenuType::MenuItem:
+            handle = CreatePopupMenu();
+            break;
     }
-
-    int numItems = GetMenuItemCount(menu);
-
-    MENUITEMINFO menuItemInfo = {0};
-    menuItemInfo.cbSize = sizeof(MENUITEMINFO);
-    menuItemInfo.fMask = MIIM_STRING;
-    menuItemInfo.fType = MFT_STRING;
-    menuItemInfo.fState = MFS_ENABLED;
-    menuItemInfo.dwTypeData = reinterpret_cast<LPTSTR>("test");
-    menuItemInfo.cch = 4;
-    InsertMenuItem(menu, numItems, TRUE, &menuItemInfo);
 }
 
-void Handlers::Win32::Win32MenuHandler::addSubItem(const MenuItem& parent,
-                                                   const MenuItem& child) {}
+void Win32MenuHandler::addItem(const MenuItem& item) {
+    // TEST - Add a 'test' menu item
 
-std::unique_ptr<Handlers::MenuHandler> Handlers::getDefaultMenuHandler() {
-    return std::make_unique<Handlers::Win32::Win32MenuHandler>();
+    MENUITEMINFO info = {0};
+    info.cbSize = sizeof(MENUITEMINFO);
+    info.fMask = MIIM_STRING;
+    info.fType = MFT_STRING;
+    info.dwTypeData = "test";
+    info.cch = 4;
+
+    InsertMenuItem(handle, 0, TRUE, &info);
+
+    if (parentHandle != NULL) DrawMenuBar(parentHandle);
+}
+
+void Win32MenuHandler::registerMenu(const Window& parent) {
+    parentHandle = ControlHandling::getHandleFromID(parent.getID());
+    SetMenu(parentHandle, handle);
+}
+
+std::unique_ptr<BrazzGUI::Handlers::MenuHandler>
+BrazzGUI::Handlers::createMenuHandler(BrazzGUI::Handlers::MenuType type) {
+    return std::make_unique<Win32MenuHandler>(type);
 }

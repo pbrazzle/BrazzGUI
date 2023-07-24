@@ -1,37 +1,32 @@
 #pragma once
 
-#include <memory>
-
 namespace BrazzGUI {
-class Window;
 class MenuItem;
+class Window;
 } // namespace BrazzGUI
 
+#include <memory>
+
 namespace BrazzGUI::Handlers {
-/*
- *   TODO document this class
- */
+
+enum class MenuType { MenuBar, MenuItem };
+
 class MenuHandler {
+    private:
+    MenuHandler();
+
     public:
-    /*
-     *   TODO document this function
-     */
+    MenuHandler(const MenuType) {}
+
     virtual ~MenuHandler() {}
 
-    /*
+    /***
      * TODO document this function
      */
-    virtual void addTopLevelItem(const Window& window,
-                                 const MenuItem& item) = 0;
+    virtual void addItem(const MenuItem& item) = 0;
 
-    /*
-     *   TODO document this function
-     */
-    virtual void addSubItem(const MenuItem& parent, const MenuItem& child) = 0;
+    virtual void registerMenu(const Window& parent) = 0;
 };
 
-/*
- *   TODO document this function
- */
-std::unique_ptr<MenuHandler> getDefaultMenuHandler();
+std::unique_ptr<MenuHandler> createMenuHandler(MenuType);
 } // namespace BrazzGUI::Handlers

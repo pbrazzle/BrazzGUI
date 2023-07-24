@@ -1,18 +1,27 @@
 #pragma once
 
 #include "Handlers/MenuHandler.hpp"
+#include "MenuItem.hpp"
+
+#include <windows.h>
 
 namespace BrazzGUI::Handlers::Win32 {
+/**
+ * TODO document this class
+ */
 class Win32MenuHandler : public MenuHandler {
-    public:
-    /*
-     *   TODO document this function
-     */
-    void addTopLevelItem(const Window& window, const MenuItem& item);
+    private:
+    HMENU handle;
+    HWND parentHandle;
 
-    /*
-     *   TODO document this function
+    public:
+    Win32MenuHandler(const MenuType);
+
+    /***
+     * TODO document this function
      */
-    void addSubItem(const MenuItem& parent, const MenuItem& child);
+    void addItem(const MenuItem& item);
+
+    void registerMenu(const Window& parent);
 };
 } // namespace BrazzGUI::Handlers::Win32

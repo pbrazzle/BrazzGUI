@@ -1,12 +1,13 @@
 #ifndef WINDOW
 #define WINDOW
 
-#include "Handlers/MenuHandler.hpp"
 #include "LayoutController.hpp"
+#include "Menu.hpp"
 #include "MenuItem.hpp"
 #include "ParentControl.hpp"
 
 #include <memory>
+
 
 namespace BrazzGUI {
 /**
@@ -15,11 +16,10 @@ namespace BrazzGUI {
  */
 class Window : public ParentControl<ControlType::Window> {
     private:
-    std::unique_ptr<Handlers::MenuHandler> menuHandler;
+    Menu menu;
 
     public:
     Window();
-    Window(std::unique_ptr<Handlers::MenuHandler> mHandler);
 
     void addMenuItem(const MenuItem& item);
 };
