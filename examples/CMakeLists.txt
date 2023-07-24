@@ -16,3 +16,7 @@ target_include_directories(panel PUBLIC ${CMAKE_SOURCE_DIR}/include)
 add_executable(tabs tabs.cpp)
 target_link_libraries(tabs PRIVATE BrazzGUI)
 target_include_directories(tabs PUBLIC ${CMAKE_SOURCE_DIR}/include)
+
+add_executable(menu menu.cpp)
+target_link_libraries(menu PRIVATE BrazzGUI)
+target_include_directories(menu PUBLIC ${CMAKE_SOURCE_DIR}/include)

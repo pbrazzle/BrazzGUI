@@ -54,7 +54,15 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
             EventHandling::runSlots(Event(id, EventType::PAINT));
             break;
         case WM_ERASEBKGND: {
+            std::cout << "Control " << id.getValue()
+                      << " drawing background...\n";
             EventHandling::runSlots(Event(id, EventType::DRAW_BACKGROUND));
+
+            auto hdc = reinterpret_cast<HDC>(wParam);
+            RECT rect;
+            GetClientRect(hwnd, &rect);
+            FillRect(hdc, &rect, (HBRUSH) GetStockObject(WHITE_BRUSH));
+            return 1;
             break;
         }
         case WM_SIZE: {
@@ -65,6 +73,7 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
         case WM_CTLCOLOREDIT:
         case WM_CTLCOLORLISTBOX:
         case WM_CTLCOLORSTATIC: {
+            std::cout << "CTLCOLOR\n";
             hwnd = reinterpret_cast<HWND>(lParam);
 
             // Get ComboBox parent from ListBox

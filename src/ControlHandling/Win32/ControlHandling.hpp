@@ -136,6 +136,9 @@ class Win32Data : public ControlOSData {
      */
     Color getTextColor() const { return textColor; }
 };
+
+HWND getHandleFromID(const ControlID& id);
+
 } // namespace BrazzGUI::ControlHandling
 
 #endif

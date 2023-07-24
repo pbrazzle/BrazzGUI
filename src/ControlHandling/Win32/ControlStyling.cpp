@@ -12,7 +12,7 @@
 using namespace BrazzGUI;
 using namespace BrazzGUI::ControlHandling;
 
-HWND getHandleFromID(const ControlID& id) {
+HWND ControlHandling::getHandleFromID(const ControlID& id) {
     auto osData = static_cast<const ControlHandling::Win32Data&>(
         ControlHandling::getDataFromID(id));
     return osData.getHandle();
