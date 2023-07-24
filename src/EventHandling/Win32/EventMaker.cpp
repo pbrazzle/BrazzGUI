@@ -28,6 +28,9 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
         case WM_LBUTTONDOWN:
             eventQueue.push(Event(id, EventType::LEFT_CLICK_DOWN));
             break;
+        case WM_LBUTTONDBLCLK:
+            eventQueue.push(Event(id, EventType::LEFT_CLICK_DOWN));
+            break;
         case WM_DESTROY:
             PostQuitMessage(0);
             return 0;
