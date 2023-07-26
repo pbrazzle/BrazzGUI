@@ -12,13 +12,15 @@ namespace BrazzGUI {
 enum class EventType {
     QUIT,
     LEFT_CLICK_DOWN,
+    RIGHT_CLICK_DOWN,
     CHECK_CHANGED,
     TEXT_CHANGED,
     RESIZED,
     DRAW_BACKGROUND,
     PAINT,
     CHILD_SET_COLORS,
-    TAB_CHANGED
+    TAB_CHANGED,
+    KEY_DOWN
 };
 
 /**
