@@ -26,6 +26,13 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
     auto id = osData->getID();
 
     switch (uMsg) {
+        case WM_KEYDOWN:
+            eventQueue.push(Event(id, EventType::KEY_DOWN));
+            break;
+        case WM_RBUTTONDOWN:
+        case WM_RBUTTONDBLCLK:
+            eventQueue.push(Event(id, EventType::RIGHT_CLICK_DOWN));
+            break;
         case WM_MENUCOMMAND: {
             auto clickedID = BrazzGUI::Handlers::Win32::Win32MenuHandler::
                 getChildIDFromHandle(reinterpret_cast<HMENU>(lParam),
