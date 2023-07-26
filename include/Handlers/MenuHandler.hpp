@@ -5,7 +5,10 @@ class MenuItem;
 class Window;
 } // namespace BrazzGUI
 
+#include "ControlID.hpp"
+
 #include <memory>
+#include <string>
 
 namespace BrazzGUI::Handlers {
 
@@ -26,7 +29,9 @@ class MenuHandler {
     virtual void addItem(const MenuItem& item) = 0;
 
     virtual void registerMenu(const Window& parent) = 0;
+
+    virtual void setText(const std::string& text) = 0;
 };
 
-std::unique_ptr<MenuHandler> createMenuHandler(MenuType);
+std::unique_ptr<MenuHandler> createMenuHandler(MenuType, ControlID);
 } // namespace BrazzGUI::Handlers

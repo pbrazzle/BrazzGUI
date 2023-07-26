@@ -13,14 +13,11 @@
 #include <windows.h>
 #include <windowsx.h>
 
-
 #ifndef UNICODE
 #define UNICODE
 #endif
 
 using namespace BrazzGUI;
-
-static int nextID = 0;
 
 extern LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
                                         LPARAM lParam);
@@ -41,7 +38,8 @@ const wchar_t* to_wchar(const std::string& s) {
 }
 
 HWND createChildWindow(const std::string& className,
-                       const std::string& defaultText, DWORD style) {
+                       const std::string& defaultText, DWORD style,
+                       ControlID id) {
     if (topWindowData.size() == 0)
         throw std::logic_error(
             "Cannot create a child control without top-level window");
@@ -55,8 +53,8 @@ HWND createChildWindow(const std::string& className,
                                style,               // Window style
                                // position and size
                                0, 0, 10, 10,
-                               parentHandle,                    // Parent window
-                               reinterpret_cast<HMENU>(nextID), // Menu
+                               parentHandle, // Parent window
+                               reinterpret_cast<HMENU>(id.getValue()), // Menu
                                GetModuleHandle(NULL), // Instance handle
                                NULL);
 
@@ -73,7 +71,6 @@ HWND createChildWindow(const std::string& className,
         prevProc = reinterpret_cast<WNDPROC>(&DefWindowProc);
     }
 
-    ControlID id = {nextID};
     idMap[id] =
         std::make_unique<ControlHandling::Win32Data>(id, hwnd, prevProc);
 
@@ -83,7 +80,7 @@ HWND createChildWindow(const std::string& className,
     return hwnd;
 }
 
-HWND createWindow() {
+HWND createWindow(ControlID id) {
     WNDCLASS wc = {};
 
     wc.lpfnWndProc = BrazzGUIWndProc;
@@ -113,7 +110,6 @@ HWND createWindow() {
             std::error_code(GetLastError(), std::system_category()),
             "createWindow");
 
-    ControlID id{nextID};
     idMap[id] = std::make_unique<ControlHandling::Win32Data>(id, hwnd);
 
     SetWindowLongPtr(hwnd, GWLP_USERDATA,
@@ -126,111 +122,103 @@ HWND createWindow() {
 
 const DWORD defaultStyle = WS_TABSTOP | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS;
 
-HWND createButton() {
+HWND createButton(ControlID id) {
     return createChildWindow("BUTTON", "Button",
-                             defaultStyle | BS_DEFPUSHBUTTON);
+                             defaultStyle | BS_DEFPUSHBUTTON, id);
 }
 
-HWND createTextbox() {
-    return createChildWindow("EDIT", "", defaultStyle | ES_LEFT | WS_BORDER);
+HWND createTextbox(ControlID id) {
+    return createChildWindow("EDIT", "", defaultStyle | ES_LEFT | WS_BORDER,
+                             id);
 }
 
-HWND createCheckbox() {
-    // Checkbox changes check on click
-    EventHandling::connect(
-        Event(nextID, EventType::LEFT_CLICK_DOWN), [](const Event& e) {
-            auto id = e.getControl();
-            auto osData = static_cast<const ControlHandling::Win32Data&>(
-                ControlHandling::getDataFromID(id));
-            Button_SetCheck(osData.getHandle(),
-                            !Button_GetCheck(osData.getHandle()));
-            EventHandling::postEvent(Event(id, EventType::CHECK_CHANGED));
-        });
-
-    return createChildWindow("BUTTON", "Button", defaultStyle | BS_CHECKBOX);
+HWND createCheckbox(ControlID id) {
+    return createChildWindow("BUTTON", "Button",
+                             defaultStyle | BS_AUTOCHECKBOX | BS_CHECKBOX, id);
 }
 
-HWND createLabel() {
+HWND createLabel(ControlID id) {
     return createChildWindow("STATIC", "Label",
-                             defaultStyle | SS_CENTER | SS_NOTIFY);
+                             defaultStyle | SS_CENTER | SS_NOTIFY, id);
 }
 
-HWND createRadioButton() {
-    return createChildWindow("BUTTON", "Button", defaultStyle | BS_RADIOBUTTON);
+HWND createRadioButton(ControlID id) {
+    return createChildWindow("BUTTON", "Button", defaultStyle | BS_RADIOBUTTON,
+                             id);
 }
 
-HWND createTextArea() {
-    return createChildWindow("EDIT", "TextArea",
-                             defaultStyle | ES_LEFT | ES_MULTILINE |
-                                 ES_WANTRETURN);
+HWND createTextArea(ControlID id) {
+    return createChildWindow(
+        "EDIT", "TextArea",
+        defaultStyle | ES_LEFT | ES_MULTILINE | ES_WANTRETURN, id);
 }
 
-HWND createDrawPane() {
-    return createChildWindow("BrazzGUI Window", "", WS_CHILD);
+HWND createDrawPane(ControlID id) {
+    return createChildWindow("BrazzGUI Window", "", WS_CHILD, id);
 }
 
-HWND createRadioButtonGroup() {
+HWND createRadioButtonGroup(ControlID id) {
     return createChildWindow("BUTTON", "Group",
-                             defaultStyle | WS_GROUP | BS_GROUPBOX);
+                             defaultStyle | WS_GROUP | BS_GROUPBOX, id);
 }
 
-HWND createComboBox() {
+HWND createComboBox(ControlID id) {
     return createChildWindow("COMBOBOX", "Combo",
                              defaultStyle | CBS_DROPDOWNLIST |
-                                 CBS_NOINTEGRALHEIGHT | CBS_HASSTRINGS);
+                                 CBS_NOINTEGRALHEIGHT | CBS_HASSTRINGS,
+                             id);
 }
 
-HWND createPanel() {
-    return createChildWindow("BrazzGUI Window", "", WS_CHILD | WS_VISIBLE);
+HWND createPanel(ControlID id) {
+    return createChildWindow("BrazzGUI Window", "", WS_CHILD | WS_VISIBLE, id);
 }
 
-HWND createTabGroup() {
-    return createChildWindow(WC_TABCONTROL, "", defaultStyle);
+HWND createTabGroup(ControlID id) {
+    return createChildWindow(WC_TABCONTROL, "", defaultStyle, id);
 }
 
 ControlID ControlCreation::createControl(const BrazzGUI::ControlType& type) {
     HWND hwnd;
+    auto id = ControlID();
     switch (type) {
         case ControlType::Window:
-            hwnd = createWindow();
+            hwnd = createWindow(id);
             break;
         case ControlType::Button:
-            hwnd = createButton();
+            hwnd = createButton(id);
             break;
         case ControlType::Textbox:
-            hwnd = createTextbox();
+            hwnd = createTextbox(id);
             break;
         case ControlType::Checkbox:
-            hwnd = createCheckbox();
+            hwnd = createCheckbox(id);
             break;
         case ControlType::RadioButton:
-            hwnd = createRadioButton();
+            hwnd = createRadioButton(id);
             break;
         case ControlType::Label:
-            hwnd = createLabel();
+            hwnd = createLabel(id);
             break;
         case ControlType::TextArea:
-            hwnd = createTextArea();
+            hwnd = createTextArea(id);
             break;
         case ControlType::DrawPane:
-            hwnd = createDrawPane();
+            hwnd = createDrawPane(id);
             break;
         case ControlType::RadioButtonGroup:
-            hwnd = createRadioButtonGroup();
+            hwnd = createRadioButtonGroup(id);
             break;
         case ControlType::ComboBox:
-            hwnd = createComboBox();
+            hwnd = createComboBox(id);
             break;
         case ControlType::Panel:
-            hwnd = createPanel();
+            hwnd = createPanel(id);
             break;
         case ControlType::TabGroup:
-            hwnd = createTabGroup();
+            hwnd = createTabGroup(id);
             break;
     }
 
-    ControlID id{nextID};
-    nextID++;
     return id;
 }
 

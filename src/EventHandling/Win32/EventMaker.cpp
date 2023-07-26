@@ -3,6 +3,7 @@
 #include "ControlHandling/Win32/ControlHandling.hpp"
 #include "Event.hpp"
 #include "EventHandling/EventSlotting.hpp"
+#include "Handlers/Win32/Win32MenuHandler.hpp"
 
 #include <CommCtrl.h>
 #include <exception>
@@ -25,6 +26,13 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
     auto id = osData->getID();
 
     switch (uMsg) {
+        case WM_MENUCOMMAND: {
+            auto clickedID = BrazzGUI::Handlers::Win32::Win32MenuHandler::
+                getChildIDFromHandle(reinterpret_cast<HMENU>(lParam),
+                                     static_cast<int>(wParam));
+            eventQueue.push(Event(clickedID, EventType::LEFT_CLICK_DOWN));
+            break;
+        }
         case WM_LBUTTONDOWN:
             eventQueue.push(Event(id, EventType::LEFT_CLICK_DOWN));
             break;

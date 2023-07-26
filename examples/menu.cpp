@@ -13,7 +13,12 @@ int main() {
 
     Window myWindow;
 
-    myWindow.addMenuItem(MenuItem());
+    MenuItem item("Item");
+    MenuItem subItem("SubItem");
+    item.addSubItem(subItem);
+    myApp.connect(Event(subItem.getID(), EventType::LEFT_CLICK_DOWN),
+                  [&](const Event&) { std::cout << "subitem click!\n"; });
+    myWindow.addMenuItem(item);
 
     myWindow.show();
 

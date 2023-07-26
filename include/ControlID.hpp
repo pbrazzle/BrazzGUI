@@ -11,7 +11,11 @@ class ControlID {
     // ID value for the ControlID
     int id;
 
+    static int nextID;
+
     public:
+    ControlID();
+
     /**
      * Creates a ControlID
      *
