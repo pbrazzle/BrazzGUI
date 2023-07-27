@@ -26,6 +26,9 @@ int main() {
                       std::cout << "key " << data->getKey() << " pressed!!!\n";
                   });
 
+    myApp.connect(Event(myWindow.getID(), EventType::SCROLL_UP),
+                  [](const Event& e) { std::cout << "scroll up!!\n"; });
+
     Button myButton;
     myButton.setBackgroundColor({0, 255, 0});
     myButton.setTextColor({255, 0, 0});

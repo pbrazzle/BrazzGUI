@@ -26,6 +26,16 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
     auto id = osData->getID();
 
     switch (uMsg) {
+        case WM_MOUSEWHEEL: {
+            auto direction = static_cast<short int>(HIWORD(wParam));
+            EventType type;
+            if (direction > 0) type = EventType::SCROLL_UP;
+            else type = EventType::SCROLL_DOWN;
+            eventQueue.push(Event(id, type));
+
+            // Top-level windows finish processing
+            if (GetParent(hwnd) == NULL) return 0;
+        } break;
         case WM_KEYDOWN:
             eventQueue.push(Event(
                 id, EventType::KEY_DOWN,

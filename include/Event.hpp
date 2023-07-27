@@ -22,7 +22,9 @@ enum class EventType {
     PAINT,
     CHILD_SET_COLORS,
     TAB_CHANGED,
-    KEY_DOWN
+    KEY_DOWN,
+    SCROLL_UP,
+    SCROLL_DOWN
 };
 
 class EventData {
