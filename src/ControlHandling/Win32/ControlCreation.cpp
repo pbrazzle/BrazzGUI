@@ -1,5 +1,6 @@
 #include "ControlHandling/ControlCreation.hpp"
 
+#include "ControlHandling/ControlStyling.hpp"
 #include "ControlHandling/Win32/ControlHandling.hpp"
 #include "EventHandling/EventMaker.hpp"
 #include "EventHandling/EventSlotting.hpp"
@@ -86,6 +87,7 @@ HWND createWindow(ControlID id) {
     wc.lpfnWndProc = BrazzGUIWndProc;
     wc.hInstance = GetModuleHandle(NULL);
     wc.lpszClassName = "BrazzGUI Window";
+    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 
     RegisterClass(&wc);
 
@@ -110,6 +112,10 @@ HWND createWindow(ControlID id) {
             std::error_code(GetLastError(), std::system_category()),
             "createWindow");
 
+    EventHandling::connect(
+        Event(id, EventType::LEFT_CLICK_DOWN),
+        [](const Event& e) { ControlStyling::takeFocus(e.getControl()); });
+
     idMap[id] = std::make_unique<ControlHandling::Win32Data>(id, hwnd);
 
     SetWindowLongPtr(hwnd, GWLP_USERDATA,
@@ -133,8 +139,18 @@ HWND createTextbox(ControlID id) {
 }
 
 HWND createCheckbox(ControlID id) {
-    return createChildWindow("BUTTON", "Button",
-                             defaultStyle | BS_AUTOCHECKBOX | BS_CHECKBOX, id);
+    EventHandling::connect(
+        Event(id, EventType::LEFT_CLICK_DOWN), [](const Event& e) {
+            auto id = e.getControl();
+            auto osData = static_cast<const ControlHandling::Win32Data&>(
+                ControlHandling::getDataFromID(id));
+            Button_SetCheck(osData.getHandle(),
+                            !Button_GetCheck(osData.getHandle()));
+            EventHandling::postEvent(Event(id, EventType::CHECK_CHANGED));
+        });
+
+    return createChildWindow("BUTTON", "Button", defaultStyle | BS_CHECKBOX,
+                             id);
 }
 
 HWND createLabel(ControlID id) {

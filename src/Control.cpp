@@ -4,6 +4,8 @@
 #include "ControlHandling/ControlStyling.hpp"
 #include "EventHandling/EventSlotting.hpp"
 
+#include <iostream>
+
 using namespace BrazzGUI;
 
 Control::Control(const ControlType& type) :

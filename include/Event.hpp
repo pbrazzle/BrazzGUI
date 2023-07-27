@@ -3,6 +3,8 @@
 
 #include "ControlID.hpp"
 
+#include <memory>
+
 namespace BrazzGUI {
 /**
  * Enum to specify different types of Events
@@ -23,6 +25,27 @@ enum class EventType {
     KEY_DOWN
 };
 
+class EventData {
+    public:
+    virtual std::unique_ptr<EventData> clone() const = 0;
+};
+
+enum EventKey : char { LSHIFT, RSHIFT, ENTER, BACKSPACE };
+
+class KeyEventData : public EventData {
+    private:
+    EventKey key;
+
+    public:
+    KeyEventData(EventKey k) : key(k) {}
+
+    std::unique_ptr<EventData> clone() const {
+        return std::make_unique<KeyEventData>(key);
+    }
+
+    EventKey getKey() const { return key; }
+};
+
 /**
  * BrazzGUI applications are based on Events
  * Events are created and handled to trigger response callback functions
@@ -35,6 +58,9 @@ class Event {
 
     // The ControlID of the associated Control for this Event
     ControlID control;
+
+    // The data for this Event
+    std::unique_ptr<EventData> data;
 
     public:
     /**
@@ -52,6 +78,33 @@ class Event {
      */
     Event(const ControlID& id, const EventType& t) : control(id), type(t) {}
 
+    Event(const ControlID& id, const EventType& t,
+          std::unique_ptr<EventData> d) :
+        control(id),
+        type(t),
+        data(std::move(d)) {}
+
+    /*
+     * TODO document this function
+     */
+    Event(const Event& rhs) {
+        type = rhs.type;
+        control = rhs.control;
+        if (rhs.data.get()) data = std::move(rhs.data->clone());
+        else data = nullptr;
+    }
+
+    /**
+     * TODO document this function
+     */
+    Event& operator=(const Event& rhs) {
+        type = rhs.type;
+        control = rhs.control;
+        if (rhs.data.get()) data = std::move(rhs.data->clone());
+        else data = nullptr;
+        return *this;
+    }
+
     /**
      * Returns the ControlID associated with this Event
      *
@@ -65,6 +118,8 @@ class Event {
      * @return EventType of this Event
      */
     EventType getType() const { return type; }
+
+    const EventData* getData() const { return data.get(); }
 };
 } // namespace BrazzGUI
 

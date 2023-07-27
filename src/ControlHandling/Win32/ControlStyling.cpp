@@ -253,3 +253,8 @@ void ControlStyling::setVisible(const ControlID id, const bool visible) {
     if (visible) ShowWindow(handle, SW_SHOW);
     else ShowWindow(handle, SW_HIDE);
 }
+
+void ControlStyling::takeFocus(const ControlID id) {
+    auto handle = getHandleFromID(id);
+    SetFocus(handle);
+}

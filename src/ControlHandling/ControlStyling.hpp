@@ -226,6 +226,11 @@ int getSelectedTabIndex(const ControlID id);
  *   TODO document
  */
 void setVisible(const ControlID id, const bool visible);
+
+/**
+ * TODO document
+ */
+void takeFocus(const ControlID id);
 } // namespace BrazzGUI::ControlStyling
 
 #endif

@@ -27,7 +27,9 @@ LRESULT CALLBACK BrazzGUIWndProc(HWND hwnd, UINT uMsg, WPARAM wParam,
 
     switch (uMsg) {
         case WM_KEYDOWN:
-            eventQueue.push(Event(id, EventType::KEY_DOWN));
+            eventQueue.push(Event(
+                id, EventType::KEY_DOWN,
+                std::make_unique<KeyEventData>(static_cast<EventKey>(wParam))));
             break;
         case WM_RBUTTONDOWN:
         case WM_RBUTTONDBLCLK:

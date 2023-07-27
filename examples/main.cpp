@@ -20,6 +20,11 @@ int main() {
 
     Window myWindow;
     myWindow.setBackgroundColor({255, 0, 0});
+    myApp.connect(Event(myWindow.getID(), EventType::KEY_DOWN),
+                  [](const Event& e) {
+                      auto data = static_cast<const KeyEventData*>(e.getData());
+                      std::cout << "key " << data->getKey() << " pressed!!!\n";
+                  });
 
     Button myButton;
     myButton.setBackgroundColor({0, 255, 0});
