@@ -274,7 +274,7 @@ void ControlStyling::drawLine(const ControlID id, int x1, int y1, int x2, int y2
     PAINTSTRUCT ps;
     auto hdc = BeginPaint(handle, &ps);
 
-    MoveToEx(hdc, x1, y1);
+    MoveToEx(hdc, x1, y1, NULL);
     LineTo(hdc, x2, y2);
 
     EndPaint(handle, &ps);
