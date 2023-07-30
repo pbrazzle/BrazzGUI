@@ -27,5 +27,5 @@ void DrawPane::drawCircle(int x1, int y1, double radius) {
 }
 
 void DrawPane::drawText(int x1, int y1, int pt, const std::string& text) {
-    ControlStyling::drawText(getID(), x1, y1, pt, text)
+    ControlStyling::drawText(getID(), x1, y1, pt, text);
 }
