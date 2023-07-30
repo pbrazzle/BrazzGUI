@@ -231,6 +231,31 @@ void setVisible(const ControlID id, const bool visible);
  * TODO document
  */
 void takeFocus(const ControlID id);
+
+/**
+ * TODO document
+ */
+void drawPixel(const ControlID id, int x, int y);
+
+/**
+ * TODO document
+ */
+void drawLine(const ControlID id, int x1, int y1, int x2, int y2);
+
+/**
+ * TODO document
+ */
+void drawRect(const ControlID id, int x1, int y1, int x2, int y2);
+
+/**
+ * TODO document
+ */
+void drawCircle(const ControlID id, int x1, int y1, double radius);
+
+/**
+ * TODO document
+ */
+void drawText(const ControlID id, int x1, int y1, int pt, const std::string& text);
 } // namespace BrazzGUI::ControlStyling
 
 #endif

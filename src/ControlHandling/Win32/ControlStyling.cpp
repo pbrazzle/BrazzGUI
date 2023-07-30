@@ -258,3 +258,13 @@ void ControlStyling::takeFocus(const ControlID id) {
     auto handle = getHandleFromID(id);
     SetFocus(handle);
 }
+
+void ControlStyling::drawPixel(const ControlID id, int x, int y) {}
+
+void ControlStyling::drawLine(const ControlID id, int x1, int y1, int x2, int y2) {}
+
+void ControlStyling::drawRect(const ControlID id, int x1, int y1, int x2, int y2) {}
+
+void ControlStyling::drawCircle(const ControlID id, int x1, int y1, double radius) {}
+
+void ControlStyling::drawText(const ControlID id, int x1, int y1, int pt, const std::string& text) {}

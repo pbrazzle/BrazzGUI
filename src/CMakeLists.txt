@@ -20,7 +20,8 @@ set(LIB_SOURCES
 	FileOpenDialog.cpp
 	FileSaveDialog.cpp
 	OKCancelDialog.cpp
-	Window.cpp)
+	Window.cpp
+	DrawPane.cpp)
 	
 add_library(BrazzGUI ${LIB_SOURCES})
 target_link_libraries(BrazzGUI PRIVATE EventHandling ControlHandling DialogHandling Handlers)
