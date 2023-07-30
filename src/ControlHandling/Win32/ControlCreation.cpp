@@ -170,7 +170,7 @@ HWND createTextArea(ControlID id) {
 }
 
 HWND createDrawPane(ControlID id) {
-    return createChildWindow("BrazzGUI Window", "", WS_CHILD, id);
+    return createChildWindow("BrazzGUI Window", "", WS_CHILD | WS_VISIBLE, id);
 }
 
 HWND createRadioButtonGroup(ControlID id) {

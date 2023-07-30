@@ -274,8 +274,13 @@ void ControlStyling::drawLine(const ControlID id, int x1, int y1, int x2, int y2
     PAINTSTRUCT ps;
     auto hdc = BeginPaint(handle, &ps);
 
+    auto pen = CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
+    SelectObject(hdc, pen);
+
     MoveToEx(hdc, x1, y1, NULL);
     LineTo(hdc, x2, y2);
+
+    DeleteObject(pen);
 
     EndPaint(handle, &ps);
 }
