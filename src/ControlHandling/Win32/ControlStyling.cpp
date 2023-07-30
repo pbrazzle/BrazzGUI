@@ -259,12 +259,53 @@ void ControlStyling::takeFocus(const ControlID id) {
     SetFocus(handle);
 }
 
-void ControlStyling::drawPixel(const ControlID id, int x, int y) {}
+void ControlStyling::drawPixel(const ControlID id, int x, int y) {
+    auto handle = getHandleFromID(id);
+    PAINTSTRUCT ps;
+    auto hdc = BeginPaint(handle, &ps);
 
-void ControlStyling::drawLine(const ControlID id, int x1, int y1, int x2, int y2) {}
+    SetPixel(hdc, x, y, RGB(0, 0, 0));
 
-void ControlStyling::drawRect(const ControlID id, int x1, int y1, int x2, int y2) {}
+    EndPaint(handle, &ps);
+}
 
-void ControlStyling::drawCircle(const ControlID id, int x1, int y1, double radius) {}
+void ControlStyling::drawLine(const ControlID id, int x1, int y1, int x2, int y2) {
+    auto handle = getHandleFromID(id);
+    PAINTSTRUCT ps;
+    auto hdc = BeginPaint(handle, &ps);
 
-void ControlStyling::drawText(const ControlID id, int x1, int y1, int pt, const std::string& text) {}
+    MoveToEx(hdc, x1, y1);
+    LineTo(hdc, x2, y2);
+
+    EndPaint(handle, &ps);
+}
+
+void ControlStyling::drawRect(const ControlID id, int x1, int y1, int x2, int y2) {
+    auto handle = getHandleFromID(id);
+    PAINTSTRUCT ps;
+    auto hdc = BeginPaint(handle, &ps);
+
+    Rectangle(hdc, x1, y1, x2, y2);
+
+    EndPaint(handle, &ps);
+}
+
+void ControlStyling::drawCircle(const ControlID id, int x1, int y1, double radius) {
+    auto handle = getHandleFromID(id);
+    PAINTSTRUCT ps;
+    auto hdc = BeginPaint(handle, &ps);
+
+    Ellipse(hdc, x1 - radius, y1 - radius, x1 + radius, y1 + radius);
+
+    EndPaint(handle, &ps);
+}
+
+void ControlStyling::drawText(const ControlID id, int x1, int y1, int pt, const std::string& text) {
+    auto handle = getHandleFromID(id);
+    PAINTSTRUCT ps;
+    auto hdc = BeginPaint(handle, &ps);
+
+    TextOut(hdc, x1, y1, text.c_str(), text.size());
+
+    EndPaint(handle, &ps);
+}
