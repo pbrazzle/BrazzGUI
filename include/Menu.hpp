@@ -8,7 +8,7 @@ namespace BrazzGUI {
 class Window;
 
 /***
- * TODO document this class
+ * The Menu controls the Window menu in a BrazzGUI application
  */
 class Menu {
     private:
