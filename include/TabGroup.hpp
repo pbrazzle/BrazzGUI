@@ -7,7 +7,7 @@
 
 namespace BrazzGUI {
 /*
- *   TODO document TabGroup
+ *   The TabGroup handles multiple groups of Controls selected by tabs
  */
 class TabGroup : public Control {
     private:
@@ -15,12 +15,15 @@ class TabGroup : public Control {
 
     public:
     /*
-     *   TODO document
+     *   Creates a TabGroup
      */
     TabGroup();
 
     /*
-     *   TODO document
+     *   Adds a new tab
+     *
+     *  @param tabName Display text for the tab
+     * @param tabControl Top-level Control for the tab
      */
     void addTab(std::string tabName, Control* tabControl);
 

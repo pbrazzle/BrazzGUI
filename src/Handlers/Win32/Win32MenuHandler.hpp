@@ -9,7 +9,7 @@
 
 namespace BrazzGUI::Handlers::Win32 {
 /**
- * TODO document this class
+ * MenuHandler with Win32 specific data
  */
 class Win32MenuHandler : public MenuHandler {
     private:
@@ -30,12 +30,16 @@ class Win32MenuHandler : public MenuHandler {
     Win32MenuHandler(const MenuType, ControlID);
 
     /***
-     * TODO document this function
+     * Adds a subitem to this MenuHandler
+     *
+     * @param item MenuItem to be added
      */
     void addItem(const MenuItem& item);
 
     /**
-     * TODO document this function
+     * Sets this Menu as the Windows top Menu
+     *
+     * @param parent Window to display this Menu
      */
     void registerMenu(const Window& parent);
 

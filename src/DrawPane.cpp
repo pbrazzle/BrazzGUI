@@ -2,13 +2,18 @@
 
 #include "ControlHandling/ControlStyling.hpp"
 
+#include <iostream>
+
 using namespace BrazzGUI;
 
-DrawPane::DrawPane() : BasicControl<ControlType::DrawPane>() { }
+DrawPane::DrawPane() : BasicControl<ControlType::DrawPane>() {}
 
 Color DrawPane::getColor() const { return drawColor; }
 
-void DrawPane::setColor(const Color c) { drawColor = c; }
+void DrawPane::setColor(const Color c) {
+    drawColor = c;
+    ControlStyling::setDrawColor(getID(), c);
+}
 
 void DrawPane::drawPixel(int x, int y) {
     ControlStyling::drawPixel(getID(), x, y);

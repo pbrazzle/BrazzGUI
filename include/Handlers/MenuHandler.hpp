@@ -24,7 +24,9 @@ class MenuHandler {
     virtual ~MenuHandler() {}
 
     /***
-     * TODO document this function
+     * Adds a subitem to this MenuHandler
+     * If this is the first child item, turns this MenuHandler into a parent
+     * Menu
      */
     virtual void addItem(const MenuItem& item) = 0;
 

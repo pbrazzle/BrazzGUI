@@ -87,7 +87,9 @@ class Event {
         data(std::move(d)) {}
 
     /*
-     * TODO document this function
+     * Copy constructor
+     *
+     * Clones Event data if it exists
      */
     Event(const Event& rhs) {
         type = rhs.type;
@@ -97,7 +99,9 @@ class Event {
     }
 
     /**
-     * TODO document this function
+     * Assignment operator
+     *
+     * Clones Event data if it exists
      */
     Event& operator=(const Event& rhs) {
         type = rhs.type;

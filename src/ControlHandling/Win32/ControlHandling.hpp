@@ -19,6 +19,7 @@ class Win32Data : public ControlOSData {
     HBRUSH backgroundBrush;    // Brush to draw the Control background
     Color backgroundColor;     // Background color for the Control
     Color textColor;           // Text color for the Control
+    Color drawColor;           // Color for drawing operations
 
     public:
     /**
@@ -30,7 +31,8 @@ class Win32Data : public ControlOSData {
         handle(h),
         defaultWindowProc(defProc),
         backgroundColor{255, 255, 255},
-        textColor{0, 0, 0} {
+        textColor{0, 0, 0},
+        drawColor{0, 0, 0} {
         backgroundBrush = CreateSolidBrush(
             RGB(backgroundColor.r, backgroundColor.g, backgroundColor.b));
     }
@@ -43,7 +45,8 @@ class Win32Data : public ControlOSData {
         handle(other.handle),
         defaultWindowProc(other.defaultWindowProc),
         backgroundColor(other.backgroundColor),
-        textColor{0, 0, 0} {
+        textColor(other.textColor),
+        drawColor(other.drawColor) {
         backgroundBrush = CreateSolidBrush(
             RGB(backgroundColor.r, backgroundColor.g, backgroundColor.b));
     }
@@ -57,9 +60,12 @@ class Win32Data : public ControlOSData {
         handle = other.handle;
         defaultWindowProc = other.defaultWindowProc;
         backgroundColor = other.backgroundColor;
+        DeleteObject(backgroundBrush);
         backgroundBrush = CreateSolidBrush(
             RGB(backgroundColor.r, backgroundColor.g, backgroundColor.b));
         textColor = other.textColor;
+        drawColor = other.drawColor;
+        return *this;
     }
 
     /**
@@ -81,6 +87,10 @@ class Win32Data : public ControlOSData {
      * @return ID for the Control
      */
     ControlID getID() const { return id; }
+
+    Color getDrawColor() const { return drawColor; }
+
+    void setDrawColor(const Color c) { drawColor = c; }
 
     /**
      * Sends a message to the default window procedure for the Control

@@ -259,22 +259,42 @@ void ControlStyling::takeFocus(const ControlID id) {
     SetFocus(handle);
 }
 
+/**Drawing functions**/
+
+Color getDrawColor(const ControlID id) {
+    auto osData = static_cast<const ControlHandling::Win32Data&>(
+        ControlHandling::getDataFromID(id));
+    return osData.getDrawColor();
+}
+
+void ControlStyling::setDrawColor(const ControlID id, const Color c) {
+    auto& osData = static_cast<ControlHandling::Win32Data&>(
+        ControlHandling::getDataFromID(id));
+    osData.setDrawColor(c);
+    auto c2 = osData.getDrawColor();
+}
+
 void ControlStyling::drawPixel(const ControlID id, int x, int y) {
     auto handle = getHandleFromID(id);
     PAINTSTRUCT ps;
     auto hdc = BeginPaint(handle, &ps);
 
-    SetPixel(hdc, x, y, RGB(0, 0, 0));
+    auto drawColor = getDrawColor(id);
+
+    SetPixel(hdc, x, y, RGB(drawColor.r, drawColor.g, drawColor.b));
 
     EndPaint(handle, &ps);
 }
 
-void ControlStyling::drawLine(const ControlID id, int x1, int y1, int x2, int y2) {
+void ControlStyling::drawLine(const ControlID id, int x1, int y1, int x2,
+                              int y2) {
     auto handle = getHandleFromID(id);
     PAINTSTRUCT ps;
     auto hdc = BeginPaint(handle, &ps);
 
-    auto pen = CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
+    auto drawColor = getDrawColor(id);
+    auto pen =
+        CreatePen(PS_SOLID, 2, RGB(drawColor.r, drawColor.g, drawColor.b));
     SelectObject(hdc, pen);
 
     MoveToEx(hdc, x1, y1, NULL);
@@ -285,31 +305,50 @@ void ControlStyling::drawLine(const ControlID id, int x1, int y1, int x2, int y2
     EndPaint(handle, &ps);
 }
 
-void ControlStyling::drawRect(const ControlID id, int x1, int y1, int x2, int y2) {
+void ControlStyling::drawRect(const ControlID id, int x1, int y1, int x2,
+                              int y2) {
     auto handle = getHandleFromID(id);
     PAINTSTRUCT ps;
     auto hdc = BeginPaint(handle, &ps);
+
+    auto drawColor = getDrawColor(id);
+    auto pen =
+        CreatePen(PS_SOLID, 5, RGB(drawColor.r, drawColor.g, drawColor.b));
+    SelectObject(hdc, pen);
 
     Rectangle(hdc, x1, y1, x2, y2);
 
+    DeleteObject(pen);
+
     EndPaint(handle, &ps);
 }
 
-void ControlStyling::drawCircle(const ControlID id, int x1, int y1, double radius) {
+void ControlStyling::drawCircle(const ControlID id, int x1, int y1,
+                                double radius) {
     auto handle = getHandleFromID(id);
     PAINTSTRUCT ps;
     auto hdc = BeginPaint(handle, &ps);
 
+    auto drawColor = getDrawColor(id);
+    auto pen =
+        CreatePen(PS_SOLID, 5, RGB(drawColor.r, drawColor.g, drawColor.b));
+    SelectObject(hdc, pen);
+
+    // Outlined by pen, filled by brush
     Ellipse(hdc, x1 - radius, y1 - radius, x1 + radius, y1 + radius);
 
+    DeleteObject(pen);
+
     EndPaint(handle, &ps);
 }
 
-void ControlStyling::drawText(const ControlID id, int x1, int y1, int pt, const std::string& text) {
+void ControlStyling::drawText(const ControlID id, int x1, int y1, int pt,
+                              const std::string& text) {
     auto handle = getHandleFromID(id);
     PAINTSTRUCT ps;
     auto hdc = BeginPaint(handle, &ps);
 
+    // Uses selected text color
     TextOut(hdc, x1, y1, text.c_str(), text.size());
 
     EndPaint(handle, &ps);
